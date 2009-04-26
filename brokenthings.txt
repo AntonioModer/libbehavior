@@ -1,1 +1,1 @@
-Collision
+Collision checking when rotating is not implemented
