@@ -7,6 +7,7 @@
 #include "xerces.h"
 
 using namespace SL;
+using namespace std;
 
 inline int round(double x)
 {
@@ -16,8 +17,8 @@ return int(x > 0.0 ? x + 0.5 : x - 0.5);
 WorldState::WorldState()
 {
 	description = "";
-	CoordinateSizeX = 1024.0;
-	CoordinateSizeY = 768.0;
+	CoordinateSizeX = 640.0;
+	CoordinateSizeY = 480.0;
 
 	CellSizeX = (int)CoordinateSizeX / coarseGraining ;
 	CellSizeY = (int)CoordinateSizeY / coarseGraining ;
@@ -120,6 +121,7 @@ bool WorldState::deleteObject(GameObject* gameObject)
 
 bool WorldState::moveObject(GameObject* gameObject, point p)
 {
+	cout<<p.toString()<<endl;
 	//replace with pixel perfect collision code
 	if (pointOutofBounds(p))
 	{
@@ -199,8 +201,11 @@ const GameObjectList* WorldState::getAllGameObjects(SortPreference p)
 
 bool WorldState::pointOutofBounds(point p)
 {
- 	if (round(p.x / coarseGraining)>=CellSizeX || p.x<0 || round(p.y / coarseGraining)>=CellSizeY || p.y<0)
+	std::cout << CoordinateSizeX << "," << CoordinateSizeY << "---" << p.x << "," << p.y << endl;
+	if (p.x >= CoordinateSizeX || p.y >= CoordinateSizeY || p.x <= 0 || p.y <= 0)
 		return true;
+ 	//if (round(p.x / coarseGraining)>=CellSizeX || p.x<0 || round(p.y / coarseGraining)>=CellSizeY || p.y<0)
+	//	return true;
 	return false;
 
 }

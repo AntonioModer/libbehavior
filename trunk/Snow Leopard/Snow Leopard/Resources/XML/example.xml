@@ -1,4 +1,4 @@
-<WorldState id="1" description="ZOMG first worldstate" CoordinateSizeX="1024" CoordinateSizeY="768" name="hello world"  time="1"
+<WorldState id="1" description="ZOMG first worldstate" CoordinateSizeX="640" CoordinateSizeY="480" name="hello world"  time="1"
             xmlns="http://code.google.com/p/snow-leopard/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://code.google.com/p/snow-leopard/ SLSchema.xsd" >
   <Entity xPosition="50" yPosition="100" name="Firefly" id="firefly" isPlayer="true"  description="transport hauler beloved by smugglers" >
     <BaseImage  pictureSource="resources\hulls\sample Hull.png" scale="20" id="fireflyimage"/>
@@ -14,7 +14,7 @@
     </Socket>
   </Entity>
 
-  <Entity xPosition="530" yPosition="280" name="BackgroundImage" id="background">
+  <Entity xPosition="320" yPosition="240" name="BackgroundImage" id="background">
     <BaseImage pictureSource="resources\backgrounds\background.png" scale="20" id="BackgroundImage"/>
   </Entity>
 </WorldState>
