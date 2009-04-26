@@ -1,0 +1,20 @@
+<WorldState id="1" description="ZOMG first worldstate" CoordinateSizeX="1024" CoordinateSizeY="768" name="hello world"  time="1"
+            xmlns="http://code.google.com/p/snow-leopard/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://code.google.com/p/snow-leopard/ SLSchema.xsd" >
+  <Entity xPosition="50" yPosition="100" name="Firefly" id="firefly" isPlayer="true"  description="transport hauler beloved by smugglers" >
+    <BaseImage  pictureSource="resources\hulls\sample Hull.png" scale="20" id="fireflyimage"/>
+    <Socket mass="10" energy="20" type="Triangle" xPosition="-30" yPosition="0" id="frontleftsocket">
+      <Engine pictureSource="resources\hulls\sample Hull.png" scale="20" subtype="Photon Thruster" id="fireflyengine"/>
+    </Socket>
+  </Entity>
+
+  <Entity xPosition="200" yPosition="100" name="Firefly" id="enemy" isPlayer="false"  description="transport hauler beloved by smugglers" >
+    <BaseImage current_angle="90"  pictureSource="resources\hulls\sample Hull.png" scale="20" id="fireflyimage"/>
+    <Socket mass="10" energy="20" type="Triangle" xPosition="-30" yPosition="0" id="frontleftsocket">
+      <Engine pictureSource="resources\hulls\sample Hull.png" scale="20" subtype="Photon Thruster" id="fireflyengine"/>
+    </Socket>
+  </Entity>
+
+  <Entity xPosition="530" yPosition="280" name="BackgroundImage" id="background">
+    <BaseImage pictureSource="resources\backgrounds\background.png" scale="20" id="BackgroundImage"/>
+  </Entity>
+</WorldState>
