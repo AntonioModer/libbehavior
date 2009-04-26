@@ -129,21 +129,31 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 		return false;
 	}
 
-	//test for and report collisions
+	//test for and report potential collisions
 	//currently tests against all objects (does not scale well)
 	//update with more sophisticated filtering in the future
 
+
+	gameObject->collisionOutline->set_translation(p.x,p.y);
 	GameObjectIter itr;
 	if (gameObject->usesPhysics)
 	{
 		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
 		{
+			if ((*itr) == gameObject)
+				continue;
 			if ((*itr)->usesPhysics)
 			{
+				cout << "testing for collision" << endl;
 				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
 				{
+					cout << "got a collision" << endl;
+					cout << (*itr)->displayName <<endl;
+					cout << gameObject->displayName << endl;
 					(*itr)->registerCollision(gameObject);
 					gameObject->registerCollision(*itr);
+					gameObject->collisionOutline->set_translation(gameObject->location.x,gameObject->location.y);
+					return false; //TODO support colliding with multiple entities
 				}
 			}
 
@@ -155,10 +165,12 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 		GameObjectList* newList = getListFromPoint(p);
 		gameObject->location=p;
 		if (currentList==newList)
-			return true;
-		newList->push_front(gameObject);
+			{}
+		else
+		{
+			newList->push_front(gameObject);
 		currentList->remove(gameObject);
-
+		}
 		gameObject->collisionOutline->set_translation(p.x,p.y);
 		return true;
 

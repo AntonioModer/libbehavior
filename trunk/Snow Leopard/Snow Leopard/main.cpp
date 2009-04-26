@@ -16,6 +16,7 @@
 #include "Definitions.h"
 
 using namespace SL;
+using namespace std;
 CL_GraphicContext* SL::gc;
 
 class DisplayProgram : public CL_ClanApplication
@@ -55,7 +56,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);  
 	}
 	
-	std::cout << "Now Debugging...";
+	cout << "Now Debugging..." <<endl;
 	
 	static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
 	DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(gLS);
@@ -73,9 +74,6 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	WorldState *state = new WorldState(doc);
 	Renderer* renderer = new Renderer(&window,gc,state);
 	GameLogic *logic = new GameLogic(state,&ic,renderer);
-
-    //CL_FramerateCounter* framerate = new CL_FramerateCounter();
-	//framerate->set_fps_limit(60);
 
 	GFrameHandler frame_handler;
 	frame_handler.set_fps_limit(60);

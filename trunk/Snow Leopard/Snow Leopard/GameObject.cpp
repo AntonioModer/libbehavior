@@ -36,8 +36,8 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	mass = NULL; //need to fill these two by calculations on the components
 	rotationalInertia = NULL;
 	isPlayer = getAttributeBool("isPlayer",attributes);
-	//usesPhysics = getAttributeBool("usesPhysics",attributes);  //TODO: disabled to simplify development
-	usesPhysics = false;
+	usesPhysics = getAttributeBool("usesPhysics",attributes);
+	//usesPhysics = false;
 
 	//set up the base sprite
 	xerces DOMNodeList* BaseImageList = ((xerces DOMElement*) rootNode)->getElementsByTagName(XercesString("BaseImage").xmlCh());
@@ -66,6 +66,7 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	collisionOutline = new CL_CollisionOutline(image);
 	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
 	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
+	collisionOutline->set_angle(CL_Angle::from_degrees(displayHeading));
 
 	targetPriorities = new GameObjectList();
 
@@ -81,8 +82,8 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 
 bool GameObject::doActions()
 {
-	if (usesPhysics)
-		processMovementPhysics();
+	//if (usesPhysics)
+	//	processMovementPhysics();
 	if (!(isPlayer))
 		brain->execute(this);
 	return true;
@@ -90,9 +91,9 @@ bool GameObject::doActions()
 
 bool GameObject::registerCollision(GameObject* collidedObject)
 {
-	/*std::cout << displayName <<  " Collided with " << collidedObject->displayName << "\n";
+	std::cout << displayName <<  " Collided with " << collidedObject->displayName << "\n";
 	std::cout << "MyPosition: " << collisionOutline->get_translation()<< "\n";
-	std::cout << "TheirPosition: " << collidedObject->collisionOutline->get_translation()<< "\n";*/
+	std::cout << "TheirPosition: " << collidedObject->collisionOutline->get_translation()<< "\n";
 	return true;
 }
 
