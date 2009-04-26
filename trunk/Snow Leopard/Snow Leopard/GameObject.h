@@ -25,10 +25,6 @@ class BehaviorTreeNode;
 
 public:
 
-	enum AbsoluteDirection { LEFT, RIGHT, UP, DOWN };
-	enum RelativeDirection { TURN_LEFT,TURN_RIGHT,FORWARD,BACK};
-
-
 	typedef std::vector<GameObject*> GameObjectList;
 	typedef std::set <GameObject*>::iterator GameObjectIter;
 	bool operator<(GameObject &b);
@@ -40,7 +36,6 @@ public:
 	GameObject::~GameObject();
 	void applyForceRect(double x, double y);
 	void applyForcePolar(double heading, double magnitude);
-	bool rotate(double angle);
 
 	BehaviorTreeNode* brain;
 

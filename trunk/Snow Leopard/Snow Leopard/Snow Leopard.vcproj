@@ -321,6 +321,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\util.h"
+				>
+			</File>
+			<File
 				RelativePath=".\WorldState.h"
 				>
 			</File>
