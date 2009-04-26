@@ -101,7 +101,6 @@ bool WorldState::insertObject(GameObject* gameObject, point p)
 	currentList->push_front(gameObject);
 	gameObject->location = p;
 	allObjectList->push_front(gameObject);
-	gameObject->worldState = this;
 	gameObject->collisionOutline->set_translation(p.x,p.y);
 	return true;
 }
@@ -192,16 +191,14 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 					cout << gameObject->displayName << endl;
 					(*itr)->registerCollision(gameObject);
 					gameObject->registerCollision(*itr);
-					gameObject->collisionOutline->set_angle(CL_Angle::from_degrees(gameObject->heading));
+					gameObject->collisionOutline->set_angle(gameObject->displayHeading);
 					return false; //TODO support colliding with multiple entities
 				}
 			}
 		}
 	}
 
-	gameObject->displayHeading += angle;
-	gameObject->heading += angle;
-	gameObject->displayHeading= mod5(gameObject->displayHeading,360);
+	gameObject->displayHeading += CL_Angle::from_degrees(angle);
 	return true;
 }
 

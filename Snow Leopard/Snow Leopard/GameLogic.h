@@ -16,17 +16,15 @@ class Renderer;
 class GameLogic {
 
 private:
-	WorldState* state;
 	Ship* playerShip;
 	CL_InputDevice* keyboard;
 	CL_InputDevice* mouse;
 	void handleInput();
-	Renderer* renderer;
 	
 	
 
 public:
-		GameLogic::GameLogic(WorldState* worldState,CL_InputContext* ic,Renderer* renderer);
+		GameLogic::GameLogic();
 		bool GameLogic::step();
 
 

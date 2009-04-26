@@ -35,7 +35,7 @@ public:
 	CL_Sprite* sprite;
 	GameObject::~GameObject();
 	void applyForceRect(double x, double y);
-	void applyForcePolar(double heading, double magnitude);
+	void applyForcePolar(CL_Angle heading, double magnitude);
 
 	BehaviorTreeNode* brain;
 
@@ -51,8 +51,8 @@ public:
 	bool isPlayer; //right now only one ship can be a player
 	
 	//polar coordinates
-	double heading;
-	double displayHeading;
+	CL_Angle movementHeading;
+	CL_Angle displayHeading;
 	CL_CollisionOutline* collisionOutline;
 	double mass;
 	double rotationalInertia;
@@ -64,7 +64,6 @@ public:
 	int actionPriority;
 	int renderPriority;
 	std::string ID;
-	WorldState* worldState;
 	double speed;
 	bool usesPhysics;
 

@@ -17,7 +17,7 @@ class GameObject;
 
 class Renderer{
 public:
-	Renderer::Renderer(CL_DisplayWindow* window,CL_GraphicContext* gc, WorldState* state);
+	Renderer::Renderer();
 	bool Renderer::Render();
 	int screenWidth;
 	int screenHeight;
@@ -25,8 +25,6 @@ public:
 
 private:
 	GameObject* camera;
-	CL_GraphicContext* gc;
-	WorldState* state;
 	CL_ResourceManager* resources;
 	double screenStartX;
 	double screenStartY;

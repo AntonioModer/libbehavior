@@ -1,39 +1,32 @@
 #include "GameLogic.h"
 
 #include "GameObject.h"
-#include "WorldState.h"
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
-#include <ClanLib/application.h>
 #include "Ship.h"
-#include "Renderer.h"
 #include "Definitions.h"
+#include "globals.h"
 
 using namespace SL;
 using namespace std;
 
-GameLogic::GameLogic(WorldState* worldState,CL_InputContext* ic,Renderer* rend)
+GameLogic::GameLogic()
 {
-	state=worldState;
 	keyboard = &ic->get_keyboard();
 	mouse = &ic->get_mouse();
-	renderer = rend;
-	playerShip = (Ship*) state->getCamera();
+	playerShip = (Ship*) ws->getCamera();
 }
 
 bool GameLogic::step()
 {
 
-	state->deleteQueued();
+	ws->deleteQueued();
 	unsigned int currentTime = CL_System::get_time();
-	state->timeElapsed = currentTime - state->time;
-	state->time = currentTime;
+	ws->timeElapsed = currentTime - ws->time;
+	ws->time = currentTime;
 
 	//should handle input with event callbacks, but I can't get them to work
 	handleInput();
 	
-	const GameObjectList* objects = state->getAllGameObjects();
+	const GameObjectList* objects = ws->getAllGameObjects();
 	ConstGameObjectIter itr;
 	for(itr = objects->begin();itr !=objects->end();)
 	{
@@ -53,22 +46,22 @@ void GameLogic::handleInput()
 #ifdef ABSOLUTE_MOVEMENT
 	 if (keyboard->get_keycode(CL_KEY_UP))
 	 {
-		 state->moveObject(playerShip,playerShip->location.offsetRect(0,-10));
+		 ws->moveObject(playerShip,playerShip->location.offsetRect(0,-10));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_DOWN))
 	 {
-		 state->moveObject(playerShip,playerShip->location.offsetRect(0,10));
+		 ws->moveObject(playerShip,playerShip->location.offsetRect(0,10));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_LEFT))
 	 {
-		state->moveObject(playerShip,playerShip->location.offsetRect(-10,0));
+		ws->moveObject(playerShip,playerShip->location.offsetRect(-10,0));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_RIGHT))
 	 {
-		state->moveObject(playerShip,playerShip->location.offsetRect(10,0));
+		ws->moveObject(playerShip,playerShip->location.offsetRect(10,0));
 	 }
 #endif
 
@@ -76,28 +69,22 @@ void GameLogic::handleInput()
 #ifdef NOPHYSICS
 	 if (keyboard->get_keycode(CL_KEY_UP))
 	 {
-		 std::cout<<"going forward" << "heading: " << playerShip->heading << endl;
-		 playerShip->worldState->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->heading,2));
+		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,2));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_DOWN))
 	 {
-		 std::cout << "going back" << "heading: " << playerShip->heading << endl;
-		 playerShip->worldState->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->heading,-2));
+		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,-2));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_LEFT))
 	 {
-		 std::cout << "turning left";
-		 //playerShip->move(GameObject::TURN_LEFT);
-		 playerShip->worldState->rotateObject(playerShip,-2);
+		 ws->rotateObject(playerShip,-2);
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_RIGHT))
 	 {
-		 std::cout << "turning right";
-		 //playerShip->move(GameObject::TURN_RIGHT);
-		  playerShip->worldState->rotateObject(playerShip,2);
+		 ws->rotateObject(playerShip,2);
 	 }
 #endif
 #ifdef PHYSICS
