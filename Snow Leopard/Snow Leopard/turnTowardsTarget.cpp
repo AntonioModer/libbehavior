@@ -47,12 +47,12 @@ BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(GameObject* object)
 
 	if ( angleBetween < -2)
 	{
-		object->rotate(1); //clockwise
+		object->worldState->rotateObject(object,1); //clockwise
 		return SL_RUNNING;
 	}
 	else if (angleBetween > 2)
 	{
-		object->rotate(-1);
+		object->worldState->rotateObject(object,-1);
 		return SL_RUNNING;
 	}
 

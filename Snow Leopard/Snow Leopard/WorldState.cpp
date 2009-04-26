@@ -5,14 +5,10 @@
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
 #include "xerces.h"
+#include "util.h"
 
 using namespace SL;
 using namespace std;
-
-inline int round(double x)
-{
-return int(x > 0.0 ? x + 0.5 : x - 0.5);
-}
 
 WorldState::WorldState()
 {
@@ -174,6 +170,39 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 		gameObject->collisionOutline->set_translation(p.x,p.y);
 		return true;
 
+}
+
+bool WorldState::rotateObject(GameObject* gameObject, double angle)
+{
+	gameObject->collisionOutline->rotate(CL_Angle::from_degrees(angle));
+	if (gameObject->usesPhysics)
+	{
+		GameObjectIter itr;
+		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
+		{
+			if ((*itr) == gameObject)
+				continue;
+			if ((*itr)->usesPhysics)
+			{
+				cout << "testing for collision" << endl;
+				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
+				{
+					cout << "got a collision" << endl;
+					cout << (*itr)->displayName <<endl;
+					cout << gameObject->displayName << endl;
+					(*itr)->registerCollision(gameObject);
+					gameObject->registerCollision(*itr);
+					gameObject->collisionOutline->set_angle(CL_Angle::from_degrees(gameObject->heading));
+					return false; //TODO support colliding with multiple entities
+				}
+			}
+		}
+	}
+
+	gameObject->displayHeading += angle;
+	gameObject->heading += angle;
+	gameObject->displayHeading= mod5(gameObject->displayHeading,360);
+	return true;
 }
 
 void WorldState::registerForDeletion(GameObject* obj)

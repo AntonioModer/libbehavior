@@ -24,8 +24,6 @@ public:
 	bool registerWallCollision();
 	Ship::Ship(xerces DOMNode* rootNode);
 	virtual bool move();
-	bool move(AbsoluteDirection dir);
-	bool move(RelativeDirection dir);
 	virtual bool shoot();
 	void (*AI_Movement) (Ship* ship);
 	void (*AI_Shooting) (Ship* ship);

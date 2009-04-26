@@ -11,6 +11,7 @@
 #include "Definitions.h"
 
 using namespace SL;
+using namespace std;
 
 GameLogic::GameLogic(WorldState* worldState,CL_InputContext* ic,Renderer* rend)
 {
@@ -75,28 +76,28 @@ void GameLogic::handleInput()
 #ifdef NOPHYSICS
 	 if (keyboard->get_keycode(CL_KEY_UP))
 	 {
-		 std::cout<<"going forward";
-		 playerShip->move(GameObject::FORWARD);
+		 std::cout<<"going forward" << "heading: " << playerShip->heading << endl;
+		 playerShip->worldState->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->heading,2));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_DOWN))
 	 {
-		 std::cout << "going back";
-		 playerShip->move(GameObject::BACK);
+		 std::cout << "going back" << "heading: " << playerShip->heading << endl;
+		 playerShip->worldState->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->heading,-2));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_LEFT))
 	 {
 		 std::cout << "turning left";
 		 //playerShip->move(GameObject::TURN_LEFT);
-		 playerShip->rotate(-2);
+		 playerShip->worldState->rotateObject(playerShip,-2);
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_RIGHT))
 	 {
 		 std::cout << "turning right";
 		 //playerShip->move(GameObject::TURN_RIGHT);
-		  playerShip->rotate(2);
+		  playerShip->worldState->rotateObject(playerShip,2);
 	 }
 #endif
 #ifdef PHYSICS

@@ -59,6 +59,7 @@ bool insertObject(GameObject* gameObject, point p);
 GameObject* getCamera();
 bool deleteObject(GameObject* gameObject);
 bool moveObject(GameObject* gameObject, point p);
+bool rotateObject(GameObject* gameObject, double angle);
 GameObjectList* getAtCell(point p);
 const GameObjectList* WorldState::getAllGameObjects(SortPreference p = UNSORTED);
 void registerForDeletion(GameObject* obj);
