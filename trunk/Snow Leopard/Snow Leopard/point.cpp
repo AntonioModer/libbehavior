@@ -1,4 +1,5 @@
 #include "point.h"
+#include <ClanLib/core.h>
 #include "boost/lexical_cast.hpp"
 
 using namespace SL;
@@ -27,9 +28,9 @@ point point::offsetRect(double ox, double oy)
 	return point(x+ox,y+oy);
 }
 
-point point::offsetPolar(double heading, double distance)
+point point::offsetPolar(CL_Angle heading, double distance)
 {
-	return point(x - distance * sin(-heading * 3.14159/180),y - distance * cos(-heading * 3.14159/180));
+	return point(x - distance * sin(-heading.to_radians()),y - distance * cos(-heading.to_radians()));
 }
 
 double point::angleTo(point p)

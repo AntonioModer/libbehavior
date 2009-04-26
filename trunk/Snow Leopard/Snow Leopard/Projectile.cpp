@@ -1,5 +1,5 @@
 #include "Projectile.h"
-#include "WorldState.h"
+#include "globals.h"
 
 using namespace SL;
 
@@ -24,6 +24,6 @@ Projectile::Projectile(xerces DOMNode* rootNode) : GameObject(rootNode)
 	
 bool Projectile::registerWallCollision()
 {
-	worldState->deleteObject(this);
+	ws->deleteObject(this);
 	return true;
 }

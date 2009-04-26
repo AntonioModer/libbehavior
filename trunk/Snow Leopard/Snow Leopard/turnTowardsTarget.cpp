@@ -1,11 +1,6 @@
 #include "turnTowardsTarget.h"
 #include "point.h"
-#include "GameObject.h"
-#include "worldstate.h"
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
-#include <ClanLib/application.h>
+#include "globals.h"
 
 using namespace SL;
 
@@ -25,7 +20,7 @@ BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(GameObject* object)
 {
 	if (!(object->ID == ("enemy")))
 		return SL_FAILURE;
-	const GameObjectList* allObjects = object->worldState->getAllGameObjects(WorldState::ACTION_SORTED);
+	const GameObjectList* allObjects = ws->getAllGameObjects(WorldState::ACTION_SORTED);
 	
 	ConstGameObjectIter itr;
 	GameObject* target;
@@ -39,20 +34,19 @@ BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(GameObject* object)
 	point resultantVector(object->location.x - target->location.x,object->location.y - target->location.y);
 	resultantVector.normalize();
 	
-	double angle = 57.2957795 * atan2(resultantVector.y,resultantVector.x); //the 57 is from radian/degree conversion
+	CL_Angle angle = CL_Angle::from_radians(atan2(resultantVector.y,resultantVector.x));
 
-	std::cout << angle << "\n" ;
+	std::cout << angle.to_degrees() << "\n" ;
 	
-	double angleBetween = ( mod( ((object->displayHeading -180 - angle) + 180),360) - 180);
-
+	double angleBetween = ( mod( ((object->displayHeading.to_degrees() -180 - angle.to_degrees()) + 180),360) - 180);
 	if ( angleBetween < -2)
 	{
-		object->worldState->rotateObject(object,1); //clockwise
+		ws->rotateObject(object,1); //clockwise
 		return SL_RUNNING;
 	}
 	else if (angleBetween > 2)
 	{
-		object->worldState->rotateObject(object,-1);
+		ws->rotateObject(object,-1);
 		return SL_RUNNING;
 	}
 

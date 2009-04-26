@@ -18,7 +18,7 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	faction = getAttributeInt("faction",attributes);
 	ID = getAttributeStr("id",attributes);
 	speed=getAttributeDouble("movementSpeed",attributes);
-	heading=getAttributeDouble("movementHeading",attributes);
+	movementHeading=CL_Angle::from_degrees(getAttributeDouble("movementHeading",attributes));
 	accelMagnitude = getAttributeDouble("accelerationMagnitude",attributes);
 	accelHeading = getAttributeDouble("accelerationHeading",attributes);
 	actionPriority = DefActionPriority;
@@ -49,14 +49,14 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	sprite->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
 	sprite->set_base_angle(CL_Angle::from_degrees(getAttributeInt("base_angle",BaseImageAttributes)));
 
-	displayHeading = getAttributeDouble("current_angle",BaseImageAttributes);
+	displayHeading = CL_Angle::from_degrees(getAttributeDouble("current_angle",BaseImageAttributes));
 
 	//need to add code to set the scale. This requires communicating with the worldState at runtime
 
 	collisionOutline = new CL_CollisionOutline(image);
 	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
 	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
-	collisionOutline->set_angle(CL_Angle::from_degrees(displayHeading));
+	collisionOutline->set_angle(displayHeading);
 
 	targetPriorities = new GameObjectList();
 
@@ -90,13 +90,13 @@ bool GameObject::registerCollision(GameObject* collidedObject)
 bool GameObject::processMovementPhysics()
 {
 	//new velocity components
-	double newX = .5 * accelMagnitude * cos(accelHeading * 3.14159/180) * worldState->timeElapsed
-		+ speed * cos(heading * 3.14159/180);
-	double newY = .5 * accelMagnitude * sin(accelHeading *3.14159/180) * worldState->timeElapsed
-		+ speed * sin(heading * 3.14159/180); 
+	double newX = .5 * accelMagnitude * cos(accelHeading * 3.14159/180) * ws->timeElapsed
+		+ speed * cos(movementHeading.to_radians());
+	double newY = .5 * accelMagnitude * sin(accelHeading *3.14159/180) * ws->timeElapsed
+		+ speed * sin(movementHeading.to_radians()); 
 
 	speed = sqrt((newX)*(newX) + (newY)*(newY));
-	heading = (180 * atan2(newY,newX)) / 3.14159;
+	movementHeading = CL_Angle::from_radians(atan2(newY,newX));
 
 	/*std::cout << this->displayName << "Physics Update: \n";
 	std::cout << "Velocity Heading: " << this->heading << "\n";
@@ -104,7 +104,7 @@ bool GameObject::processMovementPhysics()
 	std::cout << "AccelHeading: " << this->accelHeading << "\n";
 	std::cout << "AccelMagnitude: " << this->accelMagnitude << "\n\n";*/
 
-	worldState->moveObject(this,location.offsetPolar(heading,speed * worldState->timeElapsed));
+	ws->moveObject(this,location.offsetPolar(movementHeading,speed * ws->timeElapsed));
 	
 	accelHeading = 0; //should allow applied forces to have durations. Until then, everything gets re-composited every tick
 	accelMagnitude = 0;
@@ -145,10 +145,10 @@ void GameObject::applyForceRect(double x,double y)
 	accelHeading = (180 * atan2(newY,newX)) / 3.14159;
 }
 
-void GameObject::applyForcePolar(double heading, double magnitude)
+void GameObject::applyForcePolar(CL_Angle heading, double magnitude)
 {
-	double X = magnitude * cos(heading * 3.14159/180);
-	double Y = magnitude * sin(heading * 3.14159/180);
+	double X = magnitude * cos(heading.to_radians());
+	double Y = magnitude * sin(heading.to_radians());
 	applyForceRect(X,Y);
 }
 

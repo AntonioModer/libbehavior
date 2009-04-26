@@ -1,19 +1,9 @@
 #include "Renderer.h"
-
-#include "GameObject.h"
-#include "WorldState.h"
-
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
-#include <ClanLib/application.h>
-
+#include "globals.h"
 using namespace SL;
 
-Renderer::Renderer(CL_DisplayWindow* window,CL_GraphicContext* gc_, WorldState* state_)
+Renderer::Renderer()
 {
-	gc = gc_;
-	state = state_;
 	screenStartX = 0.0;
 	screenStartY = 0.0;
 	screenWidth = 640; //TODO get dynamically
@@ -21,7 +11,7 @@ Renderer::Renderer(CL_DisplayWindow* window,CL_GraphicContext* gc_, WorldState* 
 	CL_FontDescription desc;
 	desc.set_typeface_name("Times New Roman");
 	font = new CL_Font(*gc,desc);
-	camera = state->getCamera();
+	camera = ws->getCamera();
 }
 bool Renderer::setCamera(GameObject* obj)
 {
@@ -31,7 +21,7 @@ bool Renderer::setCamera(GameObject* obj)
 
 bool Renderer::Render()
 {
-	const GameObjectList* objects = state->getAllGameObjects(WorldState::RENDER_SORTED);
+	const GameObjectList* objects = ws->getAllGameObjects(WorldState::RENDER_SORTED);
 	gc->clear();
 
 	ConstGameObjectIter itr;
@@ -39,9 +29,9 @@ bool Renderer::Render()
 	{
 		GameObject* obj = *itr;
 		CL_Sprite* sprite = obj->sprite;
-		sprite->set_angle(CL_Angle::from_degrees(obj->displayHeading));
+		sprite->set_angle(obj->displayHeading);
 		sprite->draw(*gc,obj->location.x,obj->location.y);
-		obj->collisionOutline->draw(0,0,CL_Colorf::azure,*gc);
+		//obj->collisionOutline->draw(0,0,CL_Colorf::azure,*gc);
 	}
 	
 	return true;

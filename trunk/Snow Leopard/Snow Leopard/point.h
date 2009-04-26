@@ -3,6 +3,7 @@
 #include <iostream>
 #include <math.h>
 #include <cmath>
+#include <ClanLib/core.h>
 
 namespace SL
 {
@@ -15,7 +16,7 @@ public:
 	point::point(double i,double j);
 	point::point();
 	point point::offsetRect(double ox, double oy);
-	point point::offsetPolar(double heading, double distance);
+	point point::offsetPolar(CL_Angle heading, double distance);
 	double angleTo(point p);
 	double x;
 	double y;

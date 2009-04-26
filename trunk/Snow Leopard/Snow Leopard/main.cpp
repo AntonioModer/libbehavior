@@ -18,6 +18,11 @@
 using namespace SL;
 using namespace std;
 CL_GraphicContext* SL::gc;
+WorldState* SL::ws;
+CL_InputContext* SL::ic;
+Renderer* SL::ren;
+GameLogic* SL::gl;
+
 
 class DisplayProgram : public CL_ClanApplication
 {
@@ -45,10 +50,11 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_DisplayWindow window("Snow Leopard", 640, 480);
 	CL_GraphicContext graphics_context = window.get_gc();
 	SL::gc = &graphics_context;
-	CL_InputContext ic = window.get_ic();
+	CL_InputContext input_context = window.get_ic();
+	SL::ic = &input_context;
 
-	CL_InputDevice keyboard = ic.get_keyboard();
-	CL_InputDevice mouse = ic.get_mouse();
+	CL_InputDevice keyboard = ic->get_keyboard();
+	CL_InputDevice mouse = ic->get_mouse();
 
 	if(AllocConsole()) {
         freopen("CONOUT$", "w", stdout); //redirect std io to it
@@ -66,14 +72,17 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
     parser->setFeature(XMLUni::fgXercesSchema, true);
     parser->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
 	
-#define xerces XERCES_CPP_NAMESPACE_QUALIFIER
+	#define xerces XERCES_CPP_NAMESPACE_QUALIFIER
 	std::string xmlFile = "Resources\\XML\\example.xml";
 	xerces DOMNode* doc;
 	doc = parser->parseURI(XercesString(xmlFile).xmlCh());
 
-	WorldState *state = new WorldState(doc);
-	Renderer* renderer = new Renderer(&window,gc,state);
-	GameLogic *logic = new GameLogic(state,&ic,renderer);
+	WorldState* state = new WorldState(doc);
+	SL::ws = state;
+	Renderer* renderer = new Renderer();
+	SL::ren = renderer;
+	GameLogic* logic = new GameLogic();
+	SL::gl = logic;
 
 	GFrameHandler frame_handler;
 	frame_handler.set_fps_limit(60);
