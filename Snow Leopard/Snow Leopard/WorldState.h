@@ -17,7 +17,7 @@ class DOMNode;
 typedef std::list<GameObject*> GameObjectList;
 typedef GameObjectList::iterator GameObjectIter;
 typedef GameObjectList::const_iterator ConstGameObjectIter;
-#define coarseGraining 100
+#define coarseGraining 10
 
 
 class Render

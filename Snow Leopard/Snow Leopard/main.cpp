@@ -49,12 +49,11 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_InputDevice keyboard = ic.get_keyboard();
 	CL_InputDevice mouse = ic.get_mouse();
 
-	CL_ConsoleWindow console_window("Console");
-	/*CL_ConsoleWindow* console = new CL_ConsoleWindow("Debugging");
-#ifdef DEBUG
-	console->redirect_stdio();
-#endif*/
-	
+	if(AllocConsole()) {
+        freopen("CONOUT$", "w", stdout); //redirect std io to it
+        SetConsoleTitle("Debug Console");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);  
+	}
 	
 	std::cout << "Now Debugging...";
 	
@@ -74,8 +73,6 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	WorldState *state = new WorldState(doc);
 	Renderer* renderer = new Renderer(&window,gc,state);
 	GameLogic *logic = new GameLogic(state,&ic,renderer);
-
-	renderer->setCameraZoomLevel(1.0);
 
     //CL_FramerateCounter* framerate = new CL_FramerateCounter();
 	//framerate->set_fps_limit(60);

@@ -128,16 +128,6 @@ void GameLogic::handleInput()
 		exit(0);
 	 }
 
-	 if (keyboard->get_keycode(CL_KEY_SUBTRACT))
-	 {
-		 renderer->setCameraZoomLevel(1);
-	 }
-
-	 if (keyboard->get_keycode( CL_KEY_ADD))
-	 {
-		 renderer->setCameraZoomLevel(1.5);
-	 }
-
 	  if (keyboard->get_keycode(CL_KEY_LSHIFT))
 	  {
 		  playerShip->accelMagnitude = 0;
