@@ -1,2 +1,2 @@
-clanlib .80 
+clanlib 2.0.0 
 xerxes C++
