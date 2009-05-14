@@ -40,3 +40,10 @@ bool Projectile::registerWallCollision()
 	ws->deleteObject(this);
 	return true;
 }
+
+bool Projectile::registerCollision(GameObject* collidedObject)
+{
+	cout << "projectile collision" << endl;
+	ws->deleteObject(this);
+	return true;
+}

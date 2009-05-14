@@ -23,7 +23,7 @@ class Projectile: public GameObject {
 public:
 
 	bool doActions();
-	bool registerCollision(GameObjectList collisions);
+	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Projectile::Projectile(xerces DOMNode* rootNode);
 	Projectile::Projectile(Projectile& proj);
