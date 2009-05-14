@@ -87,7 +87,9 @@
       <xs:attributeGroup ref="movement"/>
       <xs:attribute name="isPlayer" type="xs:boolean" default="false"/>
       <xs:attribute name="faction" type ="xs:string" default="none"/>
-      <xs:attribute ref="usesPhysics"/>
+     <!-- <xs:attribute ref="usesPhysics"/>-->
+      <xs:attribute name="usesPhysics" type="xs:boolean" default="true"/>
+      
     </xs:complexType>
   </xs:element>
   <xs:element name="BaseImage">

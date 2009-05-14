@@ -41,6 +41,7 @@ double point::angleTo(point p)
 void point::normalize()
 {
 	double length = x*x + y*y;
+	cout << "length: " << length << endl;
 	x /= length;
 	y /= length;
 }

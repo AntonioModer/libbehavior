@@ -14,7 +14,7 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 {
 	xerces DOMNamedNodeMap* attributes =  rootNode->getAttributes();
 	displayName = getAttributeStr("name",attributes);
-	//displayHeading = getAttributeDouble("current_angle",attributes);
+	displayHeading = CL_Angle::from_degrees(0);
 	faction = getAttributeInt("faction",attributes);
 	ID = getAttributeStr("id",attributes);
 	speed=getAttributeDouble("movementSpeed",attributes);
@@ -23,10 +23,9 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	accelHeading = getAttributeDouble("accelerationHeading",attributes);
 	actionPriority = DefActionPriority;
 	renderPriority = DefRenderPriority;
-	mass = NULL; //need to fill these two by calculations on the components
-	rotationalInertia = NULL;
 	isPlayer = getAttributeBool("isPlayer",attributes);
 	usesPhysics = getAttributeBool("usesPhysics",attributes);
+	cout << "uses physics" << usesPhysics << endl;
 	//usesPhysics = false;
 
 	//set up the base sprite
@@ -52,11 +51,13 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	displayHeading = CL_Angle::from_degrees(getAttributeDouble("current_angle",BaseImageAttributes));
 
 	//need to add code to set the scale. This requires communicating with the worldState at runtime
-
+	if (usesPhysics)
+	{
 	collisionOutline = new CL_CollisionOutline(image);
 	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
 	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
 	collisionOutline->set_angle(displayHeading);
+	}
 
 	targetPriorities = new GameObjectList();
 
@@ -68,6 +69,60 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	
 	brain->init(this);
 }
+
+GameObject::GameObject(GameObjectSetup setup)
+{
+	displayName = "default";
+	displayHeading = CL_Angle();
+	faction = 0;
+	ID = getID();
+	speed=0;
+	movementHeading=CL_Angle::from_degrees(0);
+	accelMagnitude = 0;
+	accelHeading = 0;
+	actionPriority = DefActionPriority;
+	if (displayName == "BackgroundImage")
+		renderPriority = BackgroundRenderPriority;
+	else
+		renderPriority = DefRenderPriority;
+	isPlayer = false;
+	usesPhysics = true;
+
+	//set up the base sprite
+	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
+	cout << "null? " << image.is_null() << endl;
+	cout << "size " << image.get_size() << endl;
+	CL_SpriteDescription desc;
+	desc.add_frame(image);
+	sprite = new CL_Sprite(*SL::gc,desc);
+	
+	CL_Origin translationOrigin = origin_center;
+	CL_Origin rotationOrigin = origin_center;
+	int translation_offset_x =0;
+	int translation_offset_y = 0;
+	int rotation_offset_x = 0;
+	int rotation_offset_y = 0;
+	sprite->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
+	sprite->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
+	sprite->set_base_angle(CL_Angle::from_degrees(0));
+
+	displayHeading =CL_Angle::from_degrees(0);
+
+	//need to add code to set the scale. This requires communicating with the worldState at runtime
+	if (usesPhysics)
+	{
+	cout << "creating a new collision outline" << endl;
+	collisionOutline = new CL_CollisionOutline(image);
+	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
+	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
+	collisionOutline->set_angle(displayHeading);
+	}
+
+	targetPriorities = new GameObjectList();
+
+	brain = new ParallelNode();
+	brain->init(this);
+};
 
 
 bool GameObject::doActions()

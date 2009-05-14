@@ -6,7 +6,7 @@
 #define DefActionPriority 100
 #define BackgroundActionPriority 101
 
-#define ProjectileRenderPriority 1
+#define ProjectileRenderPriority 2
 #define ShipRenderPriority 2
 #define DefRenderPriority 2
 #define BackgroundRenderPriority 0

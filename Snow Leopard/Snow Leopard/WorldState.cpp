@@ -56,11 +56,11 @@ WorldState::WorldState(xerces DOMNode* rootNode)
 	CoordinateSizeY = getAttributeDouble ("CoordinateSizeY",attributes);
 	time = getAttributeInt ("time",attributes);
 	id = getAttributeStr("id",attributes);
-	std::cout <<id;
+	std::cout <<id << endl;
 	name = getAttributeStr("name",attributes);
-	std::cout <<name;
+	std::cout <<name << endl;
 	description = getAttributeStr("description",attributes);
-	std::cout <<description;
+	std::cout <<description << endl;
 
 
 
@@ -84,7 +84,7 @@ WorldState::WorldState(xerces DOMNode* rootNode)
 	for (int x = 0;x<entities->getLength();x++)
 	{
 		xerces DOMElement* entityNode = (xerces DOMElement*)entities->item(x);
-		std::cout << "now reading node" << entityNode->getAttribute(XercesString("id").xmlCh());
+		std::cout << "now reading node" << entityNode->getAttribute(XercesString("id").xmlCh()) << endl;
 		xerces DOMNamedNodeMap* entityAttributes = entityNode->getAttributes();
 		point p(getAttributeDouble("xPosition",entityAttributes),getAttributeDouble("yPosition",entityAttributes));
 		insertObject(new GameObject(entityNode),p);
@@ -101,7 +101,8 @@ bool WorldState::insertObject(GameObject* gameObject, point p)
 	currentList->push_front(gameObject);
 	gameObject->location = p;
 	allObjectList->push_front(gameObject);
-	gameObject->collisionOutline->set_translation(p.x,p.y);
+	if (gameObject->usesPhysics)
+		gameObject->collisionOutline->set_translation(p.x,p.y);
 	return true;
 }
 
@@ -128,8 +129,8 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 	//currently tests against all objects (does not scale well)
 	//update with more sophisticated filtering in the future
 
-
-	gameObject->collisionOutline->set_translation(p.x,p.y);
+	if (gameObject->usesPhysics)
+		gameObject->collisionOutline->set_translation(p.x,p.y);
 	GameObjectIter itr;
 	if (gameObject->usesPhysics)
 	{
@@ -139,10 +140,8 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 				continue;
 			if ((*itr)->usesPhysics)
 			{
-				cout << "testing for collision" << endl;
 				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
 				{
-					cout << "got a collision" << endl;
 					cout << (*itr)->displayName <<endl;
 					cout << gameObject->displayName << endl;
 					(*itr)->registerCollision(gameObject);
@@ -173,9 +172,10 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 
 bool WorldState::rotateObject(GameObject* gameObject, double angle)
 {
-	gameObject->collisionOutline->rotate(CL_Angle::from_degrees(angle));
 	if (gameObject->usesPhysics)
 	{
+		gameObject->collisionOutline->rotate(CL_Angle::from_degrees(angle));
+
 		GameObjectIter itr;
 		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
 		{
@@ -183,12 +183,8 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 				continue;
 			if ((*itr)->usesPhysics)
 			{
-				cout << "testing for collision" << endl;
 				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
 				{
-					cout << "got a collision" << endl;
-					cout << (*itr)->displayName <<endl;
-					cout << gameObject->displayName << endl;
 					(*itr)->registerCollision(gameObject);
 					gameObject->registerCollision(*itr);
 					gameObject->collisionOutline->set_angle(gameObject->displayHeading);
@@ -228,22 +224,14 @@ GameObjectList* WorldState::getAtCell(point p)
 
 const GameObjectList* WorldState::getAllGameObjects(SortPreference p)
 {
-	switch (p)
-	{
-	case ACTION_SORTED:  allObjectList->sort(Action());break;
-	case RENDER_SORTED:  allObjectList->sort(Render());break;
-	}
 	return  allObjectList; //can't change the contents of the list, but _can_ change the properties of the objects
 }
 
 
 bool WorldState::pointOutofBounds(point p)
 {
-	std::cout << CoordinateSizeX << "," << CoordinateSizeY << "---" << p.x << "," << p.y << endl;
 	if (p.x >= CoordinateSizeX || p.y >= CoordinateSizeY || p.x <= 0 || p.y <= 0)
 		return true;
- 	//if (round(p.x / coarseGraining)>=CellSizeX || p.x<0 || round(p.y / coarseGraining)>=CellSizeY || p.y<0)
-	//	return true;
 	return false;
 
 }

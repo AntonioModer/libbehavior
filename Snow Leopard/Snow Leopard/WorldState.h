@@ -11,31 +11,12 @@
 
 namespace SL
 {
-
-class GameObject;
 class DOMNode;
+class GameObject;
 typedef std::list<GameObject*> GameObjectList;
 typedef GameObjectList::iterator GameObjectIter;
 typedef GameObjectList::const_iterator ConstGameObjectIter;
 #define coarseGraining 10
-
-
-class Render
-{
-public:
-bool operator() (GameObject* lhs, GameObject* rhs) {
-return lhs->renderPriority < rhs->renderPriority;
-}
-};
-
-class Action
-{
-public:
-bool operator() ( GameObject* lhs,  GameObject* rhs) {
-return lhs->actionPriority < rhs->actionPriority;
-}
-};
-
 
 
 class WorldState
