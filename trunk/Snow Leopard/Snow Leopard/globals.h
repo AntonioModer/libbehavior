@@ -9,6 +9,9 @@
 #include "Renderer.h"
 #include "GameLogic.h"
 
+using namespace SL;
+using namespace std;
+
 namespace SL
 {
 	//these represent the overall context

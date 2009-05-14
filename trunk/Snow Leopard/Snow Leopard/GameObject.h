@@ -9,7 +9,7 @@
 #include <ClanLib/display.h>
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
-
+#include "globals.h"
 #include "xerces.h"
 
 class CL_Sprite;
@@ -21,7 +21,38 @@ class WorldState; //need to forward declare class to avoid crazy recursion
 class DOMNode;
 class BehaviorTreeNode;
 
- class GameObject{
+struct GameObjectSetup
+{
+	std::string displayName; 
+	bool isPlayer;
+	CL_Angle movementHeading;
+	CL_Angle displayHeading;
+	CL_CollisionOutline* collisionOutline;
+	double accelHeading;
+	double accelMagnitude;
+	int faction;
+	int displaySize;
+	point location;
+	int actionPriority;
+	int renderPriority;
+	double speed;
+	bool usesPhysics;
+GameObjectSetup():
+	isPlayer(false),
+	displayName("default"),
+	displayHeading(CL_Angle::from_degrees(0)),
+	faction(0),
+	speed(0),
+	movementHeading(CL_Angle::from_degrees(0)),
+	accelMagnitude(0),
+	accelHeading(0),
+	actionPriority(DefActionPriority),
+	renderPriority(DefRenderPriority),
+	usesPhysics(true)
+	{}
+};
+
+class GameObject{
 
 public:
 
@@ -32,6 +63,7 @@ public:
 	virtual bool registerCollision(GameObject* collidedObject);
 	virtual bool registerWallCollision();
 	GameObject::GameObject(xerces DOMNode* rootNode);
+	GameObject::GameObject(GameObjectSetup setup);
 	CL_Sprite* sprite;
 	GameObject::~GameObject();
 	void applyForceRect(double x, double y);
@@ -54,8 +86,6 @@ public:
 	CL_Angle movementHeading;
 	CL_Angle displayHeading;
 	CL_CollisionOutline* collisionOutline;
-	double mass;
-	double rotationalInertia;
 	double accelHeading;
 	double accelMagnitude;
 	int faction;

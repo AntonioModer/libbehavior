@@ -4,6 +4,8 @@
 #include "Ship.h"
 #include "Definitions.h"
 #include "globals.h"
+#include "Projectile.h"
+#include "xerces.h"
 
 using namespace SL;
 using namespace std;
@@ -37,9 +39,17 @@ bool GameLogic::step()
 
 void GameLogic::handleInput()
 {
+	static int timeLastFired;
 	 if (keyboard->get_keycode(CL_KEY_SPACE))
 	 {
-		 //fire weapon
+		 
+		 if (ws->time - timeLastFired > 500)
+		 {
+			 Projectile* p = new Projectile(ProjectileSetup());
+			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
+			ws->insertObject(p,playerShip->location.offsetPolar(playerShip->displayHeading,100));
+		 }
+		 timeLastFired = ws->time;
 	 }
 
 

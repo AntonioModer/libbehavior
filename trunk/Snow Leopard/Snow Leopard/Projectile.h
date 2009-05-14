@@ -13,22 +13,21 @@ namespace SL
 class WorldState;
 class GameObject;
 
+struct ProjectileSetup : GameObjectSetup
+{
+	ProjectileSetup():GameObjectSetup(){}
+};
+
 class Projectile: public GameObject {
 
 public:
-
-	//the following properties characterize a projectile type
-	//std::vector<ProjectileProperty> ProjectileProperties;
-	//the sprite
-	//name
-	//description
-
 
 	bool doActions();
 	bool registerCollision(GameObjectList collisions);
 	bool registerWallCollision();
 	Projectile::Projectile(xerces DOMNode* rootNode);
 	Projectile::Projectile(Projectile& proj);
+	Projectile::Projectile(ProjectileSetup p);
 	virtual bool move();
 
 
