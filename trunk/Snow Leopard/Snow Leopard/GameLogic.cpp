@@ -43,7 +43,7 @@ void GameLogic::handleInput()
 	 if (keyboard->get_keycode(CL_KEY_SPACE))
 	 {
 		 
-		 if (ws->time - timeLastFired > 500)
+		 if (ws->time - timeLastFired > 100)
 		 {
 			 Projectile* p = new Projectile(ProjectileSetup());
 			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
