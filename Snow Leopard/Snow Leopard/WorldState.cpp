@@ -108,9 +108,6 @@ bool WorldState::insertObject(GameObject* gameObject, point p)
 
 bool WorldState::deleteObject(GameObject* gameObject)
 {
-	GameObjectList* currentList = getListFromPoint(gameObject->location);
-	allObjectList->remove(gameObject);
-	currentList->remove(gameObject);
 	registerForDeletion(gameObject);
 	return true;
 }
@@ -206,9 +203,13 @@ void WorldState::registerForDeletion(GameObject* obj)
 void WorldState::deleteQueued()
 {
 	ConstGameObjectIter itr;
+	deleteList->sort();
 	deleteList->unique();
 	for(itr = deleteList->begin();itr !=deleteList->end();)
 	{
+		GameObjectList* currentList = getListFromPoint((*itr)->location);
+		allObjectList->remove((*itr));
+		currentList->remove((*itr));
 		delete (*itr++);
 	}
 	deleteList->clear();
