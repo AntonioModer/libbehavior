@@ -20,7 +20,7 @@ class Ship: public GameObject {
 public:
 	
 	bool doActions();
-	bool registerCollision(GameObjectList collisions);
+	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Ship::Ship(xerces DOMNode* rootNode);
 	virtual bool move();
