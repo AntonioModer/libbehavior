@@ -4,6 +4,7 @@
 #include <ClanLib/display.h>
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
+#include "Projectile.h"
 #include "xerces.h"
 #include "util.h"
 
@@ -135,6 +136,8 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 		{
 			if ((*itr) == gameObject)
 				continue;
+			if ((*itr)->faction == PROJECTILE_FACTION && (gameObject->faction == PROJECTILE_FACTION))
+				continue;
 			if ((*itr)->usesPhysics)
 			{
 				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
@@ -177,6 +180,8 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
 		{
 			if ((*itr) == gameObject)
+				continue;
+			if ((*itr)->faction == PROJECTILE_FACTION && (gameObject->faction == PROJECTILE_FACTION))
 				continue;
 			if ((*itr)->usesPhysics)
 			{

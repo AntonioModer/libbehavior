@@ -13,6 +13,8 @@ namespace SL
 class WorldState;
 class GameObject;
 
+#define PROJECTILE_FACTION 500
+
 struct ProjectileSetup : GameObjectSetup
 {
 	ProjectileSetup():GameObjectSetup(){}

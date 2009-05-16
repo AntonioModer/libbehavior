@@ -31,12 +31,13 @@ Projectile::Projectile(ProjectileSetup p) : GameObject(p)
 	actionPriority = ProjectileActionPriority;
 	renderPriority = ProjectileRenderPriority;
 	displayName = "projectile";
+	faction = PROJECTILE_FACTION;
 
 }
 	
 bool Projectile::registerWallCollision()
 {
-	cout << "projectile collision" << endl;
+	cout << "projectile wall collision" << endl;
 	ws->deleteObject(this);
 	return true;
 }
