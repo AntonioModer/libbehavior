@@ -209,6 +209,6 @@ void GameObject::applyForcePolar(CL_Angle heading, double magnitude)
 
 GameObject::~GameObject()
 {
-	std::cout <<"deleting" << displayName;
+	std::cout << displayName << " destructor" << endl;
 	delete sprite;
 }
