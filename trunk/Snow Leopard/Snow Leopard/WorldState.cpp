@@ -7,6 +7,7 @@
 #include "Projectile.h"
 #include "xerces.h"
 #include "util.h"
+#include "Ship.h"
 
 using namespace SL;
 using namespace std;
@@ -88,7 +89,8 @@ WorldState::WorldState(xerces DOMNode* rootNode)
 		std::cout << "now reading node" << entityNode->getAttribute(XercesString("id").xmlCh()) << endl;
 		xerces DOMNamedNodeMap* entityAttributes = entityNode->getAttributes();
 		point p(getAttributeDouble("xPosition",entityAttributes),getAttributeDouble("yPosition",entityAttributes));
-		insertObject(new GameObject(entityNode),p);
+		cout << entityNode->getTagName() << endl;
+		insertObject(new Ship(entityNode),p);
 	}
 }
 

@@ -83,6 +83,7 @@ public:
 	bool isPlayer; //right now only one ship can be a player
 	
 	//polar coordinates
+	unsigned int HP;
 	CL_Angle movementHeading;
 	CL_Angle displayHeading;
 	CL_CollisionOutline* collisionOutline;

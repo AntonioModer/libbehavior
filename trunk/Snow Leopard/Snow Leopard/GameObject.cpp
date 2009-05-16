@@ -67,11 +67,14 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	((SequentialNode*) brain)->addChild(tt);
 	((SequentialNode*) brain)->addChild(gs);
 	
+	HP = 100;
+
 	brain->init(this);
 }
 
 GameObject::GameObject(GameObjectSetup setup)
 {
+	HP = 100;
 	displayName = "default";
 	displayHeading = CL_Angle();
 	faction = 0;
