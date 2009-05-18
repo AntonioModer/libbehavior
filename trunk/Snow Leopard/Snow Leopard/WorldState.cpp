@@ -90,7 +90,9 @@ WorldState::WorldState(xerces DOMNode* rootNode)
 		xerces DOMNamedNodeMap* entityAttributes = entityNode->getAttributes();
 		point p(getAttributeDouble("xPosition",entityAttributes),getAttributeDouble("yPosition",entityAttributes));
 		cout << entityNode->getTagName() << endl;
-		insertObject(new Ship(entityNode),p);
+		Ship* s = new Ship(entityNode);
+		//TODO: add scenario handling code here
+		insertObject(s,p);
 	}
 }
 

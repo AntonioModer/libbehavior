@@ -1,85 +1,77 @@
 #include "BehaviorTreeNode.h"
 #include "mtrand.h"
 
-using namespace SL;
+using namespace BehaviorTree;
 
-BehaviorTreeNode::BEHAVIOR_STATUS SequentialNode::execute(GameObject* object)
+BehaviorTreeNode::BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 	{
 		BehaviorTreeNode* currentTask = children.at(currentPosition);
-		BEHAVIOR_STATUS result = currentTask->execute(object);
+		BEHAVIOR_STATUS result = currentTask->execute(agent);
 
-		if (result == SL_SUCCESS)
+		if (result == BT_SUCCESS)
 		{
 			if (currentPosition == children.size()) //finished last task
 			{
-				return SL_SUCCESS;
+				return BT_SUCCESS;
 			}
 			else
 			{
 				currentPosition++;
-				return SL_RUNNING;
+				return BT_RUNNING;
 			}
 		}
 		return result;
 	}
 
-bool SequentialNode::init(GameObject* object)
+void SequentialNode::init(void* agent)
 {
 	currentPosition = 0;
-	return true;
 }
-BehaviorTreeNode::BEHAVIOR_STATUS PrioritySelectorNode::execute(GameObject* object)
+BehaviorTreeNode::BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 {
-	if (*currentlySL_RUNNINGNode) //there's one still SL_RUNNING
+	if (*currentlyRunningNode) //there's one still BT_RUNNING
 	{
-		BEHAVIOR_STATUS status = (*currentlySL_RUNNINGNode)->execute(object);
-		if (status == SL_RUNNING)
-			return SL_RUNNING;
-		else if (status == SL_SUCCESS)
+		BEHAVIOR_STATUS status = (*currentlyRunningNode)->execute(agent);
+		if (status == BT_RUNNING)
+			return BT_RUNNING;
+		else if (status == BT_SUCCESS)
 		{
-			delete &currentlySL_RUNNINGNode;
-			return SL_SUCCESS;
+			return BT_SUCCESS;
 		}
 	}
 
 	else //need to choose one
 	{
-		currentlySL_RUNNINGNode = children.begin();
+		currentlyRunningNode = children.begin();
 		BEHAVIOR_STATUS status;
-        while ((status = (*currentlySL_RUNNINGNode)->execute(object)) == SL_FAILURE) //keep trying children until one doesn't fail
+        while ((status = (*currentlyRunningNode)->execute(agent)) == BT_FAILURE) //keep trying children until one doesn't fail
         {
-			currentlySL_RUNNINGNode++;
-            if (currentlySL_RUNNINGNode == children.end()) //all of the children failed
-                return SL_FAILURE;
+			currentlyRunningNode++;
+            if (currentlyRunningNode == children.end()) //all of the children failed
+                return BT_FAILURE;
         }
-		if (status == SL_SUCCESS)
-			delete &currentlySL_RUNNINGNode;
         return status;
 	}
 
 }
 
-bool ProbabilitySelectorNode::init(GameObject* object)
+void ProbabilitySelectorNode::init(void* agent)
 {
 	totalSum = 0;
-	return true;
 }
-bool ProbabilitySelectorNode::addChild(BehaviorTreeNode* node, double weighting)
+void ProbabilitySelectorNode::addChild(BehaviorTreeNode* node, double weighting)
 {
 	weightingMap[node] = weighting;
 	totalSum += weighting;
 	BehaviorTreeInternalNode::children.push_back(node);
-	return true;
 }
 
-BehaviorTreeNode::BEHAVIOR_STATUS ProbabilitySelectorNode::execute(GameObject *object)
+BehaviorTreeNode::BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
 {
 	//check if we've already chosen a node to run
-	if (&currentlySL_RUNNINGNode)
+	if (&currentlyRunningNode)
 	{
-		BEHAVIOR_STATUS status = ((*currentlySL_RUNNINGNode).first)->execute(object);
-		if (status != SL_RUNNING)
-			delete &currentlySL_RUNNINGNode;
+		BEHAVIOR_STATUS status = ((*currentlyRunningNode).first)->execute(agent);
 		return status;
 	}
 
@@ -94,25 +86,24 @@ BehaviorTreeNode::BEHAVIOR_STATUS ProbabilitySelectorNode::execute(GameObject *o
 		sum += (*itr).second;
 		if (sum >= chosen) //execute this node
 		{
-			BEHAVIOR_STATUS status = (*itr).first->execute(object);
+			BEHAVIOR_STATUS status = (*itr).first->execute(agent);
 
-			if (status == SL_RUNNING)
-				currentlySL_RUNNINGNode = itr;
+			if (status == BT_RUNNING)
+				currentlyRunningNode = itr;
 			return status;
 		}
 	}
 
 	
 
-	return SL_SUCCESS;
+	return BT_SUCCESS;
 }
 
-bool ParallelNode::init(GameObject* object)
+void ParallelNode::init(void* object)
 {
-	return true;
 }
 
-BehaviorTreeNode::BEHAVIOR_STATUS ParallelNode::execute(GameObject* object)
+BehaviorTreeNode::BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 {
 	BehaviorTreeListIter itr;
 	for (itr = children.begin() ; itr != children.end() ; itr++)
@@ -121,9 +112,9 @@ BehaviorTreeNode::BEHAVIOR_STATUS ParallelNode::execute(GameObject* object)
 		if (!(childrenStatus[*itr]))
 		{
 			BEHAVIOR_STATUS status = (*itr)->execute(object);
-			if (status == SL_FAILURE || status == SL_ERROR)
+			if (status == BT_FAILURE || status == BT_ERROR)
 				return status;
-			if (status == SL_SUCCESS)
+			if (status == BT_SUCCESS)
 				childrenStatus[*itr] = true;
 		}
 		
