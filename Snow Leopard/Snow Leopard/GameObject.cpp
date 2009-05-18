@@ -8,6 +8,7 @@
 
 #include "xerces.h"
 using namespace SL;
+using namespace BehaviorTree;
 
 int GameObject::IDCount = 0;
 GameObject::GameObject(xerces DOMNode* rootNode)
