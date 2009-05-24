@@ -15,7 +15,7 @@ using namespace BehaviorTree;
 void goStraight::init(void* agent)
 {
 };
-BehaviorTree::BehaviorTreeNode::BEHAVIOR_STATUS goStraight::execute(void* agent)
+BehaviorTree::BEHAVIOR_STATUS goStraight::execute(void* agent)
 {
 	GameObject* ship = (GameObject*) agent;
 #ifdef PHYSICS

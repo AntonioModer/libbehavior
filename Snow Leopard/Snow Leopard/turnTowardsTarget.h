@@ -9,9 +9,9 @@ namespace SL
 {
 	BEHAVIOR_STATUS execute(void* agent);
 	void init(void* agent);
-	BehaviorTree::BehaviorTreeNode::BehaviorTreeList getChildren()
+	BehaviorTree::BehaviorTreeList getChildren()
 	{
-		return BehaviorTree::BehaviorTreeNode::BehaviorTreeList();
+		return BehaviorTree::BehaviorTreeList();
 	}
 };
 

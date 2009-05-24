@@ -8,7 +8,7 @@ using namespace BehaviorTree;
 void turnTowardsTarget::init(void* agent)
 {
 };
-BehaviorTree::BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(void* agent)
+BEHAVIOR_STATUS turnTowardsTarget::execute(void* agent)
 {
 	GameObject* object = (GameObject*) agent;
 	if (!(object->ID == ("enemy")))

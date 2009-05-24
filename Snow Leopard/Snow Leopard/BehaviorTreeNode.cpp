@@ -3,7 +3,7 @@
 
 using namespace BehaviorTree;
 
-BehaviorTreeNode::BEHAVIOR_STATUS SequentialNode::execute(void* agent)
+BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 	{
 		BehaviorTreeNode* currentTask = children.at(currentPosition);
 		BEHAVIOR_STATUS result = currentTask->execute(agent);
@@ -27,7 +27,7 @@ void SequentialNode::init(void* agent)
 {
 	currentPosition = 0;
 }
-BehaviorTreeNode::BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
+BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 {
 	if (*currentlyRunningNode) //there's one still BT_RUNNING
 	{
@@ -66,7 +66,7 @@ void ProbabilitySelectorNode::addChild(BehaviorTreeNode* node, double weighting)
 	BehaviorTreeInternalNode::children.push_back(node);
 }
 
-BehaviorTreeNode::BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
+BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
 {
 	//check if we've already chosen a node to run
 	if (&currentlyRunningNode)
@@ -103,7 +103,7 @@ void ParallelNode::init(void* object)
 {
 }
 
-BehaviorTreeNode::BEHAVIOR_STATUS ParallelNode::execute(void* agent)
+BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 {
 	BehaviorTreeListIter itr;
 	for (itr = children.begin() ; itr != children.end() ; itr++)
