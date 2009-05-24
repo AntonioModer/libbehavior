@@ -278,10 +278,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GameObjectPriorities.h"
-				>
-			</File>
-			<File
 				RelativePath=".\globals.h"
 				>
 			</File>
