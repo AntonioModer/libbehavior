@@ -79,22 +79,22 @@ void GameLogic::handleInput()
 #ifdef NOPHYSICS
 	 if (keyboard->get_keycode(CL_KEY_UP))
 	 {
-		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,2));
+		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,5));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_DOWN))
 	 {
-		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,-2));
+		 ws->moveObject(playerShip,playerShip->location.offsetPolar(playerShip->displayHeading,-5));
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_LEFT))
 	 {
-		 ws->rotateObject(playerShip,-2);
+		 ws->rotateObject(playerShip,-5);
 	 }
 
 	 if (keyboard->get_keycode(CL_KEY_RIGHT))
 	 {
-		 ws->rotateObject(playerShip,2);
+		 ws->rotateObject(playerShip,5);
 	 }
 #endif
 #ifdef PHYSICS

@@ -1,6 +1,6 @@
 #ifndef TURNTOWARDSTARGET_H_
 #define TURNTOWARDSTARGET_H_
-#include "BehaviorTreeNode.h"
+#include "BehaviorTree.h"
 
 using namespace BehaviorTree;
 namespace SL

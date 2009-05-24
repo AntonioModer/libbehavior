@@ -1,6 +1,6 @@
 #ifndef GOSTRAIGHT_H_
 #define GOSTRAIGHT_H_
-#include "BehaviorTreeNode.h"
+#include "BehaviorTree.h"
 
 using namespace BehaviorTree;
 namespace SL

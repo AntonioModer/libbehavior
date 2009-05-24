@@ -2,7 +2,7 @@
 #include "WorldState.h"
 #include "turnTowardsTarget.h"
 #include "goStraight.h"
-#include "BehaviorTreeNode.h"
+#include "BehaviorTree.h"
 #include "globals.h"
 
 
@@ -60,13 +60,11 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	collisionOutline->set_angle(displayHeading);
 	}
 
-	targetPriorities = new GameObjectList();
-
 	brain = new ParallelNode();
-	goStraight* gs = new goStraight();
+	//goStraight* gs = new goStraight();
 	turnTowardsTarget* tt = new turnTowardsTarget();
 	brain->addChild(tt);
-	brain->addChild(gs);
+	//brain->addChild(gs);
 	
 	HP = 100;
 
@@ -121,8 +119,6 @@ GameObject::GameObject(GameObjectSetup setup)
 	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
 	collisionOutline->set_angle(displayHeading);
 	}
-
-	targetPriorities = new GameObjectList();
 
 	brain = new ParallelNode();
 	brain->init(this);

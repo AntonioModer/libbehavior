@@ -11,7 +11,7 @@
 #include <ClanLib/application.h>
 #include "globals.h"
 #include "xerces.h"
-#include "BehaviorTreeNode.h"
+#include "BehaviorTree.h"
 
 class CL_Sprite;
 class CL_CollisionOutline;
@@ -70,8 +70,6 @@ public:
 	void applyForceRect(double x, double y);
 	void applyForcePolar(CL_Angle heading, double magnitude);
 	BehaviorTree::ParallelNode* brain;
-
-	GameObjectList* targetPriorities;
 
 	static int GameObject::getID()
 {

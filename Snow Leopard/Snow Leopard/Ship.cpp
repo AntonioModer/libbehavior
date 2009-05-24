@@ -13,6 +13,8 @@ bool Ship::doActions()
 
 	//move();
 	//shoot();
+	if (!isPlayer)
+		brain->execute(this);
 	return true;
 	
 }

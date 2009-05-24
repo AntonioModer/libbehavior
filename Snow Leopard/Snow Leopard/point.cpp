@@ -40,7 +40,7 @@ double point::angleTo(point p)
 
 void point::normalize()
 {
-	double length = x*x + y*y;
+	double length = sqrtf(x*x + y*y);
 	cout << "length: " << length << endl;
 	x /= length;
 	y /= length;
@@ -48,5 +48,5 @@ void point::normalize()
 
 std::string point::toString()
 {
-	return boost::lexical_cast<std::string>((nround(x))) + "," + boost::lexical_cast<std::string>(nround(y));
+	return boost::lexical_cast<std::string>(x) + "," + boost::lexical_cast<std::string>(y);
 }
