@@ -5,15 +5,19 @@
 using namespace BehaviorTree;
 namespace SL
 {
-	class turnTowardsTarget:public BehaviorTree::BehaviorTreeNode
-{
-	BEHAVIOR_STATUS execute(void* agent);
-	void init(void* agent);
-	BehaviorTree::BehaviorTreeList getChildren()
+	namespace Behaviors
 	{
-		return BehaviorTree::BehaviorTreeList();
+		/// Behavior of turning to face a target
+		class TurnTowardsTarget:public BehaviorTree::BehaviorTreeNode
+		{
+			BEHAVIOR_STATUS execute(void* agent);
+			void init(void* agent);
+			BehaviorTree::BehaviorTreeList getChildren()
+			{
+				return BehaviorTree::BehaviorTreeList();
+			}
+		};
 	}
-};
 
 }
 #endif

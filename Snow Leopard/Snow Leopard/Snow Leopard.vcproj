@@ -221,19 +221,19 @@
 						Name="Movement"
 						>
 						<File
-							RelativePath=".\goStraight.cpp"
+							RelativePath=".\GoStraight.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\goStraight.h"
+							RelativePath=".\GoStraight.h"
 							>
 						</File>
 						<File
-							RelativePath=".\turnTowardsTarget.cpp"
+							RelativePath=".\TurnTowardsTarget.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\turnTowardsTarget.h"
+							RelativePath=".\TurnTowardsTarget.h"
 							>
 						</File>
 					</Filter>
@@ -333,10 +333,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\brokenthings.txt"
-			>
-		</File>
 		<File
 			RelativePath=".\Resources\XML\example.xml"
 			>

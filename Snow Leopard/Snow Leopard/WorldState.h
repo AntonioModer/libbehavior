@@ -22,7 +22,7 @@ typedef GameObjectList::const_iterator ConstGameObjectIter;
 /// A larger value means larger cells, and thus lower memory usage
 #define coarseGraining 10
 
-
+/// Data structure that maps a collection of objects into a 2d space
 class WorldState
 {
 public:
@@ -50,18 +50,25 @@ std::string id;
 WorldState::WorldState();
 /// Constructor from an XML node
 WorldState::WorldState(xerces DOMNode* rootNode);
+/// Insert the gameObject into the world at the given point
+/** \return true if the object was actually inserted, false if it could not be */
 bool insertObject(GameObject* gameObject, point p);
-GameObject* getCamera();
+/// Searches the world for an object with "isPlayer" set, and returns that
+GameObject* getPlayer();
+/// Marks the object for deletion. The memory is not actually freed until a convenient time, and until then the object will continue to interact with things (right now)
 bool deleteObject(GameObject* gameObject);
+/// Move an object that's already in the world to the specified point (checking for collisions)
+/**	\return true if the object was actually moved, false if it collided, went out of bounds, etc */
 bool moveObject(GameObject* gameObject, point p);
+/// Rotate an object in the world about its center (checking for collisions)
+/** \return true if the object was actually rotated, false if it collided, went out of bounds, etc */
 bool rotateObject(GameObject* gameObject, double angle);
+/// Get a list of all the objects in the region of a point
 GameObjectList* getAtCell(point p);
-const GameObjectList* WorldState::getAllGameObjects(SortPreference p = UNSORTED);
-void registerForDeletion(GameObject* obj);
+/// Get a list of all the gameObjects in the world
+const GameObjectList* WorldState::getAllGameObjects();
+/// Free the memory of objects that have been marked for deletion
 void deleteQueued();
-static void WorldState::loadFromDOM(xerces DOMNode* node);
-void WorldState::saveToDOM(xerces DOMNode* node);
-
 
 private:
 	GameObjectList*** worldMatrix;
@@ -69,6 +76,8 @@ private:
 	bool pointOutofBounds(point p);
 	GameObjectList* WorldState::getListFromPoint(point p);
 	GameObjectList* deleteList;
+	void registerForDeletion(GameObject* obj);
+	
 };
 
 }

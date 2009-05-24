@@ -36,7 +36,7 @@ WorldState::WorldState()
 	}
 }
 
-GameObject* WorldState::getCamera() //returns a random object marked as being a player. Need to add code to verify there is only one
+GameObject* WorldState::getPlayer()
 {
 	GameObjectIter itr;
 	for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
@@ -120,7 +120,6 @@ bool WorldState::deleteObject(GameObject* gameObject)
 bool WorldState::moveObject(GameObject* gameObject, point p)
 {
 	cout<<p.toString()<<endl;
-	//replace with pixel perfect collision code
 	if (pointOutofBounds(p))
 	{
 		gameObject->registerWallCollision();
@@ -233,10 +232,9 @@ GameObjectList* WorldState::getAtCell(point p)
 	return getListFromPoint(p);
 }
 
-
-const GameObjectList* WorldState::getAllGameObjects(SortPreference p)
+const GameObjectList* WorldState::getAllGameObjects()
 {
-	return  allObjectList; //can't change the contents of the list, but _can_ change the properties of the objects
+	return  allObjectList; 
 }
 
 

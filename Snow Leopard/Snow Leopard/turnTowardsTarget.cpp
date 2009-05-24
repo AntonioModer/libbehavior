@@ -3,15 +3,16 @@
 #include "globals.h"
 
 using namespace SL;
+using namespace SL::Behaviors;
 using namespace BehaviorTree;
 
-void turnTowardsTarget::init(void* agent)
+void TurnTowardsTarget::init(void* agent)
 {
 };
-BEHAVIOR_STATUS turnTowardsTarget::execute(void* agent)
+BEHAVIOR_STATUS TurnTowardsTarget::execute(void* agent)
 {
 	GameObject* object = (GameObject*) agent;
-	GameObject* target = ws->getCamera();
+	GameObject* target = ws->getPlayer();
 	cout << "found target" << endl;
 	cout << target->location.toString() << endl;
 	cout << "my location: " << object->location.toString() << endl;

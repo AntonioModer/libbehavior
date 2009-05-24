@@ -14,14 +14,14 @@ GameLogic::GameLogic()
 {
 	keyboard = &ic->get_keyboard();
 	mouse = &ic->get_mouse();
-	playerShip = (Ship*) ws->getCamera();
+	playerShip = (Ship*) ws->getPlayer();
 }
 
 bool GameLogic::step()
 {
-
-	ws->deleteQueued();
-	unsigned int currentTime = CL_System::get_time();
+	
+	ws->deleteQueued(); // Delete all the things that were destroyed last frame now, since it won't interfere with iterators, etc.
+	unsigned int currentTime = CL_System::get_time(); //Since the framerate might not be steady, need to see how much actual time has gone by
 	ws->timeElapsed = currentTime - ws->time;
 	ws->time = currentTime;
 
@@ -31,9 +31,8 @@ bool GameLogic::step()
 	const GameObjectList* objects = ws->getAllGameObjects();
 	ConstGameObjectIter itr;
 	for(itr = objects->begin();itr !=objects->end();)
-	{
- 		(*itr++)->doActions(); //if the object gets deleted during this, it's ok because the iterator is already incremented
-	}
+ 		(*itr++)->doActions();
+
 	return true;
 }
 

@@ -5,13 +5,7 @@
 using namespace SL;
 using namespace std;
 
-int nround(double a) {
-return int(a + 0.5);
-}
-
-
-
-point::point(double i, double j)
+point::point(float i, float j)
 {
 	x = i;
 	y = j;
@@ -23,24 +17,24 @@ point::point()
 	y=0;
 }
 
-point point::offsetRect(double ox, double oy)
+point point::offsetRect(float ox, float oy)
 {
 	return point(x+ox,y+oy);
 }
 
-point point::offsetPolar(CL_Angle heading, double distance)
+point point::offsetPolar(CL_Angle heading, float distance)
 {
 	return point(x - distance * sin(-heading.to_radians()),y - distance * cos(-heading.to_radians()));
 }
 
-double point::angleTo(point p)
+float point::angleTo(point p)
 {
 	return atan2(p.y,p.x) - atan2(y,x);
 }
 
 void point::normalize()
 {
-	double length = sqrtf(x*x + y*y);
+	float length = sqrtf(x*x + y*y);
 	cout << "length: " << length << endl;
 	x /= length;
 	y /= length;

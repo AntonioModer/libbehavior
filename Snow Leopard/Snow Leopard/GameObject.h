@@ -40,9 +40,9 @@ public:
 	/// Cleans up resources in use by the object when it is deleted
 	GameObject::~GameObject();
 	/// If Newtonian physics is enabled for the world, this imparts a force on the object
-	void applyForceRect(double x, double y);
+	void applyForceRect(float x, float y);
 	/// If Newtonian physics is enabled for the world, this imparts a force on the object
-	void applyForcePolar(CL_Angle heading, double magnitude);
+	void applyForcePolar(CL_Angle heading, float magnitude);
 	/// The "AI" for the object.
 	BehaviorTree::ParallelNode* brain;
 	/// Unique for each object instance
@@ -68,9 +68,9 @@ public:
 	/// The collision outline generated from the sprite
 	CL_CollisionOutline* collisionOutline;
 	/// The directional component of the object's acceleration
-	double accelHeading;
+	float accelHeading;
 	/// The scalar component of the object's acceleration
-	double accelMagnitude;
+	float accelMagnitude;
 	/// Used to divide objects into different categories to customize interactions between them
 	int faction;
 	/// Used to scale how objects are displayed. Not currently implemented
@@ -78,7 +78,7 @@ public:
 	/// Absolute coordinates of the object in the world.
 	point location;
 	/// The scalar component of the object's velocity
-	double speed;
+	float speed;
 	/// Determines whether the object collides with others
 	bool usesPhysics;
 

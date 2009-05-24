@@ -17,6 +17,8 @@
 
 using namespace SL;
 using namespace std;
+
+// Instantiate the globals that were declared as "extern" in globals.h
 CL_GraphicContext* SL::gc;
 WorldState* SL::ws;
 CL_InputContext* SL::ic;
@@ -39,8 +41,6 @@ CL_ClanApplication app(&DisplayProgram::main);
 
 int DisplayProgram::main(const std::vector<CL_String> &args)
 {
-	// Setup clanlib modules:
-
 	CL_SetupCore setup_core;
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
