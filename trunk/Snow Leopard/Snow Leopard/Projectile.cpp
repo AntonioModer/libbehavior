@@ -22,14 +22,10 @@ bool Projectile::move()
 
 Projectile::Projectile(xerces DOMNode* rootNode) : GameObject(rootNode)
 {
-	actionPriority = ProjectileActionPriority;
-	renderPriority = ProjectileRenderPriority;
 }
 
 Projectile::Projectile() : GameObject()
 {
-	actionPriority = ProjectileActionPriority;
-	renderPriority = ProjectileRenderPriority;
 	displayName = "projectile";
 	faction = PROJECTILE_FACTION;
 

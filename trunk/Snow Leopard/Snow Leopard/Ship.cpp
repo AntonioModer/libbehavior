@@ -43,8 +43,6 @@ bool Ship::shoot()
 
 Ship::Ship(xerces DOMNode* rootNode) : GameObject(rootNode)
 {
-	actionPriority = ShipActionPriority;
-	renderPriority = ShipRenderPriority;
 	//AI_Movement = &AI_Move_DoNothing;
 //	AI_Shooting = &AI_Shoot_DoNothing;
 	GameObject::usesPhysics = true;

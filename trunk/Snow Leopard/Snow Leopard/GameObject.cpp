@@ -8,6 +8,7 @@
 
 #include "xerces.h"
 using namespace SL;
+using namespace SL::Behaviors;
 using namespace BehaviorTree;
 
 int GameObject::IDCount = 0;
@@ -17,13 +18,11 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	displayName = getAttributeStr("name",attributes);
 	displayHeading = CL_Angle::from_degrees(0);
 	faction = getAttributeInt("faction",attributes);
-	ID = getAttributeStr("id",attributes);
-	speed=getAttributeDouble("movementSpeed",attributes);
-	movementHeading=CL_Angle::from_degrees(getAttributeDouble("movementHeading",attributes));
-	accelMagnitude = getAttributeDouble("accelerationMagnitude",attributes);
-	accelHeading = getAttributeDouble("accelerationHeading",attributes);
-	actionPriority = DefActionPriority;
-	renderPriority = DefRenderPriority;
+	ID = getID();
+	speed=(float)getAttributeDouble("movementSpeed",attributes);
+	movementHeading=CL_Angle::from_degrees((float)getAttributeDouble("movementHeading",attributes));
+	accelMagnitude = (float)getAttributeDouble("accelerationMagnitude",attributes);
+	accelHeading = (float)getAttributeDouble("accelerationHeading",attributes);
 	isPlayer = getAttributeBool("isPlayer",attributes);
 	usesPhysics = getAttributeBool("usesPhysics",attributes);
 	cout << "uses physics" << usesPhysics << endl;
@@ -47,22 +46,22 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	int rotation_offset_y = getAttributeInt("rotation_offset_y",BaseImageAttributes);
 	sprite->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
 	sprite->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
-	sprite->set_base_angle(CL_Angle::from_degrees(getAttributeInt("base_angle",BaseImageAttributes)));
+	sprite->set_base_angle(CL_Angle::from_degrees((float)getAttributeInt("base_angle",BaseImageAttributes)));
 
-	displayHeading = CL_Angle::from_degrees(getAttributeDouble("current_angle",BaseImageAttributes));
+	displayHeading = CL_Angle::from_degrees((float)getAttributeDouble("current_angle",BaseImageAttributes));
 
-	//need to add code to set the scale. This requires communicating with the worldState at runtime
+	// will only need a collision outline if it's going to be colliding with stuff
 	if (usesPhysics)
 	{
 	collisionOutline = new CL_CollisionOutline(image);
-	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
-	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
+	collisionOutline->set_alignment(translationOrigin,(float)translation_offset_x,(float)translation_offset_y);
+	collisionOutline->set_rotation_hotspot(rotationOrigin,(float)rotation_offset_x,(float)rotation_offset_y);
 	collisionOutline->set_angle(displayHeading);
 	}
 
 	brain = new ParallelNode();
 	//goStraight* gs = new goStraight();
-	turnTowardsTarget* tt = new turnTowardsTarget();
+	TurnTowardsTarget* tt = new TurnTowardsTarget();
 	brain->addChild(tt);
 	//brain->addChild(gs);
 	
@@ -87,8 +86,6 @@ GameObject::GameObject()
 
 	//set up the base sprite
 	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
-	cout << "null? " << image.is_null() << endl;
-	cout << "size " << image.get_size() << endl;
 	CL_SpriteDescription desc;
 	desc.add_frame(image);
 	sprite = new CL_Sprite(*SL::gc,desc);
@@ -105,13 +102,13 @@ GameObject::GameObject()
 
 	displayHeading =CL_Angle::from_degrees(0);
 
-	//need to add code to set the scale. This requires communicating with the worldState at runtime
+	// will only need a collision outline if it's going to be colliding with stuff
 	if (usesPhysics)
 	{
 	cout << "creating a new collision outline" << endl;
 	collisionOutline = new CL_CollisionOutline(image);
-	collisionOutline->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
-	collisionOutline->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
+	collisionOutline->set_alignment(translationOrigin,(float)translation_offset_x,(float)translation_offset_y);
+	collisionOutline->set_rotation_hotspot(rotationOrigin,(float)rotation_offset_x,(float)rotation_offset_y);
 	collisionOutline->set_angle(displayHeading);
 	}
 
@@ -122,8 +119,10 @@ GameObject::GameObject()
 
 bool GameObject::doActions()
 {
-	//if (usesPhysics)
-	//	processMovementPhysics();
+#ifdef PHYSICS
+	if (usesPhysics)
+		processMovementPhysics();
+#endif
 	if (!(isPlayer))
 		brain->execute(this);
 	return true;
@@ -140,9 +139,9 @@ bool GameObject::registerCollision(GameObject* collidedObject)
 bool GameObject::processMovementPhysics()
 {
 	//new velocity components
-	double newX = .5 * accelMagnitude * cos(accelHeading * 3.14159/180) * ws->timeElapsed
+	float newX = .5 * accelMagnitude * cos(accelHeading * 3.14159/180) * ws->timeElapsed
 		+ speed * cos(movementHeading.to_radians());
-	double newY = .5 * accelMagnitude * sin(accelHeading *3.14159/180) * ws->timeElapsed
+	float newY = .5 * accelMagnitude * sin(accelHeading *3.14159/180) * ws->timeElapsed
 		+ speed * sin(movementHeading.to_radians()); 
 
 	speed = sqrt((newX)*(newX) + (newY)*(newY));
@@ -184,21 +183,21 @@ bool GameObject::registerWallCollision()
 	return true;
 }
 
-void GameObject::applyForceRect(double x,double y)
+void GameObject::applyForceRect(float x,float y)
 {
-	double oldX = accelMagnitude * cos(accelHeading * 3.14159/180);
-	double oldY = accelMagnitude * sin(accelHeading *3.14159/180);
+	float oldX = accelMagnitude * cos(accelHeading * 3.14159/180);
+	float oldY = accelMagnitude * sin(accelHeading *3.14159/180);
 	//should probably be using vectors everywhere
-	double newX = oldX + x;
-	double newY = oldY + y;
+	float newX = oldX + x;
+	float newY = oldY + y;
 	accelMagnitude = sqrt(newX*newX + newY*newY);
-	accelHeading = (180 * atan2(newY,newX)) / 3.14159;
+	accelHeading = (180.0 * atan2(newY,newX)) / 3.14159;
 }
 
-void GameObject::applyForcePolar(CL_Angle heading, double magnitude)
+void GameObject::applyForcePolar(CL_Angle heading, float magnitude)
 {
-	double X = magnitude * cos(heading.to_radians());
-	double Y = magnitude * sin(heading.to_radians());
+	float X = magnitude * cos(heading.to_radians());
+	float Y = magnitude * sin(heading.to_radians());
 	applyForceRect(X,Y);
 }
 

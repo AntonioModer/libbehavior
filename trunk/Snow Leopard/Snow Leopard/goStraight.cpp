@@ -8,14 +8,15 @@
 #include <ClanLib/application.h>
 
 using namespace SL;
+using namespace SL::Behaviors;
 using namespace BehaviorTree;
 
 //goStraight will never return SUCCESS!!! Remember to provide decorators or conditions so it will fail.
 
-void goStraight::init(void* agent)
+void GoStraight::init(void* agent)
 {
 };
-BehaviorTree::BEHAVIOR_STATUS goStraight::execute(void* agent)
+BEHAVIOR_STATUS GoStraight::execute(void* agent)
 {
 	GameObject* ship = (GameObject*) agent;
 #ifdef PHYSICS

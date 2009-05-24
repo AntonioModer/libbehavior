@@ -5,15 +5,19 @@
 using namespace BehaviorTree;
 namespace SL
 {
-	class goStraight:public BehaviorTree::BehaviorTreeNode
-{
-	BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
-	void init(void* agent);
-	BehaviorTree::BehaviorTreeList getChildren()
+	namespace Behaviors
 	{
-		return BehaviorTree::BehaviorTreeList();
+	/// Simple behavior of continuously going straight
+	class GoStraight:public BehaviorTree::BehaviorTreeNode
+	{
+		BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
+		void init(void* agent);
+		BehaviorTree::BehaviorTreeList getChildren()
+		{
+			return BehaviorTree::BehaviorTreeList();
+		}
+	};
 	}
-};
 
 }
 #endif

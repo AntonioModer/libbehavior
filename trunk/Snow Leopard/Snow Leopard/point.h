@@ -7,20 +7,30 @@
 
 namespace SL
 {
-	
-
-
+/// Simple point / vector implementation
 struct point
 {
 public:
-	point::point(double i,double j);
+	///Construct a point with the given x,y coordinates
+	/** \param x the x coordinate
+		\param y the y coordinate
+	*/
+	point::point(float x,float y);
+	/// Construct a point with coordinates at 0,0
 	point::point();
-	point point::offsetRect(double ox, double oy);
-	point point::offsetPolar(CL_Angle heading, double distance);
-	double angleTo(point p);
-	double x;
-	double y;
+	/// Create a new point at the given offset from this point
+	point point::offsetRect(float ox, float oy);
+	/// Create a new point at the given offset from this point
+	point point::offsetPolar(CL_Angle heading, float distance);
+	/// Calculate the angle (in radians) to another point
+	float angleTo(point p);
+	/// The x coordinate of this point
+	float x;
+	/// The y coordinate of this point
+	float y;
+	/// Generate a string from the point, for easy display
 	std::string point::toString();
+	/// Retain the direction but make the magnitude 1
 	void normalize();
 };
 

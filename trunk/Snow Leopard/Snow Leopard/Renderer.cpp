@@ -11,7 +11,7 @@ Renderer::Renderer()
 	CL_FontDescription desc;
 	desc.set_typeface_name("Times New Roman");
 	font = new CL_Font(*gc,desc);
-	camera = ws->getCamera();
+	camera = ws->getPlayer();
 }
 bool Renderer::setCamera(GameObject* obj)
 {
@@ -21,7 +21,7 @@ bool Renderer::setCamera(GameObject* obj)
 
 bool Renderer::Render()
 {
-	const GameObjectList* objects = ws->getAllGameObjects(WorldState::RENDER_SORTED);
+	const GameObjectList* objects = ws->getAllGameObjects();
 	gc->clear();
 
 	ConstGameObjectIter itr;
