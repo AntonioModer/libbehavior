@@ -26,7 +26,7 @@ Projectile::Projectile(xerces DOMNode* rootNode) : GameObject(rootNode)
 	renderPriority = ProjectileRenderPriority;
 }
 
-Projectile::Projectile(ProjectileSetup p) : GameObject(p)
+Projectile::Projectile() : GameObject()
 {
 	actionPriority = ProjectileActionPriority;
 	renderPriority = ProjectileRenderPriority;

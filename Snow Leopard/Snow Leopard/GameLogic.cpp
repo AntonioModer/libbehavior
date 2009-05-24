@@ -45,7 +45,7 @@ void GameLogic::handleInput()
 		 
 		 if (ws->time - timeLastFired > 100)
 		 {
-			 Projectile* p = new Projectile(ProjectileSetup());
+			 Projectile* p = new Projectile();
 			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
 			ws->insertObject(p,playerShip->location.offsetPolar(playerShip->displayHeading,100));
 		 }

@@ -15,11 +15,6 @@ class GameObject;
 
 #define PROJECTILE_FACTION 500
 
-struct ProjectileSetup : GameObjectSetup
-{
-	ProjectileSetup():GameObjectSetup(){}
-};
-
 class Projectile: public GameObject {
 
 public:
@@ -28,8 +23,7 @@ public:
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Projectile::Projectile(xerces DOMNode* rootNode);
-	Projectile::Projectile(Projectile& proj);
-	Projectile::Projectile(ProjectileSetup p);
+	Projectile::Projectile();
 	virtual bool move();
 
 

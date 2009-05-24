@@ -15,10 +15,16 @@ using namespace std;
 namespace SL
 {
 	//these represent the overall context
+
+	/// The screen being rendered to
 	extern CL_GraphicContext* gc;
+	/// The current state of the level
 	extern WorldState* ws;
+	/// Grabs input events (mouse and keyboard)
 	extern CL_InputContext* ic;
+	/// Renders to the GraphicContext
 	extern Renderer* ren;
+	/// Accepts player input and drives the event loop
 	extern GameLogic* gl;
 }
 #endif

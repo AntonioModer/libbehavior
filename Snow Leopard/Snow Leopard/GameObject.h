@@ -4,7 +4,6 @@
 #include <string>
 #include "point.h"
 #include <set>
-#include "GameObjectPriorities.h"
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
 #include <ClanLib/gl.h>
@@ -18,82 +17,69 @@ class CL_CollisionOutline;
 
 namespace SL
 {
-class WorldState; //need to forward declare class to avoid crazy recursion
-class DOMNode;
+class WorldState;
 class BehaviorTreeNode;
+class GameObject;
 
-struct GameObjectSetup
-{
-	std::string displayName; 
-	bool isPlayer;
-	CL_Angle movementHeading;
-	CL_Angle displayHeading;
-	CL_CollisionOutline* collisionOutline;
-	double accelHeading;
-	double accelMagnitude;
-	int faction;
-	int displaySize;
-	point location;
-	int actionPriority;
-	int renderPriority;
-	double speed;
-	bool usesPhysics;
-GameObjectSetup():
-	isPlayer(false),
-	displayName("default"),
-	displayHeading(CL_Angle::from_degrees(0)),
-	faction(0),
-	speed(0),
-	movementHeading(CL_Angle::from_degrees(0)),
-	accelMagnitude(0),
-	accelHeading(0),
-	actionPriority(DefActionPriority),
-	renderPriority(DefRenderPriority),
-	usesPhysics(true)
-	{}
-};
-
+/// Base class for any item in the game
 class GameObject{
 
 public:
-
-	typedef std::vector<GameObject*> GameObjectList;
-	typedef std::set <GameObject*>::iterator GameObjectIter;
-	bool operator<(GameObject &b);
+	/// Called every frame to update the object
 	virtual bool doActions();
+	/// Notify the object of a collision with another object. Only called if usesPhysics is true
 	virtual bool registerCollision(GameObject* collidedObject);
+	/// Notify the object it has hit the edge of the level. Responding improperly to this can cause out of bounds errors
 	virtual bool registerWallCollision();
+	/// Constructor from an XML description
 	GameObject::GameObject(xerces DOMNode* rootNode);
-	GameObject::GameObject(GameObjectSetup setup);
+	/// Default constructor
+	GameObject::GameObject();
+	/// The graphical representation of the object
 	CL_Sprite* sprite;
+	/// Cleans up resources in use by the object when it is deleted
 	GameObject::~GameObject();
+	/// If Newtonian physics is enabled for the world, this imparts a force on the object
 	void applyForceRect(double x, double y);
+	/// If Newtonian physics is enabled for the world, this imparts a force on the object
 	void applyForcePolar(CL_Angle heading, double magnitude);
+	/// The "AI" for the object.
 	BehaviorTree::ParallelNode* brain;
-
+	/// Unique for each object instance
+	int ID;
+	/// Generate a unique ID for an object
 	static int GameObject::getID()
 {
 	IDCount++;
 	return IDCount;
 }
 
+	/// The human friendly name of the object
 	std::string displayName; 
-	bool isPlayer; //right now only one ship can be a player
+	/// True if this object is the player. Undefined behavior if more than one object has this flag set to true.
+	bool isPlayer;
 	
-	//polar coordinates
+	/// The number of "hit points" the object has.
 	unsigned int HP;
+	/// The directional component of the object's velocity
 	CL_Angle movementHeading;
+	/// The way the object's sprite is "turned"
 	CL_Angle displayHeading;
+	/// The collision outline generated from the sprite
 	CL_CollisionOutline* collisionOutline;
+	/// The directional component of the object's acceleration
 	double accelHeading;
+	/// The scalar component of the object's acceleration
 	double accelMagnitude;
+	/// Used to divide objects into different categories to customize interactions between them
 	int faction;
+	/// Used to scale how objects are displayed. Not currently implemented
 	int displaySize;
+	/// Absolute coordinates of the object in the world.
 	point location;
-	int actionPriority;
-	int renderPriority;
-	std::string ID;
+	/// The scalar component of the object's velocity
 	double speed;
+	/// Determines whether the object collides with others
 	bool usesPhysics;
 
 	//stupid hack to convert between the CL_Origin enum and string values

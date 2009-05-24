@@ -71,7 +71,7 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	brain->init(this);
 }
 
-GameObject::GameObject(GameObjectSetup setup)
+GameObject::GameObject()
 {
 	HP = 100;
 	displayName = "default";
@@ -82,11 +82,6 @@ GameObject::GameObject(GameObjectSetup setup)
 	movementHeading=CL_Angle::from_degrees(0);
 	accelMagnitude = 0;
 	accelHeading = 0;
-	actionPriority = DefActionPriority;
-	if (displayName == "BackgroundImage")
-		renderPriority = BackgroundRenderPriority;
-	else
-		renderPriority = DefRenderPriority;
 	isPlayer = false;
 	usesPhysics = true;
 

@@ -12,7 +12,7 @@ class GameObject;
 class Ship;
 class Renderer;
 
-
+/// Coordinates the player and AI input to drive forward the worldState
 class GameLogic {
 
 private:
@@ -24,7 +24,9 @@ private:
 	
 
 public:
+		/// Standard Constructor. Automatically gets keyboard, mouse, and player ship
 		GameLogic::GameLogic();
+		/// Step forward in time, get player input, and get AI actions
 		bool GameLogic::step();
 
 
