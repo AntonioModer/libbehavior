@@ -2,13 +2,17 @@
 #define TURNTOWARDSTARGET_H_
 #include "BehaviorTreeNode.h"
 
+using namespace BehaviorTree;
 namespace SL
 {
-	class GameObject;
-class turnTowardsTarget:public BehaviorTreeNode
+	class turnTowardsTarget:public BehaviorTree::BehaviorTreeNode
 {
-	BEHAVIOR_STATUS execute(GameObject* object);
-	bool init(GameObject* object);
+	BEHAVIOR_STATUS execute(void* agent);
+	void init(void* agent);
+	BehaviorTree::BehaviorTreeNode::BehaviorTreeList getChildren()
+	{
+		return BehaviorTree::BehaviorTreeNode::BehaviorTreeList();
+	}
 };
 
 }

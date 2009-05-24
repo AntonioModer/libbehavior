@@ -41,6 +41,10 @@ public:
 	{
 		children.push_back(newChild);
 	};
+	virtual BehaviorTreeList getChildren()
+	{
+		return children;
+	};
 	
 protected:
 	BehaviorTreeList children;
@@ -117,8 +121,8 @@ private:
 public:
 	enum FAILURE_POLICY {FAIL_ON_ONE,FAIL_ON_ALL};
 	enum SUCCESS_POLICY {SUCCEED_ON_ONE,SUCCEED_ON_ALL};
-	BEHAVIOR_STATUS execute(void* object);
-	void init(void* object);
+	BEHAVIOR_STATUS execute(void* agent);
+	void init(void* agent);
 	void setFailurePolicy(FAILURE_POLICY policy);
 	void setSuccessPolicy(SUCCESS_POLICY policy);
 };
