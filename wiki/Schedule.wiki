@@ -1,0 +1,64 @@
+# Schedule / Task List
+
+1. May 18 - 22: Investigate requirements for the library and write an API and design document. The design document will include a diverse set of "behavior scenarios" which describe, at a high level, types of behaviors that should be realizable using this system.
+    * Deliverable: ~~Design Document~~
+    * Deliverable: ~~Specification in the form of fully documented header files~~
+
+2. (May 25 to June 12) 
+
+ * ~~Port existing 'Snow Leopard' code base to Clanlib version 2~~
+
+ * ~~Remove code that it not relevant for this project~~ 
+ * Document the remaining code extensively, so it can be understood by people who are unfamiliar with Clanlib.
+ * Add a menu system for loading examples. Implement collision detection using the Clanlib API.
+ *   Milestone: ~~A testbed level with a stationary enemy can be loaded. The enemy can be shot at, takes damage, and can be destroyed.~~
+
+3. (June 15 to 26) Write the core code and behavior tree core nodes and create automated unit tests for them:
+    * Sequential Execution Node
+    * Parallel Execution Node
+    * Priority Selector Node
+    * Probability Selector Node
+    * Conditional Decorator Node
+
+    Deliverable: Source code and unit tests for core nodes
+
+4. (June 29- July 10) Integrate the behavior tree code into the Snow Leopard engine and write condition nodes (sensing) and primitive leaf nodes (action) that interface with the engine.
+    Condition
+        * Distance of Player
+        * Relative Angle of Player
+        * Distance of incoming bullets
+        * Relative Angle of incoming bullets
+        * Current Health
+        * Current Number of Bombs
+        * Player Movement
+        * Current amount of damage being taken
+        * Current amount of damage being dealt
+    Leaf
+        * Rotate
+        * Move
+        * Fire weapon
+        * Drop bomb
+
+    Deliverable: All nodes required for sensing and action are complete
+       
+5. (July 13 - 24)
+        Create composite behaviors that will be the first several examples that will be distributed with the code. These will include:
+        
+        * Turn to face the player
+        * Shoot when the player is in front of you
+        * Drop a bomb if you are about to die
+        * Attempt to dodge incoming fire
+        * Attempt to stay out of the player's lane of fire
+
+    Deliverable: 5 playable scenarios that each showcase a composite behavior
+
+6. (July 27 - August 7)
+        Leverage the behaviors created earlier to create more interesting, full behaviors. Exact details are to be determined in the Design Document and through an iterative process. At least one of these will include running hundreds of agents simultaneously, in order to test CPU usage of the library.
+
+    Milestone: A full set of of behavior examples. 5 of them are simple and show how to accomplish one goal. 5 of them are complex and involve either many agents or adaptation to the situation and prioritization of multiple goals.
+
+7. (August 10 - 14)
+        Create a website and forum for the project. Polish up the testbench.
+
+    Deliverable: Project Website
+    Optional Deliverable: Music, sound effects, and higher quality graphics for the testbench.
