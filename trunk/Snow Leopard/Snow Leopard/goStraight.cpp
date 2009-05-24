@@ -21,7 +21,7 @@ BehaviorTree::BEHAVIOR_STATUS goStraight::execute(void* agent)
 #ifdef PHYSICS
 	ship->applyForcePolar(ship->displayHeading,.005);
 #else
-	ws->moveObject(ship,ship->location.offsetPolar(ship->displayHeading,.1));
+	ws->moveObject(ship,ship->location.offsetPolar(ship->displayHeading,1));
 #endif
 	return BT_RUNNING;
 }

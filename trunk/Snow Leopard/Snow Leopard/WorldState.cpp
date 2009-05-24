@@ -201,6 +201,8 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 	}
 
 	gameObject->displayHeading += CL_Angle::from_degrees(angle);
+	float newAngle = fmod(gameObject->displayHeading.to_degrees(),360.0f);
+	gameObject->displayHeading.set_degrees(newAngle);
 	return true;
 }
 
