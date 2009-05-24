@@ -9,8 +9,9 @@
  * ~~Port existing 'Snow Leopard' code base to Clanlib version 2~~
 
  * ~~Remove code that it not relevant for this project~~ 
- * Document the remaining code extensively, so it can be understood by people who are unfamiliar with Clanlib.
- * Add a menu system for loading examples. Implement collision detection using the Clanlib API.
+ * ~~Document the remaining code extensively, so it can be understood by people who are unfamiliar with Clanlib.~~
+ * Add a menu system for loading examples.
+ * ~~Implement collision detection using the Clanlib API.~~
  *   Milestone: ~~A testbed level with a stationary enemy can be loaded. The enemy can be shot at, takes damage, and can be destroyed.~~
 
 3. (June 15 to 26) Write the core code and behavior tree core nodes and create automated unit tests for them:
