@@ -1,4 +1,4 @@
-#include "BehaviorTreeNode.h"
+#include "BehaviorTree.h"
 #include "mtrand.h"
 
 using namespace BehaviorTree;
