@@ -8,15 +8,20 @@
 #include <ClanLib/application.h>
 
 using namespace SL;
+using namespace BehaviorTree;
 
 //goStraight will never return SUCCESS!!! Remember to provide decorators or conditions so it will fail.
 
-bool goStraight::init(SL::GameObject *object)
+void goStraight::init(void* agent)
 {
-	return true;
 };
-BehaviorTreeNode::BEHAVIOR_STATUS goStraight::execute(GameObject* object)
+BehaviorTree::BehaviorTreeNode::BEHAVIOR_STATUS goStraight::execute(void* agent)
 {
-	object->applyForcePolar(object->displayHeading,.005);
-	return SL_RUNNING;
+	GameObject* ship = (GameObject*) agent;
+#ifdef PHYSICS
+	ship->applyForcePolar(ship->displayHeading,.005);
+#else
+	ws->moveObject(ship,ship->location.offsetPolar(ship->displayHeading,.1));
+#endif
+	return BT_RUNNING;
 }

@@ -111,7 +111,7 @@ BehaviorTreeNode::BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 		BEHAVIOR_STATUS status;
 		if (!(childrenStatus[*itr]))
 		{
-			BEHAVIOR_STATUS status = (*itr)->execute(object);
+			BEHAVIOR_STATUS status = (*itr)->execute(agent);
 			if (status == BT_FAILURE || status == BT_ERROR)
 				return status;
 			if (status == BT_SUCCESS)

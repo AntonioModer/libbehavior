@@ -65,8 +65,8 @@ GameObject::GameObject(xerces DOMNode* rootNode)
 	brain = new ParallelNode();
 	goStraight* gs = new goStraight();
 	turnTowardsTarget* tt = new turnTowardsTarget();
-	((SequentialNode*) brain)->addChild(tt);
-	((SequentialNode*) brain)->addChild(gs);
+	brain->addChild(tt);
+	brain->addChild(gs);
 	
 	HP = 100;
 

@@ -2,14 +2,17 @@
 #include "point.h"
 #include "globals.h"
 
-bool turnTowardsTarget::init(SL::GameObject *object)
+using namespace SL;
+using namespace BehaviorTree;
+
+void turnTowardsTarget::init(void* agent)
 {
-	return true;
 };
-BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(GameObject* object)
+BehaviorTree::BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(void* agent)
 {
+	GameObject* object = (GameObject*) agent;
 	if (!(object->ID == ("enemy")))
-		return SL_FAILURE;
+		return BT_FAILURE;
 	const GameObjectList* allObjects = ws->getAllGameObjects(WorldState::ACTION_SORTED);
 	
 	ConstGameObjectIter itr;
@@ -31,14 +34,14 @@ BehaviorTreeNode::BEHAVIOR_STATUS turnTowardsTarget::execute(GameObject* object)
 	if ( angleBetween.to_degrees() < -2)
 	{
 		ws->rotateObject(object,1); //clockwise
-		return SL_RUNNING;
+		return BT_RUNNING;
 	}
 	else if (angleBetween.to_degrees() > 2)
 	{
 		ws->rotateObject(object,-1);
-		return SL_RUNNING;
+		return BT_RUNNING;
 	}
 
-	else return SL_SUCCESS;
+	else return BT_SUCCESS;
 
 }
