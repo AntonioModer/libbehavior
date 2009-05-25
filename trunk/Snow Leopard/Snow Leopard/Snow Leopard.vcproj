@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;XML_LIBRARY;WIN32_LEAN_AND_MEAN"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -254,14 +255,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\BehaviorTree.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\BehaviorTree.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Definitions.h"
 				>
 			</File>
@@ -335,10 +328,6 @@
 		</Filter>
 		<File
 			RelativePath=".\Resources\XML\example.xml"
-			>
-		</File>
-		<File
-			RelativePath=".\Resources\XML\ProjectileBehaviorTree.xml"
 			>
 		</File>
 		<File
