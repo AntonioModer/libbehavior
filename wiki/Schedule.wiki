@@ -15,7 +15,7 @@
  *   Milestone: ~~A testbed level with a stationary enemy can be loaded. The enemy can be shot at, takes damage, and can be destroyed.~~
 
 3. (June 15 to 26) Write the core code and behavior tree core nodes and create automated unit tests for them:
-    * Sequential Execution Node
+    * ~~Sequential Execution Node~~
     * Parallel Execution Node
     * Priority Selector Node
     * Probability Selector Node
