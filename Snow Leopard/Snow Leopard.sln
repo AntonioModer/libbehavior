@@ -2,6 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Snow Leopard", "Snow Leopard\Snow Leopard.vcproj", "{E28CCECD-ED68-45C3-8967-CCE0AEF8B8BC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83} = {18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BehaviorTree", "BehaviorTree\BehaviorTree.vcproj", "{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +18,10 @@ Global
 		{E28CCECD-ED68-45C3-8967-CCE0AEF8B8BC}.Debug|Win32.Build.0 = Debug|Win32
 		{E28CCECD-ED68-45C3-8967-CCE0AEF8B8BC}.Release|Win32.ActiveCfg = Release|Win32
 		{E28CCECD-ED68-45C3-8967-CCE0AEF8B8BC}.Release|Win32.Build.0 = Release|Win32
+		{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}.Debug|Win32.ActiveCfg = Debug|Win32
+		{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}.Debug|Win32.Build.0 = Debug|Win32
+		{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}.Release|Win32.ActiveCfg = Release|Win32
+		{18A56DAE-2719-40C8-ADE2-7C1BDDBABB83}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
