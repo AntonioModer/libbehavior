@@ -2,31 +2,49 @@
 #include "mtrand.h"
 
 using namespace BehaviorTree;
+void SequentialNode::init(void* agent)
+{
+}
+
+SequentialNode::SequentialNode()
+{
+	currentPosition = -1;
+}
 
 BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 	{
+		if (currentPosition == -1) //starting out
+		{
+			BehaviorTreeListIter iter;
+			for (iter = children.begin(); iter!= children.end(); iter++)
+			{
+				(*iter)->init(agent);
+			}
+			currentPosition = 0;
+		}
+
 		BehaviorTreeNode* currentTask = children.at(currentPosition);
 		BEHAVIOR_STATUS result = currentTask->execute(agent);
 
-		if (result == BT_SUCCESS)
+		while(result == BT_SUCCESS)
 		{
-			if (currentPosition == children.size()) //finished last task
+			if (currentPosition == children.size()-1) //finished last task
 			{
+				currentPosition = -1; //indicate we are not running anything
 				return BT_SUCCESS;
 			}
 			else
 			{
 				currentPosition++;
-				return BT_RUNNING;
+				currentTask = children.at(currentPosition);
+				result = currentTask->execute(agent);
 			}
 		}
+		if (result == BT_FAILURE)
+			currentPosition = -1;
 		return result;
 	}
 
-void SequentialNode::init(void* agent)
-{
-	currentPosition = 0;
-}
 BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 {
 	if (*currentlyRunningNode) //there's one still BT_RUNNING

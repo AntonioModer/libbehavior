@@ -70,10 +70,12 @@ protected:
 */
 class SequentialNode:public BehaviorTreeInternalNode
 {
+public:
+	SequentialNode::SequentialNode();
 	BEHAVIOR_STATUS execute(void* agent);
 	void init(void* agent);
 
-	protected: int currentPosition;
+    int currentPosition;
 };
 ///Executes behaviors in priority order until one of them is successful.
 /** Attempts to execute children in the order they were added. 
@@ -147,6 +149,73 @@ protected:
 	int count;
 	int target;
 
+};
+
+class AlwaysRunning: public BehaviorTreeNode
+{
+	BEHAVIOR_STATUS execute(void* agent)
+	{
+		return BT_RUNNING;
+	}
+	void init(void* agent){};
+	BehaviorTreeList getChildren()
+	{
+		return BehaviorTreeList();
+	}
+};
+
+class AlwaysSuccess: public BehaviorTreeNode
+{
+	BEHAVIOR_STATUS execute(void* agent)
+	{
+		return BT_SUCCESS;
+	}
+	void init(void* agent){};
+	BehaviorTreeList getChildren()
+	{
+		return BehaviorTreeList();
+	}
+};
+
+class AlwaysFailure: public BehaviorTreeNode
+{
+	BEHAVIOR_STATUS execute(void* agent)
+	{
+		return BT_FAILURE;
+	}
+	void init(void* agent){};
+	BehaviorTreeList getChildren()
+	{
+		return BehaviorTreeList();
+	}
+};
+
+class SuccessAfterOne: public BehaviorTreeNode
+{
+public:
+	bool tick;
+	BEHAVIOR_STATUS execute(void* agent)
+	{
+		if (!tick)
+		{
+			tick = true;
+			return BT_RUNNING;
+		}
+		else
+			return BT_SUCCESS;
+	}
+	void init(void* agent)
+	{
+		tick = false;
+	};
+	SuccessAfterOne::SuccessAfterOne()
+	{
+		tick = false;
+	}
+	BehaviorTreeList getChildren()
+	{
+		return BehaviorTreeList();
+	}
 };
 }
 #endif
