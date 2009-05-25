@@ -1,2 +1,3 @@
 clanlib 2.0.0 
 xerxes C++
+boost 1.38
