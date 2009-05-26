@@ -9,10 +9,9 @@ namespace BehaviorTree
 	/**
 	- BT_SUCCESS indicates the node has completed running during this time step.
 	- BT_FAILURE indicates the node has determined it will not be able to complete its task.
-	- BT_ERROR is rarely used. It indicates that error handling outside of the normal behavior tree chain of execution should be invoked.
 	- BT_RUNNING indicates that the node has successfully moved forward during this time step, but the task is not yet complete.
 	*/
-	enum BEHAVIOR_STATUS {BT_SUCCESS,BT_FAILURE,BT_ERROR,BT_RUNNING};
+	enum BEHAVIOR_STATUS {BT_SUCCESS,BT_FAILURE,BT_RUNNING};
 	class BehaviorTreeNode;
 	/// A standard vector of Behavior Tree nodes. Provided for convenience.
 	typedef std::vector<BehaviorTreeNode*> BehaviorTreeList;
@@ -86,7 +85,11 @@ public:
 */
 class PrioritySelectorNode:public BehaviorTreeInternalNode
 {
+public:
 	BEHAVIOR_STATUS execute(void* agent);
+	int currentPosition;
+	PrioritySelectorNode::PrioritySelectorNode();
+	void init(void* agent);
 
 	BehaviorTreeListIter currentlyRunningNode;
 
@@ -209,6 +212,34 @@ public:
 		tick = false;
 	};
 	SuccessAfterOne::SuccessAfterOne()
+	{
+		tick = false;
+	}
+	BehaviorTreeList getChildren()
+	{
+		return BehaviorTreeList();
+	}
+};
+
+class FailureAfterOne: public BehaviorTreeNode
+{
+public:
+	bool tick;
+	BEHAVIOR_STATUS execute(void* agent)
+	{
+		if (!tick)
+		{
+			tick = true;
+			return BT_RUNNING;
+		}
+		else
+			return BT_FAILURE;
+	}
+	void init(void* agent)
+	{
+		tick = false;
+	};
+	FailureAfterOne::FailureAfterOne()
 	{
 		tick = false;
 	}
