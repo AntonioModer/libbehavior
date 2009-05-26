@@ -1,19 +1,19 @@
 #include "BehaviorTree.h"
-#define BOOST_TEST_MODULE SequentialNodeTest
+#define BOOST_TEST_MODULE BehaviorTree
 #include <boost/test/unit_test.hpp>
 
 
 using namespace BehaviorTree;
 
 
-BOOST_AUTO_TEST_CASE( currentPositionInitialize )
+BOOST_AUTO_TEST_CASE( snt_currentPositionInitialize )
 {
 	SequentialNode* node = new SequentialNode();
 	BOOST_CHECK(node->currentPosition == -1);
 }
 
 //Test for the current position and return value of the sequentialNode. Also check the destructor.
-BOOST_AUTO_TEST_CASE( simple1 )
+BOOST_AUTO_TEST_CASE( snt_simple1 )
 {
 	SequentialNode* node = new SequentialNode();
 	AlwaysRunning* ar = new AlwaysRunning();
@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE( simple1 )
 	delete node;
 }
 
-BOOST_AUTO_TEST_CASE( simple2 )
+BOOST_AUTO_TEST_CASE( snt_simple2 )
 {
 	SequentialNode* node = new SequentialNode();
 	node->addChild(new AlwaysSuccess());
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE( simple2 )
 	delete node;
 }
 
-BOOST_AUTO_TEST_CASE( simple3 )
+BOOST_AUTO_TEST_CASE( snt_simple3 )
 {
 	SequentialNode* node = new SequentialNode();
 	node->addChild(new AlwaysFailure());
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE( simple3 )
 }
 
 //run it twice to make sure everything gets reset correctly
-BOOST_AUTO_TEST_CASE( simple4 )
+BOOST_AUTO_TEST_CASE( snt_simple4 )
 {
 	SequentialNode* node = new SequentialNode();
 	node->addChild(new SuccessAfterOne());
@@ -70,9 +70,32 @@ BOOST_AUTO_TEST_CASE( simple4 )
 	delete node;
 }
 
+BOOST_AUTO_TEST_CASE( snt_cancelInMiddle )
+{
+	SequentialNode* node = new SequentialNode();
+	node->addChild(new SuccessAfterOne());
+	node->addChild(new SuccessAfterOne());
+	int dummy_agent = 0;
+	node->init(&dummy_agent);
+	BOOST_CHECK_EQUAL(node->currentPosition, -1);
+	BOOST_CHECK_EQUAL(node->execute(&dummy_agent), BT_RUNNING);
+	BOOST_CHECK_EQUAL(node->currentPosition, 0);
+	BOOST_CHECK_EQUAL(node->execute(&dummy_agent), BT_RUNNING);
+	BOOST_CHECK_EQUAL(node->currentPosition, 1);
+	node->init(&dummy_agent);
+	BOOST_CHECK_EQUAL(node->currentPosition, -1);
+	BOOST_CHECK_EQUAL(node->execute(&dummy_agent), BT_RUNNING);
+	BOOST_CHECK_EQUAL(node->currentPosition, 0);
+	BOOST_CHECK_EQUAL(node->execute(&dummy_agent), BT_RUNNING);
+	BOOST_CHECK_EQUAL(node->currentPosition, 1);
+	BOOST_CHECK_EQUAL(node->execute(&dummy_agent), BT_SUCCESS);
+	BOOST_CHECK_EQUAL(node->currentPosition, -1);
+	delete node;
+}
+
 //two level sequentialNodes
 //only checking correct behavior from the top
-BOOST_AUTO_TEST_CASE( complex1 )
+BOOST_AUTO_TEST_CASE( snt_complex1 )
 {
 	SequentialNode* node = new SequentialNode();
 	node->addChild(new SuccessAfterOne());

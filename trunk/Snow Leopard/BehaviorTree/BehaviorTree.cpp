@@ -4,6 +4,9 @@
 using namespace BehaviorTree;
 void SequentialNode::init(void* agent)
 {
+	currentPosition = -1;
+	for (BehaviorTreeListIter iter = children.begin(); iter!= children.end(); iter++)
+				(*iter)->init(agent);
 }
 
 SequentialNode::SequentialNode()
@@ -15,11 +18,7 @@ BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 	{
 		if (currentPosition == -1) //starting out
 		{
-			BehaviorTreeListIter iter;
-			for (iter = children.begin(); iter!= children.end(); iter++)
-			{
-				(*iter)->init(agent);
-			}
+			init(agent);
 			currentPosition = 0;
 		}
 
@@ -45,31 +44,59 @@ BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 		return result;
 	}
 
+PrioritySelectorNode::PrioritySelectorNode()
+{
+	currentPosition = -1;
+}
+
+void PrioritySelectorNode::init(void* agent)
+{
+	currentPosition = -1;
+	for (BehaviorTreeListIter iter = children.begin(); iter!= children.end(); iter++)
+				(*iter)->init(agent);
+}
+
+
 BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 {
-	if (*currentlyRunningNode) //there's one still BT_RUNNING
+	if (currentPosition != -1) //there's one still running
 	{
-		BEHAVIOR_STATUS status = (*currentlyRunningNode)->execute(agent);
+		BEHAVIOR_STATUS status = (children.at(currentPosition))->execute(agent);
 		if (status == BT_RUNNING)
 			return BT_RUNNING;
 		else if (status == BT_SUCCESS)
 		{
+			currentPosition = -1;
 			return BT_SUCCESS;
 		}
+		else if (status == BT_FAILURE)
+		{
+			currentPosition++;
+			if (currentPosition == children.size())
+			{
+				currentPosition = -1;
+				return BT_FAILURE;
+			}
+		}
+	}
+	else
+	{
+		init(agent);
+		currentPosition = 0;
 	}
 
-	else //need to choose one
+	BehaviorTreeNode* currentlyRunningNode = children.at(currentPosition);
+	BEHAVIOR_STATUS status;
+	while ((status = (*currentlyRunningNode).execute(agent)) == BT_FAILURE) //keep trying children until one doesn't fail
 	{
-		currentlyRunningNode = children.begin();
-		BEHAVIOR_STATUS status;
-        while ((status = (*currentlyRunningNode)->execute(agent)) == BT_FAILURE) //keep trying children until one doesn't fail
-        {
-			currentlyRunningNode++;
-            if (currentlyRunningNode == children.end()) //all of the children failed
-                return BT_FAILURE;
-        }
-        return status;
+		currentPosition++;
+		if (currentPosition == children.size()) //all of the children failed
+		{
+			currentPosition = -1;
+			return BT_FAILURE;
+		}
 	}
+	return status;
 
 }
 
@@ -130,7 +157,7 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 		if (!(childrenStatus[*itr]))
 		{
 			BEHAVIOR_STATUS status = (*itr)->execute(agent);
-			if (status == BT_FAILURE || status == BT_ERROR)
+			if (status == BT_FAILURE)
 				return status;
 			if (status == BT_SUCCESS)
 				childrenStatus[*itr] = true;
