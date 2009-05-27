@@ -83,7 +83,7 @@ WorldState::WorldState(xerces DOMNode* rootNode)
 		}
 	}
 	xerces DOMNodeList* entities = ((xerces DOMElement*)worldStateNode)->getElementsByTagName(XercesString("Entity").xmlCh());
-	for (int x = 0;x<entities->getLength();x++)
+	for (unsigned int x = 0;x<entities->getLength();x++)
 	{
 		xerces DOMElement* entityNode = (xerces DOMElement*)entities->item(x);
 		std::cout << "now reading node" << entityNode->getAttribute(XercesString("id").xmlCh()) << endl;

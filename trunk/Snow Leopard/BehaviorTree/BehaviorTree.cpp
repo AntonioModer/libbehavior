@@ -2,6 +2,7 @@
 #include "mtrand.h"
 
 using namespace BehaviorTree;
+using namespace std;
 void SequentialNode::init(void* agent)
 {
 	currentPosition = -1;
@@ -144,31 +145,78 @@ BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
 	return BT_SUCCESS;
 }
 
-void ParallelNode::init(void* object)
+ParallelNode::ParallelNode(FAILURE_POLICY failurePolicy, SUCCESS_POLICY successPolicy)
 {
+	failPolicy = failurePolicy;
+	succeedPolicy = successPolicy;
+}
+void ParallelNode::init(void* agent)
+{
+	for (BehaviorTreeListIter iter = children.begin(); iter!= children.end(); iter++)
+				(*iter)->init(agent);
+	
+	childrenStatus = new ChildrenStatusMap();
+	for (int i = 0 ; i<children.size(); i++)
+		childrenStatus->insert( make_pair(children.at(i),BT_RUNNING));
 }
 
 BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 {
-	BehaviorTreeListIter itr;
-	for (itr = children.begin() ; itr != children.end() ; itr++)
+	// go through all children and update the childrenStatus
+	for (int i = 0 ; i<children.size(); i++)
 	{
-		BEHAVIOR_STATUS status;
-		if (!(childrenStatus[*itr]))
+		BehaviorTreeNode* node = children[i];
+		if ((*childrenStatus)[node] == BT_RUNNING)
 		{
-			BEHAVIOR_STATUS status = (*itr)->execute(agent);
+			BEHAVIOR_STATUS status = node->execute(agent);
 			if (status == BT_FAILURE)
-				return status;
+			{
+				if (failPolicy == FAIL_ON_ONE)
+					return BT_FAILURE;
+				else
+				{
+					(*childrenStatus)[node] = BT_FAILURE;
+				}
+			}
 			if (status == BT_SUCCESS)
-				childrenStatus[*itr] = true;
-		}
-		
-			
-			bool succeeded = true;
-		for (childrenStatusIterator = childrenStatus.begin();childrenStatusIterator != childrenStatus.end() ; childrenStatusIterator++)
-		{
-			if ((*childrenStatusIterator).second)
-				succeeded = false;
+				(*childrenStatus)[node] = BT_SUCCESS;
 		}
 	}
+
+	//look through the childrenStatus and see if we have met any of our end conditions
+	ChildrenStatusMap::iterator iter;
+	bool sawSuccess = false;
+	bool sawAllFails = true;
+	bool sawAllSuccess = true;
+	for (iter = childrenStatus->begin(); iter != childrenStatus->end() ; iter++)
+	{
+		switch((*iter).second)
+		{
+		case BT_SUCCESS:
+			//can't instantly return success for succeedOnOne policy if failOnOne is also true, because failOnOne overrides succeedOnOne
+			if (succeedPolicy == SUCCEED_ON_ONE && failPolicy != FAIL_ON_ONE)
+				return BT_SUCCESS;
+			sawSuccess = true;
+			sawAllFails = false;
+			break;
+		case BT_FAILURE:
+			if (failPolicy == FAIL_ON_ONE)
+				return BT_FAILURE;
+			sawAllSuccess = false;
+			break;
+		case BT_RUNNING:
+			sawAllFails = false;
+			sawAllSuccess = false;
+			//optimization for early exit
+			if (failPolicy == FAIL_ON_ALL && succeedPolicy == SUCCEED_ON_ALL)
+				return BT_RUNNING;
+			break;
+		}
+	}
+	if (failPolicy == FAIL_ON_ALL && sawAllFails)
+		return BT_FAILURE;
+	else if (succeedPolicy == SUCCEED_ON_ALL && sawAllSuccess || succeedPolicy == SUCCEED_ON_ONE && sawSuccess)
+		return BT_SUCCESS;
+	else
+		return BT_RUNNING;
 }
