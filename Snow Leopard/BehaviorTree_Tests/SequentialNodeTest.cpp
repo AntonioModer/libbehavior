@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE( snt_simple3 )
 BOOST_AUTO_TEST_CASE( snt_simple4 )
 {
 	SequentialNode* node = new SequentialNode();
-	node->addChild(new SuccessAfterOne());
+	node->addChild(new SuccessAfter(1));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
 	BOOST_CHECK_EQUAL(node->currentPosition, -1);
@@ -73,8 +73,8 @@ BOOST_AUTO_TEST_CASE( snt_simple4 )
 BOOST_AUTO_TEST_CASE( snt_cancelInMiddle )
 {
 	SequentialNode* node = new SequentialNode();
-	node->addChild(new SuccessAfterOne());
-	node->addChild(new SuccessAfterOne());
+	node->addChild(new SuccessAfter(1));
+	node->addChild(new SuccessAfter(1));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
 	BOOST_CHECK_EQUAL(node->currentPosition, -1);
@@ -98,10 +98,10 @@ BOOST_AUTO_TEST_CASE( snt_cancelInMiddle )
 BOOST_AUTO_TEST_CASE( snt_complex1 )
 {
 	SequentialNode* node = new SequentialNode();
-	node->addChild(new SuccessAfterOne());
+	node->addChild(new SuccessAfter(1));
 	SequentialNode* top = new SequentialNode();
 	top->addChild(node);
-	top->addChild(new SuccessAfterOne());
+	top->addChild(new SuccessAfter(1));
 	top->addChild(new AlwaysFailure());
 
 	int dummy_agent = 0;

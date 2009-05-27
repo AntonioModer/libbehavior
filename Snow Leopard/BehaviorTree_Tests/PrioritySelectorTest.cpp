@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_CASE( currentNodeInitialize )
 	BOOST_CHECK(node->currentPosition == -1);
 }
 
-BOOST_AUTO_TEST_CASE( simple1 )
+BOOST_AUTO_TEST_CASE( pst_simple1 )
 {
 	PrioritySelectorNode* node = new PrioritySelectorNode();
 	AlwaysRunning* ar = new AlwaysRunning();
@@ -26,12 +26,12 @@ BOOST_AUTO_TEST_CASE( simple1 )
 	delete node;
 }
 
-BOOST_AUTO_TEST_CASE( simple2 )
+BOOST_AUTO_TEST_CASE( pst_simple2 )
 {
 	PrioritySelectorNode* node = new PrioritySelectorNode();
-	node->addChild(new FailureAfterOne());
-	node->addChild(new FailureAfterOne());
-	node->addChild(new SuccessAfterOne());
+	node->addChild(new FailureAfter(1));
+	node->addChild(new FailureAfter(1));
+	node->addChild(new SuccessAfter(1));
 	int dummy_agent = 0;
 	for (int i = 0 ; i <2 ; i++)
 	{
@@ -50,12 +50,12 @@ BOOST_AUTO_TEST_CASE( simple2 )
 	delete node;
 }
 
-BOOST_AUTO_TEST_CASE( simple3 )
+BOOST_AUTO_TEST_CASE( pst_simple3 )
 {
 	PrioritySelectorNode* node = new PrioritySelectorNode();
-	node->addChild(new SuccessAfterOne());
-	node->addChild(new FailureAfterOne());
-	node->addChild(new FailureAfterOne());
+	node->addChild(new SuccessAfter(1));
+	node->addChild(new FailureAfter(1));
+	node->addChild(new FailureAfter(1));
 	int dummy_agent = 0;
 	for (int i = 0 ; i <2 ; i++)
 	{
@@ -69,11 +69,11 @@ BOOST_AUTO_TEST_CASE( simple3 )
 	delete node;
 }
 
-BOOST_AUTO_TEST_CASE( simple4 )
+BOOST_AUTO_TEST_CASE( pst_simple4 )
 {
 	PrioritySelectorNode* node = new PrioritySelectorNode();
-	node->addChild(new FailureAfterOne());
-	node->addChild(new FailureAfterOne());
+	node->addChild(new FailureAfter(1));
+	node->addChild(new FailureAfter(1));
 	int dummy_agent = 0;
 	for (int i = 0 ; i <2 ; i++)
 	{

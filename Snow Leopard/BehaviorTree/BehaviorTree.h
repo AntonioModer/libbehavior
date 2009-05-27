@@ -18,6 +18,9 @@ namespace BehaviorTree
 	/// A standard iterator of a BehaviorTreeList. Provided for convenience.
 	typedef BehaviorTreeList::iterator BehaviorTreeListIter;
 
+	enum FAILURE_POLICY {FAIL_ON_ONE,FAIL_ON_ALL};
+	enum SUCCESS_POLICY {SUCCEED_ON_ONE,SUCCEED_ON_ALL};
+
 
 ///Abstract base clase for Behavior Tree Nodes
 class BehaviorTreeNode
@@ -123,16 +126,26 @@ public:
 */
 class ParallelNode:public BehaviorTreeInternalNode
 {
-private:
-	std::map<BehaviorTreeNode*,bool> childrenStatus;
-	std::map<BehaviorTreeNode*,bool>::iterator childrenStatusIterator;
 public:
-	enum FAILURE_POLICY {FAIL_ON_ONE,FAIL_ON_ALL};
-	enum SUCCESS_POLICY {SUCCEED_ON_ONE,SUCCEED_ON_ALL};
 	BEHAVIOR_STATUS execute(void* agent);
 	void init(void* agent);
 	void setFailurePolicy(FAILURE_POLICY policy);
 	void setSuccessPolicy(SUCCESS_POLICY policy);
+	FAILURE_POLICY getFailurePolicy()
+	{
+		return failPolicy;
+	};
+	SUCCESS_POLICY getSuccessPolicy()
+	{
+		return succeedPolicy;
+	};
+	ParallelNode::ParallelNode( FAILURE_POLICY failurePolicy = FAIL_ON_ALL, SUCCESS_POLICY SuccessPolicy = SUCCEED_ON_ALL);
+
+private:
+	typedef std::map<BehaviorTreeNode*,BEHAVIOR_STATUS> ChildrenStatusMap;
+	ChildrenStatusMap* childrenStatus;
+	FAILURE_POLICY failPolicy;
+	SUCCESS_POLICY succeedPolicy;
 };
 ///A decorator that repeats its child a specified number of times.
 class RepeatNode: public BehaviorTreeInternalNode
@@ -193,27 +206,31 @@ class AlwaysFailure: public BehaviorTreeNode
 	}
 };
 
-class SuccessAfterOne: public BehaviorTreeNode
+class SuccessAfter: public BehaviorTreeNode
 {
 public:
-	bool tick;
+	int n;
+	int total;
 	BEHAVIOR_STATUS execute(void* agent)
 	{
-		if (!tick)
+		if (n == 0)
 		{
-			tick = true;
-			return BT_RUNNING;
+			return BT_SUCCESS;
 		}
 		else
-			return BT_SUCCESS;
+		{
+			n--;
+			return BT_RUNNING;
+		}
 	}
 	void init(void* agent)
 	{
-		tick = false;
+		n = total;
 	};
-	SuccessAfterOne::SuccessAfterOne()
+	SuccessAfter::SuccessAfter(int t)
 	{
-		tick = false;
+		total = t;
+		n = total;
 	}
 	BehaviorTreeList getChildren()
 	{
@@ -221,27 +238,31 @@ public:
 	}
 };
 
-class FailureAfterOne: public BehaviorTreeNode
+class FailureAfter: public BehaviorTreeNode
 {
 public:
-	bool tick;
+	int n;
+	int total;
 	BEHAVIOR_STATUS execute(void* agent)
 	{
-		if (!tick)
+		if (n == 0)
 		{
-			tick = true;
-			return BT_RUNNING;
+			return BT_FAILURE;
 		}
 		else
-			return BT_FAILURE;
+		{
+			n--;
+			return BT_RUNNING;
+		}
 	}
 	void init(void* agent)
 	{
-		tick = false;
+		n = total;
 	};
-	FailureAfterOne::FailureAfterOne()
+	FailureAfter::FailureAfter(int t)
 	{
-		tick = false;
+		total = t;
+		n = total;
 	}
 	BehaviorTreeList getChildren()
 	{
