@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "Definitions.h"
 #include "Ship.h"
+#include "GoStraight.h"
 
 using namespace SL;
 using namespace std;
@@ -67,10 +68,17 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	cout << "Now Debugging..." <<endl;
 	
 	WorldState* state = new WorldState();
-	Ship* player = new Ship();
-	player->setSprite("Hulls\\Sample Hull.png");
-	player->isPlayer = true;
-	state->insertObject(player,point(100,100));
+		Ship* player = new Ship();
+		player->setSprite("Hulls\\Sample Hull.png");
+		player->isPlayer = true;
+		state->insertObject(player,point(100,100));
+		
+		Ship* opponent = new Ship();
+		opponent->setSprite("Hulls\\Sample Hull.png");
+		opponent->brain->addChild(new Behaviors::GoStraight(5));
+		state->insertObject(opponent,point(300,300));
+
+
 	SL::ws = state;
 	Renderer* renderer = new Renderer();
 	SL::ren = renderer;

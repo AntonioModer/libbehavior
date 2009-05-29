@@ -149,12 +149,15 @@ ParallelNode::ParallelNode(FAILURE_POLICY failurePolicy, SUCCESS_POLICY successP
 {
 	failPolicy = failurePolicy;
 	succeedPolicy = successPolicy;
+	childrenStatus = NULL;
 }
 void ParallelNode::init(void* agent)
 {
 	for (BehaviorTreeListIter iter = children.begin(); iter!= children.end(); iter++)
 				(*iter)->init(agent);
 	
+	if (childrenStatus != NULL)
+		delete childrenStatus;
 	childrenStatus = new ChildrenStatusMap();
 	for (int i = 0 ; i<children.size(); i++)
 		childrenStatus->insert( make_pair(children.at(i),BT_RUNNING));
@@ -162,6 +165,8 @@ void ParallelNode::init(void* agent)
 
 BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 {
+	if (childrenStatus == NULL)
+		init(agent);
 	// go through all children and update the childrenStatus
 	for (int i = 0 ; i<children.size(); i++)
 	{

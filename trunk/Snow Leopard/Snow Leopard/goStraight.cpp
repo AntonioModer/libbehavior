@@ -16,13 +16,18 @@ using namespace BehaviorTree;
 void GoStraight::init(void* agent)
 {
 };
+
+GoStraight::GoStraight(int _speed)
+{
+	speed = _speed;
+}
 BEHAVIOR_STATUS GoStraight::execute(void* agent)
 {
 	GameObject* ship = (GameObject*) agent;
 #ifdef PHYSICS
 	ship->applyForcePolar(ship->displayHeading,.005);
 #else
-	ws->moveObject(ship,ship->location.offsetPolar(ship->displayHeading,1));
+	ws->moveObject(ship,ship->location.offsetPolar(ship->displayHeading,speed));
 #endif
 	return BT_RUNNING;
 }
