@@ -5,70 +5,11 @@
 #include "BehaviorTree.h"
 #include "globals.h"
 
-
-#include "xerces.h"
 using namespace SL;
 using namespace SL::Behaviors;
 using namespace BehaviorTree;
 
 int GameObject::IDCount = 0;
-GameObject::GameObject(xerces DOMNode* rootNode)
-{
-	xerces DOMNamedNodeMap* attributes =  rootNode->getAttributes();
-	displayName = getAttributeStr("name",attributes);
-	displayHeading = CL_Angle::from_degrees(0);
-	faction = getAttributeInt("faction",attributes);
-	ID = getID();
-	speed=(float)getAttributeDouble("movementSpeed",attributes);
-	movementHeading=CL_Angle::from_degrees((float)getAttributeDouble("movementHeading",attributes));
-	accelMagnitude = (float)getAttributeDouble("accelerationMagnitude",attributes);
-	accelHeading = (float)getAttributeDouble("accelerationHeading",attributes);
-	isPlayer = getAttributeBool("isPlayer",attributes);
-	usesPhysics = getAttributeBool("usesPhysics",attributes);
-	cout << "uses physics" << usesPhysics << endl;
-	//usesPhysics = false;
-
-	//set up the base sprite
-	xerces DOMNodeList* BaseImageList = ((xerces DOMElement*) rootNode)->getElementsByTagName(XercesString("BaseImage").xmlCh());
-	xerces DOMNode* BaseImage = BaseImageList->item(0);
-	xerces DOMNamedNodeMap* BaseImageAttributes = BaseImage->getAttributes();
-	std::string filename = getAttributeStr("pictureSource",BaseImageAttributes);
-	CL_PixelBuffer image = CL_PNGProvider::load(CL_String(filename));
-	CL_SpriteDescription desc;
-	desc.add_frame(image);
-	sprite = new CL_Sprite(*SL::gc,desc);
-	
-	CL_Origin translationOrigin = getOriginfromString(getAttributeStr("translation_origin",BaseImageAttributes));
-	CL_Origin rotationOrigin = getOriginfromString(getAttributeStr("rotation_origin",BaseImageAttributes));
-	int translation_offset_x = getAttributeInt("translation_offset_x",BaseImageAttributes);
-	int translation_offset_y = getAttributeInt("translation_offset_y",BaseImageAttributes);
-	int rotation_offset_x = getAttributeInt("rotation_offset_x",BaseImageAttributes);
-	int rotation_offset_y = getAttributeInt("rotation_offset_y",BaseImageAttributes);
-	sprite->set_alignment(translationOrigin,translation_offset_x,translation_offset_y);
-	sprite->set_rotation_hotspot(rotationOrigin,rotation_offset_x,rotation_offset_y);
-	sprite->set_base_angle(CL_Angle::from_degrees((float)getAttributeInt("base_angle",BaseImageAttributes)));
-
-	displayHeading = CL_Angle::from_degrees((float)getAttributeDouble("current_angle",BaseImageAttributes));
-
-	// will only need a collision outline if it's going to be colliding with stuff
-	if (usesPhysics)
-	{
-	collisionOutline = new CL_CollisionOutline(image);
-	collisionOutline->set_alignment(translationOrigin,(float)translation_offset_x,(float)translation_offset_y);
-	collisionOutline->set_rotation_hotspot(rotationOrigin,(float)rotation_offset_x,(float)rotation_offset_y);
-	collisionOutline->set_angle(displayHeading);
-	}
-
-	brain = new ParallelNode();
-	//goStraight* gs = new goStraight();
-	TurnTowardsTarget* tt = new TurnTowardsTarget();
-	brain->addChild(tt);
-	//brain->addChild(gs);
-	
-	HP = 100;
-
-	brain->init(this);
-}
 
 GameObject::GameObject()
 {

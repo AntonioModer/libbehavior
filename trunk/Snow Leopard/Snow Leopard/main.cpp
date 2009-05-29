@@ -10,7 +10,6 @@
 #include "point.h"
 #include "GameLogic.h"
 #include <ctime>
-#include "xerces.h"
 #include "GFrameHandler.h"
 #include "globals.h"
 #include "Definitions.h"
@@ -53,8 +52,6 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_SetupCore setup_core;
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
-	
-	XMLPlatformUtils::Initialize();
 
 	CL_DisplayWindow window("Snow Leopard", 640, 480);
 	CL_GraphicContext graphics_context = window.get_gc();
@@ -108,10 +105,10 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
  	logic->step();
 	}
 	
-	XMLPlatformUtils::Terminate();
 	return 0;
 	}
 	catch (CL_Exception err) {
 		std::cout << "Exception caught: " << err.message.c_str() << std::endl;
+		return -1;
 	}
 }

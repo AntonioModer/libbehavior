@@ -22,7 +22,6 @@ public:
 	bool doActions();
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
-	Projectile::Projectile(xerces DOMNode* rootNode);
 	Projectile::Projectile();
 	virtual bool move();
 

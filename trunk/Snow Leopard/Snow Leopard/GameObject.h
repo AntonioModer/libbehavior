@@ -9,7 +9,6 @@
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
 #include "globals.h"
-#include "xerces.h"
 #include "BehaviorTree.h"
 
 class CL_Sprite;
@@ -31,8 +30,6 @@ public:
 	virtual bool registerCollision(GameObject* collidedObject);
 	/// Notify the object it has hit the edge of the level. Responding improperly to this can cause out of bounds errors
 	virtual bool registerWallCollision();
-	/// Constructor from an XML description
-	GameObject::GameObject(xerces DOMNode* rootNode);
 	/// Default constructor
 	GameObject::GameObject();
 	/// The graphical representation of the object

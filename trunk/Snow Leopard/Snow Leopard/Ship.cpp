@@ -41,13 +41,6 @@ bool Ship::shoot()
 	return true;
 }
 
-Ship::Ship(xerces DOMNode* rootNode) : GameObject(rootNode)
-{
-	//AI_Movement = &AI_Move_DoNothing;
-//	AI_Shooting = &AI_Shoot_DoNothing;
-	GameObject::usesPhysics = true;
-}
-
 Ship::Ship() : GameObject()
 {
 	GameObject::usesPhysics = true;

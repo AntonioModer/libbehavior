@@ -20,10 +20,6 @@ bool Projectile::move()
 	return true;
 }
 
-Projectile::Projectile(xerces DOMNode* rootNode) : GameObject(rootNode)
-{
-}
-
 Projectile::Projectile() : GameObject()
 {
 	displayName = "projectile";

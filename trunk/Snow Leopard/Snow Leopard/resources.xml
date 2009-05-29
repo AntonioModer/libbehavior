@@ -1,7 +1,0 @@
-<resources>
-  <Directory id="XML" location="Resources\XML"/>
-  <Directory id="Hulls" location="Resources\Hulls"/>
-  <Directory id="Components" location="Resources\Components"/>
-  <Directory id="Backgrounds" location="Resources\Backgrounds"/>
-  <Directory id="Ammo" location="Resources\Ammo"/>
-</resources>

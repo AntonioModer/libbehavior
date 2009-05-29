@@ -62,7 +62,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xerces-c_static_2D.lib"
 				LinkIncremental="2"
 				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames="libcmt"
@@ -319,25 +318,9 @@
 				RelativePath=".\WorldState.h"
 				>
 			</File>
-			<File
-				RelativePath=".\xerces.h"
-				>
-			</File>
-			<File
-				RelativePath=".\XercesString.h"
-				>
-			</File>
 		</Filter>
 		<File
-			RelativePath=".\Resources\XML\example.xml"
-			>
-		</File>
-		<File
 			RelativePath=".\ReadMe.txt"
-			>
-		</File>
-		<File
-			RelativePath=".\resources.xml"
 			>
 		</File>
 	</Files>

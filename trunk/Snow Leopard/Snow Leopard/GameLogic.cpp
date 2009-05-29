@@ -5,7 +5,6 @@
 #include "Definitions.h"
 #include "globals.h"
 #include "Projectile.h"
-#include "xerces.h"
 
 using namespace SL;
 using namespace std;
