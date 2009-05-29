@@ -55,7 +55,6 @@ GameObject::GameObject()
 	}
 
 	brain = new ParallelNode();
-	brain->init(this);
 };
 
 
