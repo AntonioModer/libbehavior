@@ -180,7 +180,7 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 		gameObject->collisionOutline->rotate(CL_Angle::from_degrees(angle));
 
 		GameObjectIter itr;
-		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
+ 		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
 		{
 			if ((*itr) == gameObject)
 				continue;

@@ -85,6 +85,7 @@ GameObject::GameObject()
 	usesPhysics = true;
 
 	//set up the base sprite
+	//CL_PixelBuffer image(100,100,5,CL_PixelFormat());
 	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
 	CL_SpriteDescription desc;
 	desc.add_frame(image);

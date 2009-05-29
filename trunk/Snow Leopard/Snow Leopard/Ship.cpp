@@ -47,6 +47,11 @@ Ship::Ship(xerces DOMNode* rootNode) : GameObject(rootNode)
 //	AI_Shooting = &AI_Shoot_DoNothing;
 	GameObject::usesPhysics = true;
 }
+
+Ship::Ship() : GameObject()
+{
+	GameObject::usesPhysics = true;
+}
 	
 bool Ship::registerWallCollision()
 {

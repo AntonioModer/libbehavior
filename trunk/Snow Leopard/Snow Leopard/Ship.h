@@ -23,6 +23,7 @@ public:
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Ship::Ship(xerces DOMNode* rootNode);
+	Ship::Ship();
 	virtual bool move();
 	virtual bool shoot();
 	void (*AI_Movement) (Ship* ship);
