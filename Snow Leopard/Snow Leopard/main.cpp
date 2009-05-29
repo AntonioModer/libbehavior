@@ -66,22 +66,9 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	
 	cout << "Now Debugging..." <<endl;
 	
-	/*
-	static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
-	DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(gLS);
-    DOMBuilder* parser = ((DOMImplementationLS*)impl)->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS,0);
-
-    parser->setFeature(XMLUni::fgDOMNamespaces,true);
-    parser->setFeature(XMLUni::fgXercesSchema, true);
-    parser->setFeature(XMLUni::fgXercesSchemaFullChecking, true);
-	
-	#define xerces XERCES_CPP_NAMESPACE_QUALIFIER
-	std::string xmlFile = "Resources\\XML\\example.xml";
-	xerces DOMNode* doc;
-	doc = parser->parseURI(XercesString(xmlFile).xmlCh());
-*/
 	WorldState* state = new WorldState();
 	Ship* player = new Ship();
+	player->setSprite("Hulls\\Sample Hull.png");
 	player->isPlayer = true;
 	state->insertObject(player,point(100,100));
 	SL::ws = state;

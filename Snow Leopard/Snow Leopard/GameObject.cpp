@@ -26,8 +26,8 @@ GameObject::GameObject()
 	usesPhysics = true;
 
 	//set up the base sprite
-	//CL_PixelBuffer image(100,100,5,CL_PixelFormat());
-	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
+	CL_PixelBuffer image(100,100,5,CL_PixelFormat());
+	//CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
 	CL_SpriteDescription desc;
 	desc.add_frame(image);
 	sprite = new CL_Sprite(*SL::gc,desc);
@@ -76,6 +76,25 @@ bool GameObject::registerCollision(GameObject* collidedObject)
 	std::cout << "MyPosition: " << collisionOutline->get_translation()<< "\n";
 	std::cout << "TheirPosition: " << collidedObject->collisionOutline->get_translation()<< "\n";
 	return true;
+}
+
+void GameObject::setSprite(std::string resource)
+{
+	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\" + resource));
+	CL_SpriteDescription desc;
+	desc.add_frame(image);
+	delete sprite;
+	sprite = new CL_Sprite(*SL::gc,desc);
+
+	if (usesPhysics)
+	{
+		cout << "creating a new collision outline" << endl;
+		collisionOutline = new CL_CollisionOutline(image);
+		collisionOutline->set_alignment(origin_center,0,0);
+		collisionOutline->set_rotation_hotspot(origin_center,0,0);
+		collisionOutline->set_angle(displayHeading);
+	}
+
 }
 
 bool GameObject::processMovementPhysics()

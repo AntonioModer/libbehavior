@@ -44,6 +44,7 @@ void GameLogic::handleInput()
 		 if (ws->time - timeLastFired > 100)
 		 {
 			 Projectile* p = new Projectile();
+			 p->setSprite("Ammo\\test.png");
 			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
 			ws->insertObject(p,playerShip->location.offsetPolar(playerShip->displayHeading,100));
 		 }
