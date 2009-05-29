@@ -14,6 +14,7 @@
 #include "GFrameHandler.h"
 #include "globals.h"
 #include "Definitions.h"
+#include "Ship.h"
 
 using namespace SL;
 using namespace std;
@@ -41,6 +42,14 @@ CL_ClanApplication app(&DisplayProgram::main);
 
 int DisplayProgram::main(const std::vector<CL_String> &args)
 {
+	if(AllocConsole()) {
+		freopen("CONOUT$", "w", stdout); //redirect std io to it
+		SetConsoleTitle("Debug Console");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);  
+	}
+
+	try
+	{
 	CL_SetupCore setup_core;
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
@@ -56,14 +65,11 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_InputDevice keyboard = ic->get_keyboard();
 	CL_InputDevice mouse = ic->get_mouse();
 
-	if(AllocConsole()) {
-        freopen("CONOUT$", "w", stdout); //redirect std io to it
-        SetConsoleTitle("Debug Console");
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);  
-	}
+	
 	
 	cout << "Now Debugging..." <<endl;
 	
+	/*
 	static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
 	DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(gLS);
     DOMBuilder* parser = ((DOMImplementationLS*)impl)->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS,0);
@@ -76,8 +82,11 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	std::string xmlFile = "Resources\\XML\\example.xml";
 	xerces DOMNode* doc;
 	doc = parser->parseURI(XercesString(xmlFile).xmlCh());
-
-	WorldState* state = new WorldState(doc);
+*/
+	WorldState* state = new WorldState();
+	Ship* player = new Ship();
+	player->isPlayer = true;
+	state->insertObject(player,point(100,100));
 	SL::ws = state;
 	Renderer* renderer = new Renderer();
 	SL::ren = renderer;
@@ -93,6 +102,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	window.flip();
 	frame_handler.limit_frame();
 	frame_handler.calculate();
+	cout << "fps" << frame_handler.get_fps() << endl;
 	if (CL_DisplayMessageQueue::has_messages())
 		CL_DisplayMessageQueue::process();
  	logic->step();
@@ -100,4 +110,8 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	
 	XMLPlatformUtils::Terminate();
 	return 0;
+	}
+	catch (CL_Exception err) {
+		std::cout << "Exception caught: " << err.message.c_str() << std::endl;
+	}
 }
