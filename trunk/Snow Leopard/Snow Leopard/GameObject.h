@@ -30,6 +30,9 @@ public:
 	virtual bool registerCollision(GameObject* collidedObject);
 	/// Notify the object it has hit the edge of the level. Responding improperly to this can cause out of bounds errors
 	virtual bool registerWallCollision();
+	/// Set the GameObject's sprite, and recalculate the collision outline if necessary
+	//* The resource is a relative filename to an image. e.g. "Ammo\\test.png"
+	void GameObject::setSprite(std::string resource);
 	/// Default constructor
 	GameObject::GameObject();
 	/// The graphical representation of the object
@@ -78,32 +81,6 @@ public:
 	float speed;
 	/// Determines whether the object collides with others
 	bool usesPhysics;
-
-	//stupid hack to convert between the CL_Origin enum and string values
-	
-	//static std::string origin_type_map[] = {"origin_top_left","origin_top_center","origin_top_right","origin_center_left","origin_center","origin_center_right","origin_bottom_left","origin_bottom_center","origin_bottom_right"};
-	static CL_Origin GameObject::getOriginfromString(std::string str)
-	{
-		if      (str== "top_left")
-			return origin_top_left;
-		else if (str== "top_center")
-			return origin_top_center;
-		else if (str== "top_right")
-			return origin_top_right;
-		else if (str== "center_left")
-			return origin_center_left;
-		else if (str== "center")
-			return origin_center;
-		else if (str== "center_right")
-			return origin_center_right;
-		else if (str== "bottom_left")
-			return origin_bottom_left;
-		else if (str== "bottom_center")
-			return origin_bottom_center;
-		else if (str== "bottom_right")
-			return origin_bottom_right;
-		throw std::exception("invalid origin string");
-	}
 
  protected:
 	
