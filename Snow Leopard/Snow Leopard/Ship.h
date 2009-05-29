@@ -7,7 +7,6 @@
 #include <set>
 #include "GameObject.h"
 #include "WorldState.h"
-#include "xerces.h"
 
 class CL_ResourceManager;
 
@@ -22,7 +21,6 @@ public:
 	bool doActions();
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
-	Ship::Ship(xerces DOMNode* rootNode);
 	Ship::Ship();
 	virtual bool move();
 	virtual bool shoot();

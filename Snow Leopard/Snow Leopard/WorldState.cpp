@@ -5,7 +5,6 @@
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
 #include "Projectile.h"
-#include "xerces.h"
 #include "util.h"
 #include "Ship.h"
 
@@ -47,55 +46,6 @@ GameObject* WorldState::getPlayer()
 	throw std::exception("no camera defined");
 	return NULL;
 }
-
-WorldState::WorldState(xerces DOMNode* rootNode)
-{
-	xerces DOMNode* worldStateNode = rootNode->getFirstChild();
-	xerces DOMNamedNodeMap* attributes =  worldStateNode->getAttributes();
-
-
-	CoordinateSizeX = getAttributeDouble ("CoordinateSizeX",attributes);
-	CoordinateSizeY = getAttributeDouble ("CoordinateSizeY",attributes);
-	time = getAttributeInt ("time",attributes);
-	id = getAttributeStr("id",attributes);
-	std::cout <<id << endl;
-	name = getAttributeStr("name",attributes);
-	std::cout <<name << endl;
-	description = getAttributeStr("description",attributes);
-	std::cout <<description << endl;
-
-
-
-	CellSizeX = (int)CoordinateSizeX / coarseGraining ;
-	CellSizeY = (int)CoordinateSizeY / coarseGraining ;
-
-	allObjectList = new GameObjectList();
-	deleteList = new GameObjectList();
-	worldMatrix = new GameObjectList**[CellSizeX];
-	for (int i = 0; i < CellSizeX; ++i)
-        worldMatrix[i] = new GameObjectList*[CellSizeY];
-
-	for (int i=0;i<CellSizeX;i++)
-	{
-		for (int j=0;j<CellSizeY;j++)
-		{
-			worldMatrix[i][j] = new GameObjectList();
-		}
-	}
-	xerces DOMNodeList* entities = ((xerces DOMElement*)worldStateNode)->getElementsByTagName(XercesString("Entity").xmlCh());
-	for (unsigned int x = 0;x<entities->getLength();x++)
-	{
-		xerces DOMElement* entityNode = (xerces DOMElement*)entities->item(x);
-		std::cout << "now reading node" << entityNode->getAttribute(XercesString("id").xmlCh()) << endl;
-		xerces DOMNamedNodeMap* entityAttributes = entityNode->getAttributes();
-		point p(getAttributeDouble("xPosition",entityAttributes),getAttributeDouble("yPosition",entityAttributes));
-		cout << entityNode->getTagName() << endl;
-		Ship* s = new Ship(entityNode);
-		//TODO: add scenario handling code here
-		insertObject(s,p);
-	}
-}
-
 
 bool WorldState::insertObject(GameObject* gameObject, point p)
 {

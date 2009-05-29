@@ -7,8 +7,6 @@
 #include "point.h"
 #include <set>
 
-#include "xerces.h"
-
 namespace SL
 {
 class GameObject;
@@ -48,8 +46,6 @@ std::string id;
 
 /// Standard Constructor
 WorldState::WorldState();
-/// Constructor from an XML node
-WorldState::WorldState(xerces DOMNode* rootNode);
 /// Insert the gameObject into the world at the given point
 /** \return true if the object was actually inserted, false if it could not be */
 bool insertObject(GameObject* gameObject, point p);
