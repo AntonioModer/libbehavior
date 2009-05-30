@@ -37,10 +37,8 @@
         * Current amount of damage being taken
         * Current amount of damage being dealt
     Leaf
-        * Rotate
         * ~~Move~~
-        * Fire weapon
-        * Drop bomb
+        * ~~Fire weapon~~
 
     Deliverable: All nodes required for sensing and action are complete
        
