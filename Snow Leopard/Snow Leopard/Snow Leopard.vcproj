@@ -227,6 +227,14 @@
 				<Filter
 					Name="AI Behaviors"
 					>
+					<File
+						RelativePath=".\Cooldown.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Cooldown.h"
+						>
+					</File>
 					<Filter
 						Name="Movement"
 						>

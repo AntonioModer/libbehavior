@@ -177,7 +177,10 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 			if (status == BT_FAILURE)
 			{
 				if (failPolicy == FAIL_ON_ONE)
+				{
+					init(agent);
 					return BT_FAILURE;
+				}
 				else
 				{
 					(*childrenStatus)[node] = BT_FAILURE;
@@ -200,13 +203,19 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 		case BT_SUCCESS:
 			//can't instantly return success for succeedOnOne policy if failOnOne is also true, because failOnOne overrides succeedOnOne
 			if (succeedPolicy == SUCCEED_ON_ONE && failPolicy != FAIL_ON_ONE)
+			{
+				init(agent);
 				return BT_SUCCESS;
+			}
 			sawSuccess = true;
 			sawAllFails = false;
 			break;
 		case BT_FAILURE:
 			if (failPolicy == FAIL_ON_ONE)
+			{
+			init(agent);
 				return BT_FAILURE;
+			}
 			sawAllSuccess = false;
 			break;
 		case BT_RUNNING:
@@ -214,14 +223,24 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 			sawAllSuccess = false;
 			//optimization for early exit
 			if (failPolicy == FAIL_ON_ALL && succeedPolicy == SUCCEED_ON_ALL)
+			{
 				return BT_RUNNING;
+			}
 			break;
 		}
 	}
 	if (failPolicy == FAIL_ON_ALL && sawAllFails)
+	{
+		init(agent);
 		return BT_FAILURE;
+	}
 	else if (succeedPolicy == SUCCEED_ON_ALL && sawAllSuccess || succeedPolicy == SUCCEED_ON_ONE && sawSuccess)
+	{
+		init(agent);
 		return BT_SUCCESS;
+	}
 	else
+	{
 		return BT_RUNNING;
+	}
 }

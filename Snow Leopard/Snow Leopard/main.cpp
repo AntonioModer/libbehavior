@@ -17,6 +17,7 @@
 #include "GoStraight.h"
 #include "AbsoluteMovement.h"
 #include "Fire.h"
+#include "Cooldown.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -78,8 +79,11 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		
 		Ship* opponent = new Ship();
 		opponent->setSprite("Hulls\\Sample Hull.png");
-		opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-		opponent->brain->addChild(new Fire());
+		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
+		BehaviorTreeInternalNode* fireWithTimeout = new SequentialNode();
+		fireWithTimeout->addChild(new Fire());
+		fireWithTimeout->addChild(new Cooldown(5000));
+		opponent->brain->addChild(fireWithTimeout);
 		state->insertObject(opponent,point(300,300));
 
 

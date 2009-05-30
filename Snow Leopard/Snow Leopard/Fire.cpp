@@ -24,5 +24,5 @@ BEHAVIOR_STATUS Fire::execute(void* agent)
 	Ship* ship = (Ship*) agent;
 	ship->fire();
 	
-	return BT_RUNNING;
+	return BT_SUCCESS;
 }
