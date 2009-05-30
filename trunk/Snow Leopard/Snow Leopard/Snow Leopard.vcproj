@@ -223,6 +223,14 @@
 						Name="Movement"
 						>
 						<File
+							RelativePath=".\AbsoluteMovement.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\AbsoluteMovement.h"
+							>
+						</File>
+						<File
 							RelativePath=".\GoStraight.cpp"
 							>
 						</File>
