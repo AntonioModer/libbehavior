@@ -38,7 +38,7 @@
         * Current amount of damage being dealt
     Leaf
         * Rotate
-        * Move
+        * ~~Move~~
         * Fire weapon
         * Drop bomb
 
