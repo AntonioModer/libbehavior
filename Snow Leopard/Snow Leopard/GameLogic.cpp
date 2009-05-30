@@ -30,7 +30,12 @@ bool GameLogic::step()
 	const GameObjectList* objects = ws->getAllGameObjects();
 	ConstGameObjectIter itr;
 	for(itr = objects->begin();itr !=objects->end();)
+	{
+#ifdef PHYSICS
+		(*itr)->processMovementPhysics();
+#endif
  		(*itr++)->doActions();
+	}
 
 	return true;
 }

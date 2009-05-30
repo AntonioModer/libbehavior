@@ -11,8 +11,6 @@ using namespace SL;
 using namespace SL::Behaviors;
 using namespace BehaviorTree;
 
-//goStraight will never return SUCCESS!!! Remember to provide decorators or conditions so it will fail.
-
 void AbsoluteMovement::init(void* agent)
 {
 };
@@ -25,9 +23,6 @@ AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION _direction,int _speed)
 BEHAVIOR_STATUS AbsoluteMovement::execute(void* agent)
 {
 	GameObject* ship = (GameObject*) agent;
-#ifdef PHYSICS
-	ship->applyForcePolar(ship->displayHeading,.005);
-#else
 	switch(direction)
 	{
 	case UP:
@@ -44,6 +39,5 @@ BEHAVIOR_STATUS AbsoluteMovement::execute(void* agent)
 		break;
 	}
 	
-#endif
 	return BT_RUNNING;
 }

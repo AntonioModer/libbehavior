@@ -16,6 +16,7 @@
 #include "Ship.h"
 #include "GoStraight.h"
 #include "AbsoluteMovement.h"
+#include "Fire.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -77,7 +78,8 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		
 		Ship* opponent = new Ship();
 		opponent->setSprite("Hulls\\Sample Hull.png");
-		opponent->brain->addChild(new AbsoluteMovement(LEFT,5));
+		opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
+		opponent->brain->addChild(new Fire());
 		state->insertObject(opponent,point(300,300));
 
 

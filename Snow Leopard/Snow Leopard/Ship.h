@@ -22,13 +22,7 @@ public:
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Ship::Ship();
-	virtual bool move();
-	virtual bool shoot();
-	void (*AI_Movement) (Ship* ship);
-	void (*AI_Shooting) (Ship* ship);
-
-
-
+	void Ship::fire();
 };
 
 }

@@ -4,6 +4,7 @@
 #include <ClanLib/display.h>
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
+#include "Projectile.h"
 
 using namespace SL;
 using namespace std;
@@ -19,26 +20,12 @@ bool Ship::doActions()
 	
 }
 
-bool Ship::move()
+void Ship::fire()
 {
-#ifdef PHYSICS
-	GameObject::processMovementPhysics();
-#endif
-	
-	if (!(GameObject::isPlayer))
-	{
-	AI_Movement(this);
-	}
-	return true;
-}
-
-bool Ship::shoot()
-{
-	if (!(GameObject::isPlayer))
-	{
-	AI_Shooting(this);
-	}
-	return true;
+	Projectile* p = new Projectile();
+	p->setSprite("Ammo\\test.png");
+	p->displayHeading = *(new CL_Angle(displayHeading));
+	ws->insertObject(p,location.offsetPolar(displayHeading,100));
 }
 
 Ship::Ship() : GameObject()

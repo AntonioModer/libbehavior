@@ -216,6 +216,14 @@
 			<Filter
 				Name="content"
 				>
+				<File
+					RelativePath=".\Fire.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Fire.h"
+					>
+				</File>
 				<Filter
 					Name="AI Behaviors"
 					>
@@ -246,10 +254,6 @@
 							RelativePath=".\TurnTowardsTarget.h"
 							>
 						</File>
-					</Filter>
-					<Filter
-						Name="Shooting"
-						>
 					</Filter>
 					<Filter
 						Name="Sensing"
