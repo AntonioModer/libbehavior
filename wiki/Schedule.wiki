@@ -39,6 +39,7 @@
     Leaf
         * ~~Move~~
         * ~~Fire weapon~~
+        * ~~Wait~~
 
     Deliverable: All nodes required for sensing and action are complete
        
