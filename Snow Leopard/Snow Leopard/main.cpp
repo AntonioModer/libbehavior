@@ -15,8 +15,10 @@
 #include "Definitions.h"
 #include "Ship.h"
 #include "GoStraight.h"
+#include "AbsoluteMovement.h"
 
 using namespace SL;
+using namespace SL::Behaviors;
 using namespace std;
 
 // Instantiate the globals that were declared as "extern" in globals.h
@@ -75,7 +77,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		
 		Ship* opponent = new Ship();
 		opponent->setSprite("Hulls\\Sample Hull.png");
-		opponent->brain->addChild(new Behaviors::GoStraight(5));
+		opponent->brain->addChild(new AbsoluteMovement(LEFT,5));
 		state->insertObject(opponent,point(300,300));
 
 
