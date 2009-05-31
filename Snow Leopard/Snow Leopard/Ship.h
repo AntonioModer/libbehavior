@@ -25,6 +25,8 @@ public:
 	void Ship::fire();
 	int test(){return 100;};
 	static int test2() {return 100;};
+	bool test3() {return true;};
+	static bool test4(){return true;};
 };
 
 }

@@ -1,12 +1,12 @@
-#ifndef CONDITIONALNODE_H_
-#define CONDITIONALNODE_H_
+#ifndef INTCONDITION_H_
+#define INTCONDITION_H_
 
 #include <vector>
 #include <map>
 #include "boost\\bind.hpp"
+#include "Common.h"
 namespace BehaviorTree
 {
-	class NoClass{};
 	enum INT_TEST {LESS_THAN,GREATER_THAN,LESS_OR_EQ,GREATER_OR_EQ,EQUAL,NOT_EQUAL};
 	template <class T = NoClass>
 	class IntCondition: public BehaviorTreeNode
