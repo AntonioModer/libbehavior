@@ -23,6 +23,7 @@ public:
 	bool registerWallCollision();
 	Ship::Ship();
 	void Ship::fire();
+	int test(){return 100;};
 };
 
 }
