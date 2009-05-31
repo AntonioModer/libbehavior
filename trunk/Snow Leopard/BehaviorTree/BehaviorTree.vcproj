@@ -167,7 +167,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ConditionalNode.h"
+				RelativePath=".\BoolCondition.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Common.h"
+				>
+			</File>
+			<File
+				RelativePath=".\IntCondition.h"
 				>
 			</File>
 			<File
