@@ -18,10 +18,6 @@ namespace SL
 		/** \param timeout in milliseconds
 		*/
 		Cooldown::Cooldown(int timeout);
-		BehaviorTree::BehaviorTreeList getChildren()
-		{
-			return BehaviorTree::BehaviorTreeList();
-		}
 	};
 	}
 

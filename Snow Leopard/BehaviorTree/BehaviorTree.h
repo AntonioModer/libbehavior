@@ -30,8 +30,6 @@ public:
 	virtual BEHAVIOR_STATUS execute(void* agent) = 0;
 	/// This method will be invoked before the node is executed for the first time.
 	virtual void init(void* agent) = 0;
-	/// Retrieve a BehaviorTreeList of the node's children. If the node has no children, the list will be empty.
-	virtual BehaviorTreeList getChildren() = 0;
 };
 
 /// Abstract base class for Behavior Tree nodes with children
@@ -46,10 +44,6 @@ public:
 	{
 		children.push_back(newChild);
 		return this;
-	};
-	virtual BehaviorTreeList getChildren()
-	{
-		return children;
 	};
 	
 protected:
@@ -176,10 +170,6 @@ class AlwaysRunning: public BehaviorTreeNode
 		return BT_RUNNING;
 	}
 	void init(void* agent){};
-	BehaviorTreeList getChildren()
-	{
-		return BehaviorTreeList();
-	}
 };
 
 class AlwaysSuccess: public BehaviorTreeNode
@@ -189,10 +179,6 @@ class AlwaysSuccess: public BehaviorTreeNode
 		return BT_SUCCESS;
 	}
 	void init(void* agent){};
-	BehaviorTreeList getChildren()
-	{
-		return BehaviorTreeList();
-	}
 };
 
 class AlwaysFailure: public BehaviorTreeNode
@@ -202,10 +188,6 @@ class AlwaysFailure: public BehaviorTreeNode
 		return BT_FAILURE;
 	}
 	void init(void* agent){};
-	BehaviorTreeList getChildren()
-	{
-		return BehaviorTreeList();
-	}
 };
 
 class SuccessAfter: public BehaviorTreeNode
@@ -234,10 +216,6 @@ public:
 		total = t;
 		n = total;
 	}
-	BehaviorTreeList getChildren()
-	{
-		return BehaviorTreeList();
-	}
 };
 
 class FailureAfter: public BehaviorTreeNode
@@ -265,10 +243,6 @@ public:
 	{
 		total = t;
 		n = total;
-	}
-	BehaviorTreeList getChildren()
-	{
-		return BehaviorTreeList();
 	}
 };
 }

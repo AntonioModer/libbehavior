@@ -15,10 +15,6 @@ namespace SL
 		BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
 		void init(void* agent);
 		GoStraight::GoStraight(int speed);
-		BehaviorTree::BehaviorTreeList getChildren()
-		{
-			return BehaviorTree::BehaviorTreeList();
-		}
 	};
 	}
 
