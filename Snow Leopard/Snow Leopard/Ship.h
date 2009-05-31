@@ -24,6 +24,7 @@ public:
 	Ship::Ship();
 	void Ship::fire();
 	int test(){return 100;};
+	static int test2() {return 100;};
 };
 
 }
