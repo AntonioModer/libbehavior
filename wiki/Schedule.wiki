@@ -20,7 +20,10 @@
     * ~~Parallel Execution Node~~
     * ~~Priority Selector Node~~
     * Probability Selector Node
-    * Conditional Decorator Node
+    * Conditional Nodes
+        * ~~int~~
+        * bool
+        * float
     * Integration Tests
 
     Deliverable: Source code and unit tests for core nodes
