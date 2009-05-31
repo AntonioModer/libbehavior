@@ -80,10 +80,10 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		Ship* opponent = new Ship();
 		opponent->setSprite("Hulls\\Sample Hull.png");
 		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-		BehaviorTreeInternalNode* fireWithTimeout = new SequentialNode();
-		fireWithTimeout->addChild(new Fire());
-		fireWithTimeout->addChild(new Cooldown(5000));
-		opponent->brain->addChild(fireWithTimeout);
+		opponent->brain->addChild(
+			(new SequentialNode())
+				->addChild(new Fire())
+				->addChild(new Cooldown(1000)));
 		state->insertObject(opponent,point(300,300));
 
 

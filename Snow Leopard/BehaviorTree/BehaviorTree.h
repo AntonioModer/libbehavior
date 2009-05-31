@@ -42,9 +42,10 @@ public:
 	virtual BEHAVIOR_STATUS execute(void* agent) = 0;
 	virtual void init(void* object) = 0;
 	/// Add a child to this node. Takes ownership of the child.
-	virtual void BehaviorTreeInternalNode::addChild(BehaviorTreeNode* newChild)
+	virtual BehaviorTreeInternalNode* BehaviorTreeInternalNode::addChild(BehaviorTreeNode* newChild)
 	{
 		children.push_back(newChild);
+		return this;
 	};
 	virtual BehaviorTreeList getChildren()
 	{
@@ -103,6 +104,7 @@ public:
 	If another child with a weight of eight were added, the previous children would have a 10% chance of being executed, and the new child would have an 80% chance of being executed.
 	This weight system is intended to facilitate the fine-tuning of behaviors.
 */
+/*
 class ProbabilitySelectorNode:public BehaviorTreeInternalNode
 {
 private:
@@ -118,7 +120,7 @@ public:
 	///Add a child to this node, with a weight of one.
 	void addChild( BehaviorTreeNode* node);
 };
-
+*/
 ///Execute behaviors in parallel
 /** There are two policies that control the flow of execution. The first is the policy for failure, and the second is the policy for success.
 	For failure, the options are "fail when one child fails" and "fail when all children fail".
