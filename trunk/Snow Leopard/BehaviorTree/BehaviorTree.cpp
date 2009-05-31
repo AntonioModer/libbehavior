@@ -100,7 +100,7 @@ BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 	return status;
 
 }
-
+/*
 void ProbabilitySelectorNode::init(void* agent)
 {
 	totalSum = 0;
@@ -144,7 +144,7 @@ BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
 
 	return BT_SUCCESS;
 }
-
+*/
 ParallelNode::ParallelNode(FAILURE_POLICY failurePolicy, SUCCESS_POLICY successPolicy)
 {
 	failPolicy = failurePolicy;
