@@ -14,9 +14,9 @@ namespace SL
 		BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
 		void init(void* agent);
 		Fire::Fire();
-		BehaviorTree::BehaviorTreeList getChildren()
+		const BehaviorTree::BehaviorTreeList* getChildren() const
 		{
-			return BehaviorTree::BehaviorTreeList();
+			return NULL;
 		}
 	};
 	}

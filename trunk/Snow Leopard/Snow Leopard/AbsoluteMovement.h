@@ -17,9 +17,9 @@ namespace SL
 		BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
 		void init(void* agent);
 		AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION direction,int speed);
-		BehaviorTree::BehaviorTreeList getChildren()
+		const BehaviorTree::BehaviorTreeList* getChildren()
 		{
-			return BehaviorTree::BehaviorTreeList();
+			return NULL;
 		}
 	};
 	}

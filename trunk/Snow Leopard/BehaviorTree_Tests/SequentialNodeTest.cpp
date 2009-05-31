@@ -109,7 +109,6 @@ BOOST_AUTO_TEST_CASE( snt_complex1 )
 	for (int i = 0 ; i< 2 ; i++)
 	{
 		BOOST_CHECK_EQUAL(top->currentPosition, -1);
-		BOOST_CHECK_EQUAL(top->getChildren().size(),3);
 		BOOST_CHECK_EQUAL(top->execute(&dummy_agent),BT_RUNNING);
 		BOOST_CHECK_EQUAL(top->currentPosition, 0);
 		BOOST_CHECK_EQUAL(top->execute(&dummy_agent),BT_RUNNING);

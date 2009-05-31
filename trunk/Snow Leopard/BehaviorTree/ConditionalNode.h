@@ -6,7 +6,7 @@
 #include "boost\\bind.hpp"
 namespace BehaviorTree
 {
-	enum INT_TEST {LESS_THAN,GREATER_THAN,LESS_OR_EQ,GREATER_OR_EQ,EQUAL};
+	enum INT_TEST {LESS_THAN,GREATER_THAN,LESS_OR_EQ,GREATER_OR_EQ,EQUAL,NOT_EQUAL};
 	template <class T>
 	class IntCondition: public BehaviorTreeNode
 	{
@@ -17,17 +17,21 @@ namespace BehaviorTree
 		BEHAVIOR_STATUS execute(void* agent)
 		{
 			T* obj = (T*) agent;
+			bool status;
 			switch (test)
 			{
-			case EQUAL:
-				if ((obj->*func)() == val)
-				{
-					cout << "SUCCESS!!" << endl;
-					return BT_SUCCESS;
-				}
-				else
-					return BT_FAILURE;
+				case LESS_THAN:		status = ((obj->*func)() < val); break;
+				case GREATER_THAN:	status = ((obj->*func)() > val); break;
+				case LESS_OR_EQ:	status = ((obj->*func)() <= val); break;
+				case GREATER_OR_EQ: status = ((obj->*func)() >= val); break;
+				case EQUAL:			status = ((obj->*func)() == val); break;
+				case NOT_EQUAL:		status = ((obj->*func)() != val); break;
 			}
+
+			if (status)
+				return BT_SUCCESS;
+			else
+				return BT_FAILURE;
 		}
 		void init(void* agent)
 		{
@@ -37,11 +41,6 @@ namespace BehaviorTree
 			func = _func;
 			test = _test;
 			val = _val;
-		}
-		IntCondition(){throw 5;};
-		BehaviorTreeList getChildren()
-		{
-			return BehaviorTreeList();
 		}
 	};
 }
