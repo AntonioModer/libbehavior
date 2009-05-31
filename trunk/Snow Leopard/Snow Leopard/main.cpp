@@ -84,6 +84,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		opponent->brain->addChild(
 			(new SequentialNode())
 				->addChild(new IntCondition<Ship>(&Ship::test,EQUAL,100))
+				->addChild(new IntCondition<>(&Ship::test2,EQUAL,100))
 				->addChild(new Fire())
 				->addChild(new Cooldown(1000)));
 		state->insertObject(opponent,point(300,300));
