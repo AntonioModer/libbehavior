@@ -13,13 +13,8 @@
 #include "GFrameHandler.h"
 #include "globals.h"
 #include "Definitions.h"
-#include "Ship.h"
-#include "GoStraight.h"
-#include "AbsoluteMovement.h"
-#include "Fire.h"
-#include "Cooldown.h"
-#include "IntCondition.h"
-#include "BoolCondition.h"
+
+#include "Scenario1.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -60,7 +55,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
 
-	CL_DisplayWindow window("Snow Leopard", 640, 480);
+	CL_DisplayWindow window("Snow Leopard", 800, 600);
 	CL_GraphicContext graphics_context = window.get_gc();
 	SL::gc = &graphics_context;
 	CL_InputContext input_context = window.get_ic();
@@ -72,28 +67,9 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	
 	
 	cout << "Now Debugging..." <<endl;
-	
-	WorldState* state = new WorldState();
-		Ship* player = new Ship();
-		player->setSprite("Hulls\\Sample Hull.png");
-		player->isPlayer = true;
-		state->insertObject(player,point(100,100));
-		
-		Ship* opponent = new Ship();
-		opponent->setSprite("Hulls\\Sample Hull.png");
-		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-		opponent->brain->addChild(
-			(new SequentialNode())
-				//->addChild(new IntCondition<Ship>(&Ship::test,EQUAL,100))
-				->addChild(new IntCondition<>(&Ship::test2,EQUAL,100))
-				->addChild(new Fire())
-				->addChild(new Cooldown(1000))
-				->addChild(new BoolCondition<Ship>(&Ship::test3,true))
-				->addChild(new BoolCondition<>(&Ship::test4,true)));
-		state->insertObject(opponent,point(300,300));
 
 
-	SL::ws = state;
+	SL::ws = loadScenario1();
 	Renderer* renderer = new Renderer();
 	SL::ren = renderer;
 	GameLogic* logic = new GameLogic();

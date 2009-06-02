@@ -20,8 +20,9 @@ WorldState::WorldState()
 	CellSizeX = (int)CoordinateSizeX / coarseGraining ;
 	CellSizeY = (int)CoordinateSizeY / coarseGraining ;
 
-	allObjectList = new GameObjectList();
+	activeObjectList = new GameObjectList();
 	deleteList = new GameObjectList();
+	backgroundObjectList = new GameObjectList();
 	worldMatrix = new GameObjectList**[CellSizeX];
 	for (int i = 0; i < CellSizeX; ++i)
         worldMatrix[i] = new GameObjectList*[CellSizeY];
@@ -38,7 +39,7 @@ WorldState::WorldState()
 GameObject* WorldState::getPlayer()
 {
 	GameObjectIter itr;
-	for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
+	for (itr = activeObjectList->begin();itr != activeObjectList->end(); itr++)
 	{
 		if ((*itr)->isPlayer)
 			return *itr;
@@ -55,7 +56,7 @@ bool WorldState::insertObject(GameObject* gameObject, point p)
 	GameObjectList* currentList = getListFromPoint(p);
 	currentList->push_front(gameObject);
 	gameObject->location = p;
-	allObjectList->push_front(gameObject);
+	activeObjectList->push_front(gameObject);
 	if (gameObject->usesPhysics)
 		gameObject->collisionOutline->set_translation(p.x,p.y);
 	return true;
@@ -85,7 +86,7 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 	GameObjectIter itr;
 	if (gameObject->usesPhysics)
 	{
-		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
+		for (itr = activeObjectList->begin();itr != activeObjectList->end(); itr++)
 		{
 			if ((*itr) == gameObject)
 				continue;
@@ -130,7 +131,7 @@ bool WorldState::rotateObject(GameObject* gameObject, double angle)
 		gameObject->collisionOutline->rotate(CL_Angle::from_degrees(angle));
 
 		GameObjectIter itr;
- 		for (itr = allObjectList->begin();itr != allObjectList->end(); itr++)
+ 		for (itr = activeObjectList->begin();itr != activeObjectList->end(); itr++)
 		{
 			if ((*itr) == gameObject)
 				continue;
@@ -168,11 +169,21 @@ void WorldState::deleteQueued()
 	for(itr = deleteList->begin();itr !=deleteList->end();)
 	{
 		GameObjectList* currentList = getListFromPoint((*itr)->location);
-		allObjectList->remove((*itr));
+		activeObjectList->remove((*itr));
 		currentList->remove((*itr));
 		delete (*itr++);
 	}
 	deleteList->clear();
+}
+
+void WorldState::addBackgroundObject(GameObject* background)
+{
+	backgroundObjectList->push_back(background);
+}
+
+const GameObjectList* WorldState::getBackgroundObjects()
+{
+	return backgroundObjectList;
 }
 
 GameObjectList* WorldState::getAtCell(point p)
@@ -184,13 +195,13 @@ GameObjectList* WorldState::getAtCell(point p)
 
 const GameObjectList* WorldState::getAllGameObjects()
 {
-	return  allObjectList; 
+	return  activeObjectList; 
 }
 
 
 bool WorldState::pointOutofBounds(point p)
 {
-	if (p.x >= CoordinateSizeX || p.y >= CoordinateSizeY || p.x <= 0 || p.y <= 0)
+	if (p.x >= CoordinateSizeX || p.y >= CoordinateSizeY || p.x < 0 || p.y < 0)
 		return true;
 	return false;
 

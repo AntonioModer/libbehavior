@@ -46,7 +46,7 @@ bool Ship::registerWallCollision()
 bool Ship::registerCollision(GameObject* collidedObject)
  {
 	cout << "ship collision" << endl;
-	if (HP <= 50)
+	if (HP <= 50 && !isPlayer)
 		ws->deleteObject(this);
 	else
 		HP -= 50;
