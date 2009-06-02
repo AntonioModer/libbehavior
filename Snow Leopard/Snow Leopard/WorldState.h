@@ -65,10 +65,14 @@ GameObjectList* getAtCell(point p);
 const GameObjectList* WorldState::getAllGameObjects();
 /// Free the memory of objects that have been marked for deletion
 void deleteQueued();
+const GameObjectList* getBackgroundObjects();
+void addBackgroundObject(GameObject* background);
 
 private:
+	CL_Sprite* background;
 	GameObjectList*** worldMatrix;
-	GameObjectList* allObjectList;
+	GameObjectList* activeObjectList;
+	GameObjectList* backgroundObjectList;
 	bool pointOutofBounds(point p);
 	GameObjectList* WorldState::getListFromPoint(point p);
 	GameObjectList* deleteList;

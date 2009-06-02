@@ -21,18 +21,28 @@ bool Renderer::setCamera(GameObject* obj)
 
 bool Renderer::Render()
 {
+	const GameObjectList* backgrounds = ws->getBackgroundObjects();
 	const GameObjectList* objects = ws->getAllGameObjects();
 	gc->clear();
 
 	ConstGameObjectIter itr;
+	for (itr = backgrounds->begin(); itr!=backgrounds->end();itr++)
+	{
+		GameObject* obj = *itr;
+		CL_Sprite* sprite = obj->sprite;
+		sprite->set_angle(obj->displayHeading);
+		sprite->draw(*gc,obj->location.x,obj->location.y);
+	}
+
 	for (itr = objects->begin(); itr!=objects->end();itr++)
 	{
 		GameObject* obj = *itr;
 		CL_Sprite* sprite = obj->sprite;
 		sprite->set_angle(obj->displayHeading);
-		//sprite->draw(*gc,obj->location.x,obj->location.y);
-		if (obj->usesPhysics)
+		sprite->draw(*gc,obj->location.x,obj->location.y);
+		/*if (obj->usesPhysics)
 			obj->collisionOutline->draw(0,0,CL_Colorf::azure,*gc);
+			*/
 	}
 	
 	return true;
