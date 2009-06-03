@@ -68,8 +68,18 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	
 	cout << "Now Debugging..." <<endl;
 
+	int scenario;
+	if (args.size() > 1)
+		scenario = atoi(args[1].c_str());
+	else
+		scenario = 1;
 
-	SL::ws = loadScenario1();
+
+	 switch (scenario)
+	 {
+		case 1: SL::ws = loadScenario1();
+	 }
+
 	Renderer* renderer = new Renderer();
 	SL::ren = renderer;
 	GameLogic* logic = new GameLogic();
