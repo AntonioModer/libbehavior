@@ -13,15 +13,21 @@ using namespace BehaviorTree;
 
 void AbsoluteMovement::init(void* agent)
 {
+	timeLeft = totalTime;
 };
 
-AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION _direction,int _speed)
+AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION _direction,int _speed, int time = INT_MAX)
 {
 	direction = _direction;
 	speed = _speed;
+	timeLeft = time;
+	totalTime = time;
 }
 BEHAVIOR_STATUS AbsoluteMovement::execute(void* agent)
 {
+	timeLeft -= ws->timeElapsed;
+	if (timeLeft <= 0)
+		return BT_SUCCESS;
 	GameObject* ship = (GameObject*) agent;
 	switch(direction)
 	{

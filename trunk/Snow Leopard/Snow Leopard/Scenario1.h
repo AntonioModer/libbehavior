@@ -30,15 +30,12 @@ WorldState* loadScenario1()
 	Ship* opponent = new Ship();
 	opponent->setSprite("Hulls\\Sample Hull.png");
 	//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-	opponent->brain->addChild(
-		(new SequentialNode())
-		//->addChild(new IntCondition<Ship>(&Ship::test,EQUAL,100))
-		->addChild(new IntCondition<>(&Ship::test2,EQUAL,100))
-		//->addChild(new Fire())
-		->addChild(new Cooldown(1000))
-		->addChild(new BoolCondition<Ship>(&Ship::test3,true))
-		->addChild(new BoolCondition<>(&Ship::test4,true)));
-	state->insertObject(opponent,point(300,300));
+	opponent->brain
+		->addChild((new SequentialNode())
+			->addChild(new Fire())
+			->addChild(new Cooldown(500))
+			->addChild(new AbsoluteMovement(RIGHT,3,500)));
+	state->insertObject(opponent,point(100,300));
 	return state;
 }}
 #endif
