@@ -24,7 +24,7 @@
         * ~~int~~
         * ~~bool~~
         * float
-    * Integration Tests
+    * Repeat Node
 
     Deliverable: Source code and unit tests for core nodes
 
