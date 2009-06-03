@@ -34,7 +34,7 @@
         * Relative Angle of Player
         * Distance of incoming bullets
         * Relative Angle of incoming bullets
-        * Current Health
+        * ~~Current Health~~
         * Current Number of Bombs
         * Player Movement
         * Current amount of damage being taken
