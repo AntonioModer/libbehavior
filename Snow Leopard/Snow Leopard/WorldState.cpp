@@ -34,6 +34,7 @@ WorldState::WorldState()
 			worldMatrix[i][j] = new GameObjectList();
 		}
 	}
+	time = CL_System::get_time();
 }
 
 GameObject* WorldState::getPlayer()

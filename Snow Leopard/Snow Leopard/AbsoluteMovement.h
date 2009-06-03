@@ -13,10 +13,12 @@ namespace SL
 	{
 	public:
 		int speed;
+		int timeLeft;
+		int totalTime;
 		ABSOLUTE_DIRECTION direction;
 		BehaviorTree::BEHAVIOR_STATUS execute(void* agent);
 		void init(void* agent);
-		AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION direction,int speed);
+		AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION direction,int speed,int time);
 		const BehaviorTree::BehaviorTreeList* getChildren()
 		{
 			return NULL;

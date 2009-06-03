@@ -25,7 +25,7 @@ void Ship::fire()
 	Projectile* p = new Projectile();
 	p->setSprite("Ammo\\test.png");
 	p->displayHeading = *(new CL_Angle(displayHeading));
-	ws->insertObject(p,location.offsetPolar(displayHeading,50));
+	ws->insertObject(p,location.offsetPolar(displayHeading,100));
 }
 
 Ship::Ship() : GameObject()
