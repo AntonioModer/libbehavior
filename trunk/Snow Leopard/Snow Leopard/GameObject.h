@@ -43,6 +43,14 @@ public:
 	void applyForceRect(float x, float y);
 	/// If Newtonian physics is enabled for the world, this imparts a force on the object
 	void applyForcePolar(CL_Angle heading, float magnitude);
+	float getXPosition() const
+	{
+		return location.x;
+	}
+	float getYPosition() const
+	{
+		return location.y;
+	}
 	/// The "AI" for the object.
 	BehaviorTree::ParallelNode* brain;
 	/// Unique for each object instance
