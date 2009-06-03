@@ -22,7 +22,7 @@
     * Probability Selector Node
     * Conditional Nodes
         * ~~int~~
-        * bool
+        * ~~bool~~
         * float
     * Integration Tests
 
