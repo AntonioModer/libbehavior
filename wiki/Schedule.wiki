@@ -10,7 +10,7 @@
 
  * ~~Remove code that it not relevant for this project~~ 
  * ~~Document the remaining code extensively, so it can be understood by people who are unfamiliar with Clanlib.~~
- * Add a menu system for loading examples.
+ * ~~Add a system for loading scenarios~~.
  * ~~Implement collision detection using the Clanlib API.~~
  * ~~Test on multiple machines and determine the system requirements~~
  *   Milestone: ~~A testbed level with a stationary enemy can be loaded. The enemy can be shot at, takes damage, and can be destroyed.~~
