@@ -145,6 +145,27 @@ BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
 	return BT_SUCCESS;
 }
 */
+BEHAVIOR_STATUS RepeatNode::execute(void* agent)
+{
+	if (children.size()== 0)
+		return BT_SUCCESS;
+	else
+	{
+		BEHAVIOR_STATUS status = children.at(0)->execute(agent);
+		if (status == BT_SUCCESS)
+		{
+			count++;
+			if (count == target)
+			{
+				init(agent);
+				return BT_SUCCESS;
+			}
+			else
+				return BT_RUNNING;
+		}
+		return status;
+	}
+}
 ParallelNode::ParallelNode(FAILURE_POLICY failurePolicy, SUCCESS_POLICY successPolicy)
 {
 	failPolicy = failurePolicy;
@@ -159,7 +180,7 @@ void ParallelNode::init(void* agent)
 	if (childrenStatus != NULL)
 		delete childrenStatus;
 	childrenStatus = new ChildrenStatusMap();
-	for (int i = 0 ; i<children.size(); i++)
+	for (unsigned int i = 0 ; i<children.size(); i++)
 		childrenStatus->insert( make_pair(children.at(i),BT_RUNNING));
 }
 
@@ -168,7 +189,7 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 	if (childrenStatus == NULL)
 		init(agent);
 	// go through all children and update the childrenStatus
-	for (int i = 0 ; i<children.size(); i++)
+	for (unsigned int i = 0 ; i<children.size(); i++)
 	{
 		BehaviorTreeNode* node = children[i];
 		if ((*childrenStatus)[node] == BT_RUNNING)

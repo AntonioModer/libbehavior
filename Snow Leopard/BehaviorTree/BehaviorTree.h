@@ -143,20 +143,31 @@ private:
 	FAILURE_POLICY failPolicy;
 	SUCCESS_POLICY succeedPolicy;
 };
-///A decorator that repeats its child a specified number of times.
+///A node that repeats its child a specified number of times.
 class RepeatNode: public BehaviorTreeInternalNode
 {
 public:
-	/// Specify the number of times to repeat the child before returning success.
-	void setNumberOfRepeats(unsigned int repeats)
+	RepeatNode::RepeatNode(int repeats)
 	{
 		target = repeats;
+		count = 0;
+	};
+	BehaviorTreeInternalNode* addChild(BehaviorTreeNode* newChild)
+	{
+		if (children.size() == 0)
+			BehaviorTreeInternalNode::addChild(newChild);
+		else
+			throw new std::exception("Cannot add more than one child to a repeat node");
+		
+		return this;
 	};
 	BEHAVIOR_STATUS execute(void* agent);
-	void init(void* object)
+	void init(void* agent)
 	{
 		count = 0;
-	}
+		if (children.size() == 1)
+			children.at(0)->init(agent);
+	};
 protected:
 	int count;
 	int target;

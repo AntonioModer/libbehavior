@@ -25,17 +25,22 @@ WorldState* loadScenario1()
 	Ship* player = new Ship();
 	player->setSprite("Hulls\\Sample Hull.png");
 	player->isPlayer = true;
-	state->insertObject(player,point(100,100));
-
-	Ship* opponent = new Ship();
-	opponent->setSprite("Hulls\\Sample Hull.png");
-	//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-	opponent->brain
-		->addChild((new SequentialNode())
-			->addChild(new Fire())
-			->addChild(new Cooldown(500))
-			->addChild(new AbsoluteMovement(RIGHT,3,500)));
-	state->insertObject(opponent,point(100,300));
+	state->insertObject(player,point(100,300));
+	
+	const int offset = 50;
+	for (int i = 0 ; i<10 ; i++)
+	{
+		Ship* opponent = new Ship();
+		opponent->displayHeading.set_degrees(180);
+		opponent->setSprite("Hulls\\drone.png");
+		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
+		opponent->brain
+			->addChild((new SequentialNode())
+				->addChild(new Fire())
+				->addChild(new Cooldown(500))
+				->addChild(new AbsoluteMovement(RIGHT,3,500)));
+		state->insertObject(opponent,point(50 + i * offset,100));
+	}
 	return state;
 }}
 #endif
