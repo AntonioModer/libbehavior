@@ -24,7 +24,7 @@
         * ~~int~~
         * ~~bool~~
         * float
-    * Repeat Node
+    * ~~Repeat Node~~
     * Count Limit Node
 
     Deliverable: Source code and unit tests for core nodes
