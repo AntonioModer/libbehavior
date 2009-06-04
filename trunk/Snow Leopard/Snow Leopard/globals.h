@@ -4,10 +4,12 @@
 #include <ClanLib/display.h>
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
+#include <ClanLib/sound.h>
 #include "GameObject.h"
 #include "WorldState.h"
 #include "Renderer.h"
 #include "GameLogic.h"
+#include "SoundManager.h"
 
 using namespace SL;
 using namespace std;
@@ -26,5 +28,6 @@ namespace SL
 	extern Renderer* ren;
 	/// Accepts player input and drives the event loop
 	extern GameLogic* gl;
+	extern SoundManager* sm;
 }
 #endif
