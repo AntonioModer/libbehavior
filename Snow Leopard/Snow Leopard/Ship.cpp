@@ -23,7 +23,7 @@ bool Ship::doActions()
 void Ship::fire()
 {
 	Projectile* p = new Projectile();
-	p->setSprite("Ammo\\test.png");
+	p->setSprite("Ammo\\test");
 	p->displayHeading = *(new CL_Angle(displayHeading));
 	ws->insertObject(p,location.offsetPolar(displayHeading,100));
 }

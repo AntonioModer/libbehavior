@@ -30,8 +30,8 @@ public:
 	virtual bool registerCollision(GameObject* collidedObject);
 	/// Notify the object it has hit the edge of the level. Responding improperly to this can cause out of bounds errors
 	virtual bool registerWallCollision();
-	/// Set the GameObject's sprite, and recalculate the collision outline if necessary
-	//* The resource is a relative filename to an image. e.g. "Ammo\\test.png"
+	/// Set the GameObject's sprite, and load the collision outline if it exists. If it doesn't, regenerate and save it.
+	//* The resource is a relative filename to an image (without the extension). e.g. "Ammo\\test"
 	void GameObject::setSprite(std::string resource);
 	/// Default constructor
 	GameObject::GameObject();
@@ -93,6 +93,7 @@ public:
  protected:
 	
 	 bool processMovementPhysics();
+	 void loadCollisionOutline(std::string source,CL_PixelBuffer image);
  private:
 	
 	 static int IDCount;

@@ -19,11 +19,11 @@ WorldState* loadScenario1()
 
 	GameObject* background = new GameObject();
 	background->usesPhysics = false;
-	background->setSprite("Backgrounds\\background.png");
+	background->setSprite("Backgrounds\\background");
 	state->addBackgroundObject(background);
 
 	Ship* player = new Ship();
-	player->setSprite("Hulls\\Sample Hull.png");
+	player->setSprite("Hulls\\Sample Hull");
 	player->isPlayer = true;
 	state->insertObject(player,point(100,300));
 	
@@ -32,7 +32,7 @@ WorldState* loadScenario1()
 	{
 		Ship* opponent = new Ship();
 		opponent->displayHeading.set_degrees(180);
-		opponent->setSprite("Hulls\\drone.png");
+		opponent->setSprite("Hulls\\drone");
 		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
 		opponent->brain
 			->addChild((new SequentialNode())
