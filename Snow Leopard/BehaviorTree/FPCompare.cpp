@@ -50,7 +50,7 @@ bool AlmostEqual2sComplement(float A, float B, int maxUlps)
 
 inline bool IsInfinite(float A)
 {
-    const kInfAsInt = 0x7F800000;
+    const int kInfAsInt = 0x7F800000;
 
     // An infinity has an exponent of 255 (shift left 23 positions) and
     // a zero mantissa. There are two infinities - positive and negative.
