@@ -149,6 +149,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\FPCompare.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\IntCondition.cpp"
 				>
 			</File>
@@ -200,6 +204,10 @@
 			</File>
 			<File
 				RelativePath=".\FloatCondition.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FPCompare.h"
 				>
 			</File>
 			<File

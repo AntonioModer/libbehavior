@@ -17,14 +17,15 @@ namespace BehaviorTree
 		{
 			T* obj = (T*) agent;
 			bool status;
+			int objVal = (obj->*func)();
 			switch (test)
 			{
-				case LESS_THAN:		status = ((obj->*func)() < val); break;
-				case GREATER_THAN:	status = ((obj->*func)() > val); break;
-				case LESS_OR_EQ:	status = ((obj->*func)() <= val); break;
-				case GREATER_OR_EQ: status = ((obj->*func)() >= val); break;
-				case EQUAL:			status = ((obj->*func)() == val); break;
-				case NOT_EQUAL:		status = ((obj->*func)() != val); break;
+				case LESS_THAN:		status = (objVal < val); break;
+				case GREATER_THAN:	status = (objVal > val); break;
+				case LESS_OR_EQ:	status = (objVal <= val); break;
+				case GREATER_OR_EQ: status = (objVal >= val); break;
+				case EQUAL:			status = (objVal == val); break;
+				case NOT_EQUAL:		status = (objVal != val); break;
 			}
 
 			if (status)
