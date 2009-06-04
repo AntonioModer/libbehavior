@@ -1,6 +1,3 @@
-#ifndef INTCONDITION_H_
-#define INTCONDITION_H_
-
 #include <vector>
 #include <map>
 #include "boost\\bind.hpp"
@@ -73,5 +70,3 @@ namespace BehaviorTree
 			return BT_FAILURE;
 	}
 }
-
-#endif

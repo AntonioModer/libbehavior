@@ -149,11 +149,31 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\BehaviorTree.cpp"
+				RelativePath=".\IntCondition.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\mtrand.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ParallelNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\PrioritySelectorNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ProbabilitySelectorNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RepeatNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SequentialNode.cpp"
 				>
 			</File>
 		</Filter>
@@ -164,6 +184,10 @@
 			>
 			<File
 				RelativePath=".\BehaviorTree.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BehaviorTreeBase.h"
 				>
 			</File>
 			<File
@@ -180,6 +204,26 @@
 			</File>
 			<File
 				RelativePath=".\mtrand.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ParallelNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PrioritySelectorNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ProbabilitySelectorNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RepeatNode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SequentialNode.h"
 				>
 			</File>
 		</Filter>

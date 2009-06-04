@@ -1,7 +1,6 @@
 #include "BehaviorTree.h"
 #include <boost/test/unit_test.hpp>
 #include "TestClass.h"
-#include "BoolCondition.h"
 
 using namespace BehaviorTree;
 
