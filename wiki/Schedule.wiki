@@ -66,5 +66,5 @@
 7. (August 10 - 14)
         Create a website and forum for the project. Polish up the testbench.
 
-    Deliverable: Project Website
-    Optional Deliverable: Music, sound effects, and higher quality graphics for the testbench.
+    * Deliverable: Project Website
+    * Optional Deliverable: Music, sound effects, and higher quality graphics for the testbench.
