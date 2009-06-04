@@ -43,14 +43,15 @@ CL_ClanApplication app(&DisplayProgram::main);
 
 int DisplayProgram::main(const std::vector<CL_String> &args)
 {
+	try
+	{
 	if(AllocConsole()) {
 		freopen("CONOUT$", "w", stdout); //redirect std io to it
 		SetConsoleTitle("Debug Console");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);  
 	}
 
-	try
-	{
+
 	CL_SetupCore setup_core;
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
@@ -104,6 +105,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	}
 	catch (CL_Exception err) {
 		std::cout << "Exception caught: " << err.message.c_str() << std::endl;
+		getchar();
 		return -1;
 	}
 }

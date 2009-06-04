@@ -27,7 +27,7 @@ GameObject::GameObject()
 
 	//set up the base sprite
 	CL_PixelBuffer image(100,100,5,CL_PixelFormat());
-	//CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test.png"));
+	//CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\Ammo\\test"));
 	CL_SpriteDescription desc;
 	desc.add_frame(image);
 	sprite = new CL_Sprite(*SL::gc,desc);
@@ -47,11 +47,7 @@ GameObject::GameObject()
 	// will only need a collision outline if it's going to be colliding with stuff
 	if (usesPhysics)
 	{
-	cout << "creating a new collision outline" << endl;
-	collisionOutline = new CL_CollisionOutline(image);
-	collisionOutline->set_alignment(translationOrigin,(float)translation_offset_x,(float)translation_offset_y);
-	collisionOutline->set_rotation_hotspot(rotationOrigin,(float)rotation_offset_x,(float)rotation_offset_y);
-	collisionOutline->set_angle(displayHeading);
+		collisionOutline = new CL_CollisionOutline();
 	}
 
 	brain = new ParallelNode();
@@ -79,7 +75,7 @@ bool GameObject::registerCollision(GameObject* collidedObject)
 
 void GameObject::setSprite(std::string resource)
 {
-	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\" + resource));
+	CL_PixelBuffer image = CL_PNGProvider::load(CL_String("Resources\\" + resource + ".png"));
 	CL_SpriteDescription desc;
 	desc.add_frame(image);
 	delete sprite;
@@ -87,11 +83,7 @@ void GameObject::setSprite(std::string resource)
 
 	if (usesPhysics)
 	{
-		cout << "creating a new collision outline" << endl;
-		collisionOutline = new CL_CollisionOutline(image);
-		collisionOutline->set_alignment(origin_center,0,0);
-		collisionOutline->set_rotation_hotspot(origin_center,0,0);
-		collisionOutline->set_angle(displayHeading);
+		loadCollisionOutline(resource,image);
 	}
 
 }
@@ -165,4 +157,22 @@ GameObject::~GameObject()
 {
 	std::cout << displayName << " destructor" << endl;
 	delete sprite;
+}
+
+void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
+{
+	string* s = new string("Resources\\Collision\\" + source + ".out");
+	try 
+	{
+		collisionOutline = new CL_CollisionOutline(*s);
+	}
+	catch (...)
+	{
+		cout << "creating a new collision outline" << endl;
+		collisionOutline = new CL_CollisionOutline(image);
+		collisionOutline->set_alignment(origin_center,0,0);
+		collisionOutline->set_rotation_hotspot(origin_center,0,0);
+		collisionOutline->set_angle(displayHeading);
+		collisionOutline->save(CL_String("Resources\\Collision\\" + source + ".out"));
+}
 }
