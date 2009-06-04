@@ -28,7 +28,7 @@ WorldState* loadScenario1()
 	state->insertObject(player,point(100,300));
 	
 	const int offset = 50;
-	for (int i = 0 ; i<10 ; i++)
+	for (int i = 0 ; i<1 ; i++)
 	{
 		Ship* opponent = new Ship();
 		opponent->displayHeading.set_degrees(180);
@@ -36,9 +36,9 @@ WorldState* loadScenario1()
 		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
 		opponent->brain
 			->addChild((new SequentialNode())
+				->addChild(new BoolCondition<GameObject>(&GameObject::alignedWithPlayer,true))
 				->addChild(new Fire())
-				->addChild(new Cooldown(500))
-				->addChild(new AbsoluteMovement(RIGHT,3,500)));
+				->addChild(new Cooldown(500)));
 		state->insertObject(opponent,point(50 + i * offset,100));
 	}
 	return state;

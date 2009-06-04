@@ -52,3 +52,4 @@ bool Ship::registerCollision(GameObject* collidedObject)
 		HP -= 50;
 	return true;
 }
+

@@ -89,6 +89,7 @@ public:
 	float speed;
 	/// Determines whether the object collides with others
 	bool usesPhysics;
+	bool alignedWithPlayer();
 
  protected:
 	
