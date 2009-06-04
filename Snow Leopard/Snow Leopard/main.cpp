@@ -1,14 +1,7 @@
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
-#include <ClanLib/application.h>
+#include "globals.h"
 #include <string>
 #include <iostream>
-#include "GameObject.h"
-#include "WorldState.h"
-#include "Renderer.h"
 #include "point.h"
-#include "GameLogic.h"
 #include <ctime>
 #include "GFrameHandler.h"
 #include "globals.h"
@@ -26,6 +19,7 @@ WorldState* SL::ws;
 CL_InputContext* SL::ic;
 Renderer* SL::ren;
 GameLogic* SL::gl;
+SoundManager* SL::sm;
 
 
 class DisplayProgram : public CL_ClanApplication
@@ -55,6 +49,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	CL_SetupCore setup_core;
 	CL_SetupDisplay setup_display;
 	CL_SetupGL setup_gl;
+	CL_SetupSound setup_sound;
 
 	CL_DisplayWindow window("Snow Leopard", 800, 600);
 	CL_GraphicContext graphics_context = window.get_gc();

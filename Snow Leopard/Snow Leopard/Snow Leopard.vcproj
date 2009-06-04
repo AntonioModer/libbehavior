@@ -210,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SoundManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\WorldState.cpp"
 				>
 			</File>
@@ -325,6 +329,10 @@
 			</File>
 			<File
 				RelativePath=".\Ship.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SoundManager.h"
 				>
 			</File>
 			<File
