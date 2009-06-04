@@ -174,5 +174,13 @@ void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 		collisionOutline->set_rotation_hotspot(origin_center,0,0);
 		collisionOutline->set_angle(displayHeading);
 		collisionOutline->save(CL_String("Resources\\Collision\\" + source + ".out"));
+	}
 }
+
+bool GameObject::alignedWithPlayer()
+{
+	point playerLocation = ws->getPlayer()->location;
+	if (abs(location.x-playerLocation.x) < 20)
+		return true;
+	return false;
 }
