@@ -13,6 +13,7 @@ SequentialNode::SequentialNode()
 	currentPosition = -1;
 }
 
+
 BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 {
 	if (currentPosition == -1) //starting out
@@ -20,6 +21,9 @@ BEHAVIOR_STATUS SequentialNode::execute(void* agent)
 		init(agent);
 		currentPosition = 0;
 	}
+
+	if (children.size() == 0)
+		return BT_SUCCESS;
 
 	BehaviorTreeNode* currentTask = children.at(currentPosition);
 	BEHAVIOR_STATUS result = currentTask->execute(agent);

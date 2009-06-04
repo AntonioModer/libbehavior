@@ -47,6 +47,11 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 			if (status == BT_SUCCESS)
 				(*childrenStatus)[node] = BT_SUCCESS;
 		}
+		if ((*childrenStatus)[node] == BT_FAILURE && failPolicy == FAIL_ON_ALL) //theoretically the failPolicy check is not needed
+		{
+			BEHAVIOR_STATUS status = node->execute(agent);
+			(*childrenStatus)[node] = status;
+		}
 	}
 
 	//look through the childrenStatus and see if we have met any of our end conditions
