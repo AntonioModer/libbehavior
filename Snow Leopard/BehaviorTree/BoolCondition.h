@@ -1,6 +1,3 @@
-#ifndef BOOLCONDITION_H_
-#define BOOLCONDITION_H_
-
 #include "Common.h"
 #include <vector>
 #include <map>
@@ -47,5 +44,3 @@ namespace BehaviorTree
 			return BT_FAILURE;
 	}
 }
-
-#endif

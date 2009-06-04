@@ -1,10 +1,9 @@
+#include "BehaviorTree.h"
 #include "Ship.h"
 #include "GoStraight.h"
 #include "AbsoluteMovement.h"
 #include "Fire.h"
 #include "Cooldown.h"
-#include "IntCondition.h"
-#include "BoolCondition.h"
 #include "WorldState.h"
 
 #ifndef SCENARIO1_H_
