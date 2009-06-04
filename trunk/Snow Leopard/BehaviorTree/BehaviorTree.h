@@ -5,6 +5,7 @@
 #include "BehaviorTreeBase.h"
 #include "BoolCondition.h"
 #include "IntCondition.h"
+#include "FloatCondition.h"
 #include "ParallelNode.h"
 #include "PrioritySelectorNode.h"
 #include "ProbabilitySelectorNode.h"

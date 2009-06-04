@@ -8,6 +8,7 @@ public:
 	int return5() {return 5;};
 	bool returnTrue() {return true;};
 	bool returnFalse() {return false;};
+	float returnFP5(){return 5.0;};
 };
 
 #endif

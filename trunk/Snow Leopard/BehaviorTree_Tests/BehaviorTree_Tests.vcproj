@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FloatConditionTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\IntConditionTest.cpp"
 				>
 			</File>
