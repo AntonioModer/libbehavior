@@ -20,10 +20,10 @@
     * ~~Parallel Execution Node~~
     * ~~Priority Selector Node~~
     * Probability Selector Node
-    * Conditional Nodes
+    * ~~Conditional Nodes~~
         * ~~int~~
         * ~~bool~~
-        * float
+        * ~~float~~
     * ~~Repeat Node~~
     * Count Limit Node
 
