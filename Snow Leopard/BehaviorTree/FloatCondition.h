@@ -17,9 +17,8 @@ namespace BehaviorTree
 		int ulps;
 		BEHAVIOR_STATUS execute(void* agent)
 		{
-			T* obj = (T*) agent;
+			float objVal = getObjVal(agent);
 			bool status;
-			float objVal = (obj->*func)();
 			switch (test)
 			{
 			case LESS_THAN_FP:		status = (objVal < val) && !AlmostEqual2sComplement(objVal,val,ulps); break;
@@ -54,25 +53,17 @@ namespace BehaviorTree
 			val = _val;
 			ulps = _ulps;
 		}
+	private:
+		float getObjVal(void* agent)
+		{
+			T* obj = (T*) agent;
+			return (obj->*func)();
+		}
 	};
 
 	template<>
-	BEHAVIOR_STATUS FloatCondition<NoClass>::execute(void* agent)
+	float FloatCondition<NoClass>::getObjVal(void* agent)
 	{
-		bool status;
-		switch (test)
-		{
-		case LESS_THAN:		status = ((*func2)() < val); break;
-		case GREATER_THAN:	status = ((*func2)() > val); break;
-		case LESS_OR_EQ:	status = ((*func2)() <= val); break;
-		case GREATER_OR_EQ: status = ((*func2)() >= val); break;
-		case EQUAL:			status = ((*func2)() == val); break;
-		case NOT_EQUAL:		status = ((*func2)() != val); break;
-		}
-
-		if (status)
-			return BT_SUCCESS;
-		else
-			return BT_FAILURE;
+		return (*func2)();
 	}
 }
