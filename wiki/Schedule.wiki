@@ -19,7 +19,7 @@
     * ~~Sequential Execution Node~~
     * ~~Parallel Execution Node~~
     * ~~Priority Selector Node~~
-    * Probability Selector Node
+    * ~~Probability Selector Node~~
     * ~~Conditional Nodes~~
         * ~~int~~
         * ~~bool~~
