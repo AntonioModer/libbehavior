@@ -23,8 +23,8 @@ namespace BehaviorTree
 			{
 			case LESS_THAN_FP:		status = (objVal < val) && !AlmostEqual2sComplement(objVal,val,ulps); break;
 			case GREATER_THAN_FP:	status = (objVal > val) && !AlmostEqual2sComplement(objVal,val,ulps); break;
-			case LESS_OR_CLOSE:		status = (objVal <= val)&& AlmostEqual2sComplement(objVal,val,ulps); break;
-			case GREATER_OR_CLOSE:	status = (objVal >= val)&& AlmostEqual2sComplement(objVal,val,ulps); break;
+			case LESS_OR_CLOSE:		status = (objVal <= val)|| AlmostEqual2sComplement(objVal,val,ulps); break;
+			case GREATER_OR_CLOSE:	status = (objVal >= val)|| AlmostEqual2sComplement(objVal,val,ulps); break;
 			case CLOSE:				status = AlmostEqual2sComplement(objVal,val,ulps); break;
 			case NOT_CLOSE:			status = !AlmostEqual2sComplement(objVal,val,ulps); break;
 			}

@@ -42,6 +42,8 @@ BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
 		init(agent);
 		currentPosition = 0;
 	}
+	if (children.size() == 0)
+		return BT_SUCCESS;
 
 	BehaviorTreeNode* currentlyRunningNode = children.at(currentPosition);
 	BEHAVIOR_STATUS status;
