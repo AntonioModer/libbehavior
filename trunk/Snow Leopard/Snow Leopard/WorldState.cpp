@@ -71,7 +71,6 @@ bool WorldState::deleteObject(GameObject* gameObject)
 
 bool WorldState::moveObject(GameObject* gameObject, point p)
 {
-	cout<<p.toString()<<endl;
 	if (pointOutofBounds(p))
 	{
 		gameObject->registerWallCollision();

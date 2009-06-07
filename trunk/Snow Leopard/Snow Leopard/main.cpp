@@ -8,6 +8,7 @@
 #include "Definitions.h"
 
 #include "Scenario1.h"
+#include "Scenario2.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -68,12 +69,13 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	if (args.size() > 1)
 		scenario = atoi(args[1].c_str());
 	else
-		scenario = 1;
+		scenario = 2;
 
 
 	 switch (scenario)
 	 {
 		case 1: SL::ws = loadScenario1();
+		case 2: SL::ws = loadScenario2();
 	 }
 
 	Renderer* renderer = new Renderer();
@@ -90,7 +92,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	window.flip();
 	frame_handler.limit_frame();
 	frame_handler.calculate();
-	cout << "fps" << frame_handler.get_fps() << endl;
+	//cout << "fps" << frame_handler.get_fps() << endl;
 	if (CL_DisplayMessageQueue::has_messages())
 		CL_DisplayMessageQueue::process();
  	logic->step();

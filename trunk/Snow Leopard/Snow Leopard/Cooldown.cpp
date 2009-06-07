@@ -24,7 +24,6 @@ Cooldown::Cooldown(int timeout)
 }
 BEHAVIOR_STATUS Cooldown::execute(void* agent)
 {
-	cout << "cooling down" << endl;
 	current += ws->timeElapsed;
 	if (current >= limit)
 	{

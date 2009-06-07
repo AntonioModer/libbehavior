@@ -279,6 +279,10 @@
 						RelativePath=".\Scenario1.h"
 						>
 					</File>
+					<File
+						RelativePath=".\Scenario2.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
