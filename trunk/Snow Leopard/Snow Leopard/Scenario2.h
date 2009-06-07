@@ -3,8 +3,6 @@
 #include "AbsoluteMovement.h"
 #include "Fire.h"
 #include "Cooldown.h"
-#include "IntCondition.h"
-#include "BoolCondition.h"
 #include "WorldState.h"
 
 #ifndef SCENARIO2_H_

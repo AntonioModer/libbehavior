@@ -107,13 +107,3 @@ BEHAVIOR_STATUS ParallelNode::execute(void* agent)
 		return BT_RUNNING;
 	}
 }
-
-BehaviorTree::FAILURE_POLICY BehaviorTree::ParallelNode::getFailurePolicy()
-{
-	return failPolicy;
-}
-
-BehaviorTree::SUCCESS_POLICY BehaviorTree::ParallelNode::getSuccessPolicy()
-{
-	return succeedPolicy;
-}
