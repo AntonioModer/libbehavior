@@ -15,7 +15,5 @@ public:
 	PrioritySelectorNode::PrioritySelectorNode();
 	void init(void* agent);
 
-	BehaviorTreeListIter currentlyRunningNode;
-
 };
 }

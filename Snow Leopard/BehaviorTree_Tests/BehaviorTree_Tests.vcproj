@@ -192,6 +192,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ProbabilitySelectorTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RepeatNodeTest.cpp"
 				>
 			</File>
