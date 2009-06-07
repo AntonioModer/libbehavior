@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE( simple1 )
 BOOST_AUTO_TEST_CASE( simple2 )
 {
 	ParallelNode* node = new ParallelNode();
-	node->addChild(new AlwaysFailure());
+	node->addChild(new FailureAfter(0));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
 	BOOST_CHECK_EQUAL(node->execute(&dummy_agent),BT_FAILURE);
