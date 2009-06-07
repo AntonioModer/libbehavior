@@ -8,7 +8,7 @@ using namespace BehaviorTree;
 BOOST_AUTO_TEST_CASE( repeat_simple1 )
 {
 	RepeatNode* node = new RepeatNode(5);
-	node->addChild(new AlwaysSuccess());
+	node->addChild(new SuccessAfter(0));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
 	
@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE( repeat_simple1 )
 BOOST_AUTO_TEST_CASE( repeat_simple2 )
 {
 	RepeatNode* node = new RepeatNode(5);
-	node->addChild(new AlwaysFailure());
+	node->addChild(new FailureAfter(0));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
 
