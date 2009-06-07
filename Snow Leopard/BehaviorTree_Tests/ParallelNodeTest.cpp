@@ -4,19 +4,6 @@
 
 using namespace BehaviorTree;
 
-BOOST_AUTO_TEST_CASE( constructor )
-{
-	ParallelNode* node = new ParallelNode();
-	BOOST_CHECK_EQUAL(node->getFailurePolicy(),FAIL_ON_ALL);
-	BOOST_CHECK_EQUAL(node->getSuccessPolicy(),SUCCEED_ON_ALL);
-	delete node;
-
-	ParallelNode* node2 = new ParallelNode(FAIL_ON_ONE,SUCCEED_ON_ONE);
-	BOOST_CHECK_EQUAL(node2->getFailurePolicy(),FAIL_ON_ONE);
-	BOOST_CHECK_EQUAL(node2->getSuccessPolicy(),SUCCEED_ON_ONE);
-	delete node2;
-}
-
 BOOST_AUTO_TEST_CASE( simple1 )
 {
 	ParallelNode* node = new ParallelNode();

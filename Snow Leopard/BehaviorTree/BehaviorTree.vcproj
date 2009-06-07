@@ -153,10 +153,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\IntCondition.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\mtrand.cpp"
 				>
 			</File>

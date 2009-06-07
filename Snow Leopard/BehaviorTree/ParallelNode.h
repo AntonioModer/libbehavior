@@ -10,10 +10,6 @@ class ParallelNode:public BehaviorTreeInternalNode
 public:
 	BEHAVIOR_STATUS execute(void* agent);
 	void init(void* agent);
-	void setFailurePolicy(FAILURE_POLICY policy);
-	void setSuccessPolicy(SUCCESS_POLICY policy);
-	FAILURE_POLICY getFailurePolicy();
-	SUCCESS_POLICY getSuccessPolicy();
 	ParallelNode::ParallelNode( FAILURE_POLICY failurePolicy = FAIL_ON_ALL, SUCCESS_POLICY SuccessPolicy = SUCCEED_ON_ALL);
 
 private:

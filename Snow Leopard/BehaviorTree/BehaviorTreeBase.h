@@ -16,7 +16,19 @@ namespace BehaviorTree
 	/// A standard iterator of a BehaviorTreeList. Provided for convenience.
 	typedef BehaviorTreeList::iterator BehaviorTreeListIter;
 
+	/// Enumerates the options for when a parallel node is considered to have failed.
+	/**
+	- FAIL_ON_ONE indicates that the node will return failure as soon as one of its children fails.
+	- FAIL_ON_ALL indicates that all of the node's children must fail before it returns failure.
+
+	If FAIL_ON_ONE and SUCEED_ON_ONE are both active and are both trigerred in the same time step, failure will take precedence.
+	*/
 	enum FAILURE_POLICY {FAIL_ON_ONE,FAIL_ON_ALL};
+	/// Enumerates the options for when a parallel node is considered to have succeeded.
+	/**
+	- SUCCEED_ON_ONE indicates that the node will return success as soon as one of its children succeeds.
+	- SUCCEED_ON_ALL indicates that all of the node's children must succeed before it returns success.
+	*/
 	enum SUCCESS_POLICY {SUCCEED_ON_ONE,SUCCEED_ON_ALL};
 
 

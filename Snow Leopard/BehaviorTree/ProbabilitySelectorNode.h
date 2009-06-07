@@ -12,10 +12,6 @@ This weight system is intended to facilitate the fine-tuning of behaviors.
 class ProbabilitySelectorNode:public BehaviorTreeInternalNode
 {
 public:
-	double totalSum;
-	BehaviorTreeNode* currentNode;
-	std::map<BehaviorTreeNode*,double> weightingMap;
-
 	void init(void* object);
 	BEHAVIOR_STATUS execute(void* object);
 	ProbabilitySelectorNode::ProbabilitySelectorNode();
@@ -23,8 +19,11 @@ public:
 	BehaviorTreeInternalNode* addChild( BehaviorTreeNode* node, double weighting);
 	///Add a child to this node, with a weight of 1.
 	BehaviorTreeInternalNode* addChild( BehaviorTreeNode* node);
-	MTRand_closed random;
 private:
+	MTRand_closed random;
+	double totalSum;
+	BehaviorTreeNode* currentNode;
+	std::map<BehaviorTreeNode*,double> weightingMap;
 
 };
 
