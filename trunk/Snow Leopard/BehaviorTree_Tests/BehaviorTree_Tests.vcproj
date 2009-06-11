@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CountLimitTest.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FloatConditionTest.cpp"
 				>
 			</File>

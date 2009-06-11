@@ -149,6 +149,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\CountLimitNode.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FPCompare.cpp"
 				>
 			</File>
@@ -196,6 +200,10 @@
 			</File>
 			<File
 				RelativePath=".\Common.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CountLimitNode.h"
 				>
 			</File>
 			<File

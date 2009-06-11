@@ -11,5 +11,6 @@
 #include "ProbabilitySelectorNode.h"
 #include "RepeatNode.h"
 #include "SequentialNode.h"
+#include "CountLimitNode.h"
 
 #endif
