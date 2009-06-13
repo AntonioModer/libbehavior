@@ -52,6 +52,7 @@
         
         * Turn to face the player
         * ~~Shoot when the player is in front of you~~ (scenario 1)
+        * Homing missiles (scenario 2)
         * Drop a bomb if you are about to die
         * Attempt to dodge incoming fire
         * Attempt to stay out of the player's lane of fire
