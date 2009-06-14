@@ -211,3 +211,21 @@ GameObjectList* WorldState::getListFromPoint(point p)
 {
 	return worldMatrix[(int)p.x / coarseGraining][(int)p.y / coarseGraining];
 }
+
+float SL::WorldState::distanceBetween( GameObject* obj1, GameObject* obj2 )
+{
+	point resultantVector(obj1->location.x - obj2->location.x,obj1->location.y - obj2->location.y);
+	return resultantVector.vectorSize();
+}
+
+CL_Angle SL::WorldState::angleBetween( GameObject* obj1, GameObject* obj2 )
+{
+	point resultantVector(obj1->location.x - obj2->location.x,obj1->location.y - obj2->location.y);
+	resultantVector.normalize();
+	CL_Angle angle = CL_Angle::from_radians(atan2(resultantVector.y,resultantVector.x));
+	CL_Angle angleBetween = angle - obj1->displayHeading + CL_Angle::from_degrees(-90.0f);
+	angleBetween = CL_Angle::from_degrees(mod(angleBetween.to_degrees(),360.0f)); 
+	if (angleBetween > CL_Angle::from_degrees(180.0f))
+		angleBetween = CL_Angle::from_degrees(180.0f) - angleBetween;
+	return angleBetween;
+}
