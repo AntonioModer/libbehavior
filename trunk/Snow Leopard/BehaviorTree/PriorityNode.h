@@ -7,12 +7,12 @@ namespace BehaviorTree
 - If a child returns BT_SUCCESS, return BT_SUCCESS.
 - If a child returns BT_RUNNING, return BT_RUNNING.
 */
-class PrioritySelectorNode:public BehaviorTreeInternalNode
+class PriorityNode:public BehaviorTreeInternalNode
 {
 public:
 	BEHAVIOR_STATUS execute(void* agent);
 	int currentPosition;
-	PrioritySelectorNode::PrioritySelectorNode();
+	PriorityNode::PriorityNode();
 	void init(void* agent);
 
 };

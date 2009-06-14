@@ -165,11 +165,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PrioritySelectorNode.cpp"
+				RelativePath=".\PriorityNode.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ProbabilitySelectorNode.cpp"
+				RelativePath=".\ProbabilityNode.cpp"
 				>
 			</File>
 			<File
@@ -227,11 +227,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PrioritySelectorNode.h"
+				RelativePath=".\PriorityNode.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ProbabilitySelectorNode.h"
+				RelativePath=".\ProbabilityNode.h"
 				>
 			</File>
 			<File

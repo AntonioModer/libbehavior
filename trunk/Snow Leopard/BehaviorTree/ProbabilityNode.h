@@ -9,12 +9,12 @@ If another child with a weight of eight were added, the previous children would 
 This weight system is intended to facilitate the fine-tuning of behaviors.
 */
 
-class ProbabilitySelectorNode:public BehaviorTreeInternalNode
+class ProbabilityNode:public BehaviorTreeInternalNode
 {
 public:
 	void init(void* object);
 	BEHAVIOR_STATUS execute(void* object);
-	ProbabilitySelectorNode::ProbabilitySelectorNode();
+	ProbabilityNode::ProbabilityNode();
 	///Add a child to this node, with the given weight.
 	BehaviorTreeInternalNode* addChild( BehaviorTreeNode* node, double weighting);
 	///Add a child to this node, with a weight of 1.
