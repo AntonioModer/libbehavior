@@ -63,6 +63,9 @@
 6. (July 27 - August 7)
         Leverage the behaviors created earlier to create more interesting, full behaviors. Exact details are to be determined in the Design Document and through an iterative process. At least one of these will include running hundreds of agents simultaneously, in order to test CPU usage of the library.
 
+     * A "director" implemented with a behavior tree selects the composition of each enemy wave that is sent against the player
+     * Space invaders (hundreds of agents)
+
     Milestone: A full set of of behavior examples. 5 of them are simple and show how to accomplish one goal. 5 of them are complex and involve either many agents or adaptation to the situation and prioritization of multiple goals.
 
 7. (August 10 - 14)
