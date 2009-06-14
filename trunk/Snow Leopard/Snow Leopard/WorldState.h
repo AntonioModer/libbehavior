@@ -58,7 +58,7 @@ bool deleteObject(GameObject* gameObject);
 bool moveObject(GameObject* gameObject, point p);
 /// Rotate an object in the world about its center (checking for collisions)
 /** \return true if the object was actually rotated, false if it collided, went out of bounds, etc */
-bool rotateObject(GameObject* gameObject, double angle);
+bool rotateObject(GameObject* gameObject, float angle);
 /// Get a list of all the objects in the region of a point
 GameObjectList* getAtCell(point p);
 /// Get a list of all the gameObjects in the world

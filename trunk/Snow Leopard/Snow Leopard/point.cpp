@@ -35,7 +35,6 @@ float point::angleTo(point p)
 void point::normalize()
 {
 	float length = sqrtf(x*x + y*y);
-	cout << "length: " << length << endl;
 	x /= length;
 	y /= length;
 }

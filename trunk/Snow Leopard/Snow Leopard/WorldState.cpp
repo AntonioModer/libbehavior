@@ -124,7 +124,7 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 
 }
 
-bool WorldState::rotateObject(GameObject* gameObject, double angle)
+bool WorldState::rotateObject(GameObject* gameObject, float angle)
 {
 	if (gameObject->usesPhysics)
 	{

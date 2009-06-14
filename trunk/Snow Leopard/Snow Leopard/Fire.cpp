@@ -22,7 +22,10 @@ Fire::Fire()
 BEHAVIOR_STATUS Fire::execute(void* agent)
 {
 	Ship* ship = (Ship*) agent;
-	ship->fire();
+	Projectile* p = new Projectile();
+	p->setSprite("Ammo\\test");
+	p->brain = ship->getProjectileBrain();
+	ship->fire(p);
 	
 	return BT_SUCCESS;
 }

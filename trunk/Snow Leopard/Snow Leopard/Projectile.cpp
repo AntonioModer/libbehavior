@@ -6,11 +6,14 @@ using namespace SL;
 bool Projectile::doActions()
 {
 
-	move();
+	if (brain != NULL)
+	{
+		brain->execute(this);
+	}
 	return true;
 	
 }
-
+/*
 bool Projectile::move()
 {
 	#ifndef PHYSICS
@@ -18,7 +21,7 @@ bool Projectile::move()
 	ws->moveObject(this,location.offsetPolar(displayHeading,20));
 	#endif
 	return true;
-}
+}*/
 
 Projectile::Projectile() : GameObject()
 {
