@@ -48,7 +48,7 @@ namespace SL
 		opponent->setSprite("Hulls\\Fighter1");
 		opponent->getProjectileBrain = &makeHomingBrain;
 		opponent->brain
-			->addChild((new PrioritySelectorNode())
+			->addChild((new PriorityNode())
 				->addChild((new SequentialNode())
 					->addChild(new IntCondition<GameObject>(&GameObject::getHealth,GREATER_THAN,50))
 					->addChild(new Fire())

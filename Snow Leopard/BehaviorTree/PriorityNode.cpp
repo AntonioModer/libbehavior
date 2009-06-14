@@ -2,12 +2,12 @@
 using namespace BehaviorTree;
 using namespace std;
 
-PrioritySelectorNode::PrioritySelectorNode()
+PriorityNode::PriorityNode()
 {
 	currentPosition = -1;
 }
 
-void PrioritySelectorNode::init(void* agent)
+void PriorityNode::init(void* agent)
 {
 	currentPosition = -1;
 	for (BehaviorTreeListIter iter = children.begin(); iter!= children.end(); iter++)
@@ -15,7 +15,7 @@ void PrioritySelectorNode::init(void* agent)
 }
 
 
-BEHAVIOR_STATUS PrioritySelectorNode::execute(void* agent)
+BEHAVIOR_STATUS PriorityNode::execute(void* agent)
 {
 	if (currentPosition != -1) //there's one still running
 	{

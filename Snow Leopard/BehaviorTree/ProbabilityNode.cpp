@@ -7,19 +7,19 @@ using namespace std;
 
 
 
-void ProbabilitySelectorNode::init(void* agent)
+void ProbabilityNode::init(void* agent)
 {
 	currentNode = NULL;
 	for (BehaviorTreeListIter iter = children.begin();iter!=children.end();iter++)
 		(*iter)->init(agent);
 }
-ProbabilitySelectorNode::ProbabilitySelectorNode()
+ProbabilityNode::ProbabilityNode()
 {
 	totalSum = 0;
 	currentNode = NULL;
 	random.seed(time(NULL));
 }
-BehaviorTreeInternalNode* ProbabilitySelectorNode::addChild(BehaviorTreeNode* node, double weighting)
+BehaviorTreeInternalNode* ProbabilityNode::addChild(BehaviorTreeNode* node, double weighting)
 {
 	weightingMap[node] = weighting;
 	totalSum += weighting;
@@ -27,7 +27,7 @@ BehaviorTreeInternalNode* ProbabilitySelectorNode::addChild(BehaviorTreeNode* no
 	return this;
 }
 
-BehaviorTreeInternalNode* ProbabilitySelectorNode::addChild(BehaviorTreeNode* node)
+BehaviorTreeInternalNode* ProbabilityNode::addChild(BehaviorTreeNode* node)
 {
 	weightingMap[node] = 1;
 	totalSum += 1;
@@ -35,7 +35,7 @@ BehaviorTreeInternalNode* ProbabilitySelectorNode::addChild(BehaviorTreeNode* no
 	return this;
 }
 
-BEHAVIOR_STATUS ProbabilitySelectorNode::execute(void* agent)
+BEHAVIOR_STATUS ProbabilityNode::execute(void* agent)
 {
 	//check if we've already chosen a node to run
 	if (currentNode != NULL)

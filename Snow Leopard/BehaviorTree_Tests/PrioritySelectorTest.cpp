@@ -7,13 +7,13 @@ using namespace BehaviorTree;
 
 BOOST_AUTO_TEST_CASE( currentNodeInitialize )
 {
-	PrioritySelectorNode* node = new PrioritySelectorNode();
+	PriorityNode* node = new PriorityNode();
 	BOOST_CHECK(node->currentPosition == -1);
 }
 
 BOOST_AUTO_TEST_CASE( pst_simple1 )
 {
-	PrioritySelectorNode* node = new PrioritySelectorNode();
+	PriorityNode* node = new PriorityNode();
 	AlwaysRunning* ar = new AlwaysRunning();
 	node->addChild(ar);
 	int dummy_agent = 0;
@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE( pst_simple1 )
 
 BOOST_AUTO_TEST_CASE( pst_simple2 )
 {
-	PrioritySelectorNode* node = new PrioritySelectorNode();
+	PriorityNode* node = new PriorityNode();
 	node->addChild(new FailureAfter(1));
 	node->addChild(new FailureAfter(1));
 	node->addChild(new SuccessAfter(1));
@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE( pst_simple2 )
 
 BOOST_AUTO_TEST_CASE( pst_simple3 )
 {
-	PrioritySelectorNode* node = new PrioritySelectorNode();
+	PriorityNode* node = new PriorityNode();
 	node->addChild(new SuccessAfter(1));
 	node->addChild(new FailureAfter(1));
 	node->addChild(new FailureAfter(1));
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE( pst_simple3 )
 
 BOOST_AUTO_TEST_CASE( pst_simple4 )
 {
-	PrioritySelectorNode* node = new PrioritySelectorNode();
+	PriorityNode* node = new PriorityNode();
 	node->addChild(new FailureAfter(1));
 	node->addChild(new FailureAfter(1));
 	int dummy_agent = 0;

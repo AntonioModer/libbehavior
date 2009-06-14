@@ -8,7 +8,7 @@ using namespace BehaviorTree;
 
 BOOST_AUTO_TEST_CASE(trivial)
 {
-	ProbabilitySelectorNode* node = new ProbabilitySelectorNode();
+	ProbabilityNode* node = new ProbabilityNode();
 	node->addChild(new SuccessAfter(0));
 	int dummy_agent = 0;
 	node->init(&dummy_agent);
@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_CASE(trivial)
 
 BOOST_AUTO_TEST_CASE(FiftyFifty)
 {
-	ProbabilitySelectorNode* node = new ProbabilitySelectorNode();
+	ProbabilityNode* node = new ProbabilityNode();
 	node->addChild(new SuccessAfter(0));
 	node->addChild(new FailureAfter(0));
 	int dummy_agent = 0;
@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(FiftyFifty)
 
 BOOST_AUTO_TEST_CASE(WithWeights1)
 {
-	ProbabilitySelectorNode* node = new ProbabilitySelectorNode();
+	ProbabilityNode* node = new ProbabilityNode();
 	node->addChild(new SuccessAfter(0),9);
 	node->addChild(new FailureAfter(0),1);
 	int dummy_agent = 0;
