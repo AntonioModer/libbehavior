@@ -34,6 +34,7 @@ bool GameLogic::step()
 #ifdef PHYSICS
 		(*itr)->processMovementPhysics();
 #endif
+		(*itr)->age += ws->timeElapsed;
  		(*itr++)->doActions();
 	}
 

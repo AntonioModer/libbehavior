@@ -6,6 +6,7 @@
 #include "WorldState.h"
 #include "Projectile.h"
 #include "turnTowardsTarget.h"
+#include "BehaviorTree.h"
 
 #ifndef SCENARIO2_H_
 #define SCENARIO2_H_
@@ -47,8 +48,12 @@ namespace SL
 		opponent->setSprite("Hulls\\Fighter1");
 		opponent->getProjectileBrain = &makeHomingBrain;
 		opponent->brain
-			->addChild(new Fire())
-			->addChild(new Cooldown(1000));
+			->addChild((new PrioritySelectorNode())
+				->addChild((new SequentialNode())
+					->addChild(new IntCondition<GameObject>(&GameObject::getHealth,GREATER_THAN,50))
+					->addChild(new Fire())
+					->addChild(new Cooldown(1000)))
+				->addChild(makeHomingBrain()));
 		state->insertObject(opponent,point(400,50));
 		return state;
 	}

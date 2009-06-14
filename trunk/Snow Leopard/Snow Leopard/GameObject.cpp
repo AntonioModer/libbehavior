@@ -51,6 +51,7 @@ GameObject::GameObject()
 	}
 
 	brain = new ParallelNode();
+	age = 0;
 };
 
 
@@ -183,4 +184,9 @@ bool GameObject::alignedWithPlayer()
 	if (abs(location.x-playerLocation.x) < 20)
 		return true;
 	return false;
+}
+
+int SL::GameObject::getHealth()
+{
+	return HP;
 }

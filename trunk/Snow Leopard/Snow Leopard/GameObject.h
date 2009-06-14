@@ -89,7 +89,10 @@ public:
 	float speed;
 	/// Determines whether the object collides with others
 	bool usesPhysics;
+	/// Number of milliseconds the object has been in existence. Updated every tick based on the timeElapsed
+	long age;
 	bool alignedWithPlayer();
+	int getHealth();
 
  protected:
 	

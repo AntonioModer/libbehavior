@@ -220,14 +220,6 @@
 			<Filter
 				Name="content"
 				>
-				<File
-					RelativePath=".\Fire.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Fire.h"
-					>
-				</File>
 				<Filter
 					Name="AI Behaviors"
 					>
@@ -237,6 +229,22 @@
 					</File>
 					<File
 						RelativePath=".\Cooldown.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Fire.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Fire.h"
+						>
+					</File>
+					<File
+						RelativePath=".\SelfDestruct.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SelfDestruct.h"
 						>
 					</File>
 					<Filter
