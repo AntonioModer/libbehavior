@@ -32,6 +32,8 @@ public:
 	std::string point::toString();
 	/// Retain the direction but make the magnitude 1
 	void normalize();
+	/// The distance from (0,0) to this point
+	float vectorSize();
 };
 
 }

@@ -34,7 +34,7 @@ float point::angleTo(point p)
 
 void point::normalize()
 {
-	float length = sqrtf(x*x + y*y);
+	float length = vectorSize();
 	x /= length;
 	y /= length;
 }
@@ -42,4 +42,9 @@ void point::normalize()
 std::string point::toString()
 {
 	return boost::lexical_cast<std::string>(x) + "," + boost::lexical_cast<std::string>(y);
+}
+
+float SL::point::vectorSize()
+{
+	return sqrtf(x*x + y*y);	
 }
