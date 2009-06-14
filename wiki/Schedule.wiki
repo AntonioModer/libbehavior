@@ -44,6 +44,7 @@
         * ~~Turn towards the player~~
         * ~~Fire weapon~~
         * ~~Wait~~
+        * Self Destruct
 
     Deliverable: All nodes required for sensing and action are complete
        
