@@ -4,6 +4,8 @@
 #include "Fire.h"
 #include "Cooldown.h"
 #include "WorldState.h"
+#include "Projectile.h"
+#include "turnTowardsTarget.h"
 
 #ifndef SCENARIO2_H_
 #define SCENARIO2_H_
@@ -11,6 +13,20 @@ using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
+	ParallelNode* makeHomingBrain()
+	{
+		ParallelNode* b = new ParallelNode();
+		b->addChild(new TurnTowardsTarget(2));
+		b->addChild(new GoStraight(5));
+		return b;
+	}
+
+	ParallelNode* makeBoringBrain()
+	{
+		ParallelNode* b = new ParallelNode();
+		b->addChild(new GoStraight(10));
+		return b;
+	}
 	WorldState* loadScenario2()
 	{
 		WorldState* state = new WorldState();
@@ -23,25 +39,20 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
+		player->getProjectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
-		const int offset = 50;
-		for (int i = 0 ; i<1 ; i++)
-		{
-			Ship* opponent = new Ship();
-			opponent->displayHeading.set_degrees(180);
-			opponent->setSprite("Hulls\\Fighter1");
-			//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-			opponent->brain
-				->addChild((new SequentialNode())
-					->addChild(new BoolCondition<GameObject>(&GameObject::alignedWithPlayer,true))
-					->addChild(new Fire())
-					->addChild(new Cooldown(500)))
-			    ->addChild((new SequentialNode())
-					->addChild(new AbsoluteMovement(DOWN,5,500))
-					->addChild(new Cooldown(2000)));
-			state->insertObject(opponent,point(50 + i * offset,100));
-		}
+		Ship* opponent = new Ship();
+		opponent->displayHeading.set_degrees(180);
+		opponent->setSprite("Hulls\\Fighter1");
+		opponent->getProjectileBrain = &makeHomingBrain;
+		opponent->brain
+			->addChild(new Fire())
+			->addChild(new Cooldown(1000));
+		state->insertObject(opponent,point(400,50));
 		return state;
-	}}
+	}
+
+
+}
 #endif

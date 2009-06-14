@@ -10,8 +10,12 @@ namespace SL
 		/// Behavior of turning to face a target
 		class TurnTowardsTarget:public BehaviorTree::BehaviorTreeNode
 		{
+		public:
 			BEHAVIOR_STATUS execute(void* agent);
 			void init(void* agent);
+			TurnTowardsTarget::TurnTowardsTarget(float turnSpeed);
+		private:
+			float speed;
 		};
 	}
 

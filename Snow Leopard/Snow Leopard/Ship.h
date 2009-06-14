@@ -7,8 +7,11 @@
 #include <set>
 #include "GameObject.h"
 #include "WorldState.h"
+#include "Projectile.h"
+#include "BehaviorTree.h"
 
 class CL_ResourceManager;
+using namespace BehaviorTree;
 
 namespace SL
 {
@@ -22,7 +25,8 @@ public:
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Ship::Ship();
-	void Ship::fire();
+	void Ship::fire(Projectile* p);
+	ParallelNode* (*getProjectileBrain)();
 };
 
 }

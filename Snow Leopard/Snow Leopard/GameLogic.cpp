@@ -51,6 +51,7 @@ void GameLogic::handleInput()
 			 Projectile* p = new Projectile();
 			 p->setSprite("Ammo\\test");
 			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
+			p->brain = playerShip->getProjectileBrain();
 			ws->insertObject(p,playerShip->location.offsetPolar(playerShip->displayHeading,100));
 		 }
 		 timeLastFired = ws->time;
