@@ -181,13 +181,15 @@ void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 
 bool GameObject::alignedWithPlayer()
 {
-	point playerLocation = ws->getPlayer()->location;
-	if (abs(location.x-playerLocation.x) < 20)
-		return true;
-	return false;
+	return abs(ws->angleBetween(this,ws->getPlayer()).to_degrees()) < 10;
 }
 
 int SL::GameObject::getHealth()
 {
 	return HP;
+}
+
+bool SL::GameObject::playerIsAligned()
+{
+	return abs(ws->angleBetween(ws->getPlayer(),this).to_degrees()) < 10;
 }

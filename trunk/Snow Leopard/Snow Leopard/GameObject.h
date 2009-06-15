@@ -91,7 +91,10 @@ public:
 	bool usesPhysics;
 	/// Number of milliseconds the object has been in existence. Updated every tick based on the timeElapsed
 	long age;
+	/// Am I facing the player
 	bool alignedWithPlayer();
+	/// Is the player facing me
+	bool playerIsAligned();
 	int getHealth();
 
  protected:

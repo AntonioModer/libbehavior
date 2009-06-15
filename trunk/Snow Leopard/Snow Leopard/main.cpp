@@ -75,9 +75,9 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 
 	 switch (scenario)
 	 {
-		case 1: SL::ws = loadScenario1();
-		case 2: SL::ws = loadScenario2();
-		case 3: SL::ws = loadScenario3();
+		case 1: SL::ws = loadScenario1(); break;
+		case 2: SL::ws = loadScenario2(); break;
+		case 3: SL::ws = loadScenario3(); break;
 	 }
 
 	Renderer* renderer = new Renderer();

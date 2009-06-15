@@ -284,6 +284,10 @@
 					Name="Scenarios"
 					>
 					<File
+						RelativePath=".\BehaviorFactory.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Scenario1.h"
 						>
 					</File>
