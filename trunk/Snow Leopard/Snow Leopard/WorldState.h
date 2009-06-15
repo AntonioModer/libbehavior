@@ -62,7 +62,7 @@ bool rotateObject(GameObject* gameObject, float angle);
 /// Get a list of all the objects in the region of a point
 GameObjectList* getAtCell(point p);
 /// Get a list of all the active gameObjects in the world
-const GameObjectList* WorldState::getAllGameObjects();
+const GameObjectList* WorldState::getAllGameObjects() const;
 /// Free the memory of objects that have been marked for deletion
 void deleteQueued();
 /// Get a list of all the inert gameObjects in the world
@@ -70,9 +70,9 @@ const GameObjectList* getBackgroundObjects();
 /// Add an inert background object to the world. The object's location should already be set
 void addBackgroundObject(GameObject* background);
 /// Calculate the distance between obj1 and obj2. The distance is calculated based on their point locations, not on their full outlines.
-float distanceBetween(GameObject* obj1, GameObject* obj2);
+float distanceBetween(const GameObject* obj1,const GameObject* obj2) const;
 /// Calculate the angle from obj1 to obj2. The angles are in the range -180 to 180.
-CL_Angle angleBetween(GameObject* obj1, GameObject* obj2);
+CL_Angle angleBetween(const GameObject* obj1,const GameObject* obj2) const;
 
 private:
 	CL_Sprite* background;

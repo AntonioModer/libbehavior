@@ -92,10 +92,10 @@ public:
 	/// Number of milliseconds the object has been in existence. Updated every tick based on the timeElapsed
 	long age;
 	/// Am I facing the player
-	bool alignedWithPlayer();
+	bool alignedWithPlayer() const;
 	/// Is the player facing me
-	bool playerIsAligned();
-	int getHealth();
+	bool playerIsAligned() const;
+	int getHealth() const;
 
  protected:
 	

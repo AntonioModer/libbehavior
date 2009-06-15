@@ -179,17 +179,17 @@ void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 	}
 }
 
-bool GameObject::alignedWithPlayer()
+bool GameObject::alignedWithPlayer() const
 {
 	return abs(ws->angleBetween(this,ws->getPlayer()).to_degrees()) < 10;
 }
 
-int SL::GameObject::getHealth()
+int SL::GameObject::getHealth() const
 {
 	return HP;
 }
 
-bool SL::GameObject::playerIsAligned()
+bool SL::GameObject::playerIsAligned() const
 {
 	return abs(ws->angleBetween(ws->getPlayer(),this).to_degrees()) < 10;
 }

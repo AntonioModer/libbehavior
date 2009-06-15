@@ -35,22 +35,24 @@ namespace BehaviorTree
 		/** \param _func the address of the class member
 			\param _check the value that is being tested for
 		*/
-		BoolCondition(bool(T::*_func)(), bool _check)
+		BoolCondition(bool(T::*_func)(), bool _check) : func(_func), func2(NULL)
 		{
-			func = _func;
 			check = _check;
 		}
 		/** \param _func the address of the function or the static class member
 			\param _check the value that is being tested for
 		*/
-		BoolCondition(bool(*_func)(), bool _check)
+		BoolCondition(bool(*_func)(), bool _check) : func2(_func), func(NULL)
 		{
-			func2 = _func;
+			check = _check;
+		}
+		BoolCondition(bool(T::* const _func)() const,bool _check) : func(reinterpret_cast<bool(T::* const)()>(_func)), func2(NULL)
+		{
 			check = _check;
 		}
 	private:
-		bool (T::*func)();
-		bool (*func2)();
+		bool (T::* const func)();
+		bool (* const func2)();
 		bool check;
 	};
 

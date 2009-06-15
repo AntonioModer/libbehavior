@@ -51,9 +51,8 @@ namespace BehaviorTree
 			\param _test the mathematical operation to perform on the return value of _func
 			\param _val the 'right side' of the mathematical expression the node performs
 		*/
-		IntCondition(int(T::*_func)(), INT_TEST _test, int _val)
+		IntCondition(int(T::* const _func)(), INT_TEST _test, int _val) : func(_func), func2(NULL)
 		{
-			func = _func;
 			test = _test;
 			val = _val;
 		}
@@ -61,15 +60,19 @@ namespace BehaviorTree
 			\param _test the mathematical operation to perform on the return value of _func
 			\param _val the 'right side' of the mathematical expression the node performs
 		*/
-		IntCondition(int(*_func)(), INT_TEST _test, int _val)
+		IntCondition(int(* const _func)(), INT_TEST _test, int _val) : func2(_func), func(NULL)
 		{
-			func2 = _func;
+			test = _test;
+			val = _val;
+		}
+		IntCondition(int(T::* const _func)() const, INT_TEST _test, int _val) : func(reinterpret_cast<int(T::* const)()>(_func)), func2(NULL)
+		{
 			test = _test;
 			val = _val;
 		}
 	private:
-		int (T::*func)();
-		int (*func2)();
+		int (T::* const func)() ; //A member function pointer of the class T, being stored as const since we don't modify it
+		int (* const func2)();   //A static method or function pointer, being stored as const since we don't modify it
 		INT_TEST test;
 		int val;
 

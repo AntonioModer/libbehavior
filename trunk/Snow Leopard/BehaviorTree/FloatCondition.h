@@ -52,9 +52,8 @@ namespace BehaviorTree
 			\param _val the 'right side' of the mathematical expression the node performs
 			\param _ulps the number of "units in the last place" two floating point numbers can differ by and still be considered 'close' The default value of 2^25 will consider 5.000000000 and 5.000001 to be 'close'. However, the number of digits the numbers can differ by will vary depending on their size, due to how they are stored on the computer. 
 		*/
-		FloatCondition(float(T::*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25)
+		FloatCondition(float(T::*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25): func(_func), func2(NULL)
 		{
-			func = _func;
 			test = _test;
 			val = _val;
 			ulps = _ulps;
@@ -65,16 +64,21 @@ namespace BehaviorTree
 		\param _val the 'right side' of the mathematical expression the node performs
 		\param _ulps the number of "units in the last place" two floating point numbers can differ by and still be considered 'close' The default value of 2^25 will consider 5.000000000 and 5.000001 to be 'close'. However, the number of digits the numbers can differ by will vary depending on their size, due to how they are stored on the computer. 
 		*/
-		FloatCondition(float(*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25)
+		FloatCondition(float(*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25) : func2(_func), func(NULL)
 		{
-			func2 = _func;
 			test = _test;
 			val = _val;
 			ulps = _ulps;
 		}
+
+		FloatCondition(float(T::* const _func)() const, FLOAT_TEST _test, float _val,int _ulps = 2^25) : func(reinterpret_cast<int(T::* const)()>(_func)), func2(NULL)
+		{
+			test = _test;
+			val = _val;
+		}
 	private:
-		float (T::*func)();
-		float (*func2)();
+		float (T::* const func)();
+		float (* const func2)();
 		FLOAT_TEST test;
 		float val;
 		int ulps;

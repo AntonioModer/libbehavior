@@ -193,7 +193,7 @@ GameObjectList* WorldState::getAtCell(point p)
 	return getListFromPoint(p);
 }
 
-const GameObjectList* WorldState::getAllGameObjects()
+const GameObjectList* WorldState::getAllGameObjects() const
 {
 	return  activeObjectList; 
 }
@@ -212,13 +212,13 @@ GameObjectList* WorldState::getListFromPoint(point p)
 	return worldMatrix[(int)p.x / coarseGraining][(int)p.y / coarseGraining];
 }
 
-float SL::WorldState::distanceBetween( GameObject* obj1, GameObject* obj2 )
+float SL::WorldState::distanceBetween(const GameObject* obj1,const GameObject* obj2 ) const
 {
 	point resultantVector(obj1->location.x - obj2->location.x,obj1->location.y - obj2->location.y);
 	return resultantVector.vectorSize();
 }
 
-CL_Angle SL::WorldState::angleBetween( GameObject* obj1, GameObject* obj2 )
+CL_Angle SL::WorldState::angleBetween( const GameObject* obj1,const GameObject* obj2 ) const
 {
 	point resultantVector(obj1->location.x - obj2->location.x,obj1->location.y - obj2->location.y);
 	resultantVector.normalize();
