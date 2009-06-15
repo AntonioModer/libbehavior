@@ -37,7 +37,7 @@ WorldState::WorldState()
 	time = CL_System::get_time();
 }
 
-GameObject* WorldState::getPlayer()
+GameObject* WorldState::getPlayer() const
 {
 	GameObjectIter itr;
 	for (itr = activeObjectList->begin();itr != activeObjectList->end(); itr++)

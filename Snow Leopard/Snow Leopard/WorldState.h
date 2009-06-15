@@ -50,7 +50,7 @@ WorldState::WorldState();
 /** \return true if the object was actually inserted, false if it could not be */
 bool insertObject(GameObject* gameObject, point p);
 /// Searches the world for an object with "isPlayer" set, and returns that
-GameObject* getPlayer();
+GameObject* getPlayer() const;
 /// Marks the object for deletion. The memory is not actually freed until a convenient time, and until then the object will continue to interact with things (right now)
 bool deleteObject(GameObject* gameObject);
 /// Move an object that's already in the world to the specified point (checking for collisions)
