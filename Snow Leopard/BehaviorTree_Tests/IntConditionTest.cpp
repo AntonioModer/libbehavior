@@ -19,6 +19,21 @@ BOOST_AUTO_TEST_CASE( CheckEquals)
 	delete t;
 }
 
+BOOST_AUTO_TEST_CASE( CheckEquals_Const)
+{
+	TestClass* t = new TestClass();
+	IntCondition<TestClass>* c1 = new IntCondition<TestClass>(&TestClass::return5Const,EQUAL,5);
+	c1->init(t);
+	BOOST_CHECK_EQUAL(c1->execute(t),BT_SUCCESS);
+	delete c1;
+
+	IntCondition<TestClass>* c2 = new IntCondition<TestClass>(&TestClass::return5Const,EQUAL,10);
+	c2->init(t);
+	BOOST_CHECK_EQUAL(c2->execute(t),BT_FAILURE);
+	delete c2;
+	delete t;
+}
+
 BOOST_AUTO_TEST_CASE( CheckNotEquals)
 {
 	TestClass* t = new TestClass();
