@@ -4,6 +4,7 @@
 #include "goStraight.h"
 #include "BehaviorTree.h"
 #include "globals.h"
+#include "util.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -92,9 +93,9 @@ void GameObject::setSprite(std::string resource)
 bool GameObject::processMovementPhysics()
 {
 	//new velocity components
-	float newX = .5 * accelMagnitude * cos(accelHeading * 3.14159/180) * ws->timeElapsed
+	float newX = .5f * accelMagnitude * cos(accelHeading * PI/180) * ws->timeElapsed
 		+ speed * cos(movementHeading.to_radians());
-	float newY = .5 * accelMagnitude * sin(accelHeading *3.14159/180) * ws->timeElapsed
+	float newY = .5f * accelMagnitude * sin(accelHeading * PI/180) * ws->timeElapsed
 		+ speed * sin(movementHeading.to_radians()); 
 
 	speed = sqrt((newX)*(newX) + (newY)*(newY));
@@ -138,13 +139,13 @@ bool GameObject::registerWallCollision()
 
 void GameObject::applyForceRect(float x,float y)
 {
-	float oldX = accelMagnitude * cos(accelHeading * 3.14159/180);
-	float oldY = accelMagnitude * sin(accelHeading *3.14159/180);
+	float oldX = accelMagnitude * cos(accelHeading * PI/180);
+	float oldY = accelMagnitude * sin(accelHeading * PI/180);
 	//should probably be using vectors everywhere
 	float newX = oldX + x;
 	float newY = oldY + y;
 	accelMagnitude = sqrt(newX*newX + newY*newY);
-	accelHeading = (180.0 * atan2(newY,newX)) / 3.14159;
+	accelHeading = (180.0f * atan2(newY,newX)) / PI;
 }
 
 void GameObject::applyForcePolar(CL_Angle heading, float magnitude)

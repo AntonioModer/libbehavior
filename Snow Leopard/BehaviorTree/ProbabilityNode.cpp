@@ -17,7 +17,7 @@ ProbabilityNode::ProbabilityNode()
 {
 	totalSum = 0;
 	currentNode = NULL;
-	random.seed(time(NULL));
+	random.seed((unsigned long)time(NULL));
 }
 BehaviorTreeInternalNode* ProbabilityNode::addChild(BehaviorTreeNode* node, double weighting)
 {
