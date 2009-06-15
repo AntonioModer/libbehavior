@@ -1,1 +1,1 @@
-Deleting objects due to collisions can lead to crashes
+The conditional nodes need to support const methods
