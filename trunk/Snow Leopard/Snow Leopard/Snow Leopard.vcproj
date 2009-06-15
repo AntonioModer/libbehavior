@@ -312,10 +312,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DOMHelpers.h"
-				>
-			</File>
-			<File
 				RelativePath=".\GameLogic.h"
 				>
 			</File>
