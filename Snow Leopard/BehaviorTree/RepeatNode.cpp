@@ -12,7 +12,7 @@ BEHAVIOR_STATUS RepeatNode::execute(void* agent)
 		if (status == BT_SUCCESS)
 		{
 			count++;
-			if (count == target)
+			if (count == target && target!= -1)
 			{
 				init(agent);
 				return BT_SUCCESS;
@@ -41,6 +41,7 @@ BehaviorTreeInternalNode* BehaviorTree::RepeatNode::addChild( BehaviorTreeNode* 
 	return this;
 }
 
+/** \param repeats The number of times to repeat. An argument of -1 indicates the node should repeat indefinitely. Other negative numbers have undefined behavior */
 RepeatNode::RepeatNode(int repeats)
 {
 	target = repeats;

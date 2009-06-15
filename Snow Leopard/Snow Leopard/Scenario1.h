@@ -1,10 +1,7 @@
 #include "BehaviorTree.h"
 #include "Ship.h"
-#include "GoStraight.h"
-#include "AbsoluteMovement.h"
-#include "Fire.h"
-#include "Cooldown.h"
 #include "WorldState.h"
+#include "BehaviorFactory.h"
 
 #ifndef SCENARIO1_H_
 #define SCENARIO1_H_
@@ -24,6 +21,7 @@ WorldState* loadScenario1()
 	Ship* player = new Ship();
 	player->setSprite("Hulls\\Sample Hull");
 	player->isPlayer = true;
+	player->getProjectileBrain = &makeBoringBrain;
 	state->insertObject(player,point(100,300));
 	
 	const int offset = 50;
@@ -33,11 +31,14 @@ WorldState* loadScenario1()
 		opponent->displayHeading.set_degrees(180);
 		opponent->setSprite("Hulls\\drone");
 		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
+		opponent->getProjectileBrain = makeBoringBrain;
 		opponent->brain
-			->addChild((new SequentialNode())
-				->addChild(new BoolCondition<GameObject>(&GameObject::alignedWithPlayer,true))
-				->addChild(new Fire())
-				->addChild(new Cooldown(500)));
+			->addChild((new RepeatNode(-1))
+				->addChild((new SequentialNode())
+					->addChild(new BoolCondition<GameObject>(&GameObject::alignedWithPlayer,true))
+					->addChild(new Fire())
+					->addChild(new Cooldown(500))))
+			->addChild(new TurnTowardsTarget(.5));
 		state->insertObject(opponent,point(50 + i * offset,100));
 	}
 	return state;
