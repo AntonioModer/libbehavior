@@ -48,3 +48,28 @@ float SL::point::vectorSize()
 {
 	return sqrtf(x*x + y*y);	
 }
+
+point point::operator+ (const point& right)
+{
+	return point(x + right.x,y+ right.y);
+}
+
+point point::operator- (const point& right)
+{
+	return point(x - right.x,y- right.y);
+}
+
+point point::operator*= (float k)
+{
+	x*=k;
+	y*=k;
+	return *this;
+}
+
+point point::operator/= (float k)
+{
+	x/=k;
+	y/=k;
+	return *this;
+}
+
