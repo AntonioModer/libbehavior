@@ -267,6 +267,14 @@
 							>
 						</File>
 						<File
+							RelativePath=".\GotoPoint.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\GotoPoint.h"
+							>
+						</File>
+						<File
 							RelativePath=".\TurnTowardsTarget.cpp"
 							>
 						</File>

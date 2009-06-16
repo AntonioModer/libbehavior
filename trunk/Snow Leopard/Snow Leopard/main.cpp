@@ -70,7 +70,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	if (args.size() > 1)
 		scenario = atoi(args[1].c_str());
 	else
-		scenario = 1;
+		scenario = 3;
 
 
 	 switch (scenario)

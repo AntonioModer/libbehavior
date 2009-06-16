@@ -7,6 +7,8 @@
 #include "Projectile.h"
 #include "turnTowardsTarget.h"
 #include "BehaviorTree.h"
+#include "BehaviorFactory.h"
+#include "GotoPoint.h"
 
 #ifndef SCENARIO3_H_
 #define SCENARIO3_H_
@@ -26,11 +28,13 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		state->insertObject(player,point(100,300));
+		player->getProjectileBrain = &makeBoringBrain;
+		state->insertObject(player,point(100,100));
 
 		Ship* opponent = new Ship();
 		opponent->displayHeading.set_degrees(180);
 		opponent->setSprite("Hulls\\Fighter1");
+		opponent->brain->addChild(new GotoPoint(point(100,100),100));
 		state->insertObject(opponent,point(400,50));
 		return state;
 	}

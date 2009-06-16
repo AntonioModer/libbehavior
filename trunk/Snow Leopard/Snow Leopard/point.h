@@ -34,7 +34,13 @@ public:
 	void normalize();
 	/// The distance from (0,0) to this point
 	float vectorSize();
+
+	point operator/= (float k);
+	point operator*= (float k);
+	point operator- (const point& right);
+	point operator+ (const point& right);
 };
 
 }
+
 #endif
