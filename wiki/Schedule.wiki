@@ -43,6 +43,7 @@
         * ~~Move in an absolute direction~~
         * ~~Move forward relative to current orientation~~
         * ~~Turn towards the player~~
+        * ~~Go straight to a particular point~~
         * ~~Fire weapon~~
         * ~~Wait~~
         * Self Destruct
