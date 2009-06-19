@@ -164,6 +164,7 @@ GameObject::~GameObject()
 void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 {
 	string* s = new string("Resources\\Collision\\" + source + ".out");
+	delete collisionOutline;
 	try 
 	{
 		collisionOutline = new CL_CollisionOutline(*s);
@@ -172,11 +173,12 @@ void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 	{
 		cout << "creating a new collision outline" << endl;
 		collisionOutline = new CL_CollisionOutline(image);
-		collisionOutline->set_alignment(origin_center,0,0);
 		collisionOutline->set_rotation_hotspot(origin_center,0,0);
 		collisionOutline->set_angle(displayHeading);
 		collisionOutline->save(CL_String("Resources\\Collision\\" + source + ".out"));
 	}
+
+	collisionOutline->set_translation(location.x,location.y);
 }
 
 bool GameObject::alignedWithPlayer() const
