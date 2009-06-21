@@ -56,7 +56,7 @@
         
         * ~~Turn to face the player and fire when you have a shot lined up.~~ (scenario 1)
         * ~~Fire homing missiles until you are at 50% health. Then, attempt to kamikaze the player (using the same homing behavior)~~ (scenario 2)
-        * Extend scenario 1 to add randomized movement behavior (scenario 3)
+        * ~~Extend scenario 1 to add randomized movement behavior (scenario 3)~~
         * Drop a bomb if you are about to die
         * Attempt to dodge incoming fire
         * Attempt to stay out of the player's lane of fire
