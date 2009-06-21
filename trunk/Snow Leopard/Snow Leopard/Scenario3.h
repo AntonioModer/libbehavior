@@ -29,13 +29,32 @@ namespace SL
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
 		player->getProjectileBrain = &makeBoringBrain;
-		state->insertObject(player,point(100,100));
+		state->insertObject(player,point(100,300));
 
 		Ship* opponent = new Ship();
 		opponent->displayHeading.set_degrees(180);
 		opponent->setSprite("Hulls\\Fighter1");
-		opponent->brain->addChild(new GotoPoint(point(100,100),100));
-		state->insertObject(opponent,point(400,50));
+		
+		
+
+		opponent->getProjectileBrain = &makeBoringBrain;
+		opponent->brain->addChild(new TurnTowardsTarget(1));
+		ProbabilityNode* pNode = new ProbabilityNode();
+		pNode->addChild((new SequentialNode())
+				->addChild(new Fire())
+				->addChild(new Cooldown(500)),5.0);
+		pNode->addChild((
+			new SequentialNode())
+				->addChild(new FloatCondition<GameObject>(&Ship::getXPosition,LESS_THAN_FP,200,1))
+				->addChild(new GotoPoint(point(300,50),500)))
+			->addChild((new SequentialNode())
+				->addChild(new FloatCondition<GameObject>(&Ship::getXPosition,GREATER_OR_CLOSE,200,1))
+				->addChild(new GotoPoint(point(100,50),500)));
+		opponent->brain
+			->addChild((new RepeatNode(-1))
+				->addChild(pNode));
+			
+		state->insertObject(opponent,point(100,50));
 		return state;
 	}
 

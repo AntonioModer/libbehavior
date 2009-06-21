@@ -24,7 +24,7 @@ bool Ship::doActions()
 void Ship::fire(Projectile* p)
 {
 	p->displayHeading = *(new CL_Angle(displayHeading));
-	ws->insertObject(p,location.offsetPolar(displayHeading,100));
+	ws->insertObject(p,location.offsetPolar(displayHeading,150));
 }
 
 Ship::Ship() : GameObject()

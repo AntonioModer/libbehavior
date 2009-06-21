@@ -47,12 +47,20 @@ namespace BehaviorTree
 		void init(void* agent)
 		{
 		};
+
+		FloatCondition(float(T::* const _func)() const, FLOAT_TEST _test, float _val,int _ulps = 2^22) : func(reinterpret_cast<float(T::* const)()>(_func)), func2(NULL)
+		{
+			test = _test;
+			val = _val;
+			ulps = _ulps;
+		}
+
 		/** \param _func the address of the class member
 			\param _test the mathematical operation to perform on the return value of _func
 			\param _val the 'right side' of the mathematical expression the node performs
 			\param _ulps the number of "units in the last place" two floating point numbers can differ by and still be considered 'close' The default value of 2^25 will consider 5.000000000 and 5.000001 to be 'close'. However, the number of digits the numbers can differ by will vary depending on their size, due to how they are stored on the computer. 
 		*/
-		FloatCondition(float(T::*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25): func(_func), func2(NULL)
+		FloatCondition(float(T::*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^22): func(_func), func2(NULL)
 		{
 			test = _test;
 			val = _val;
@@ -64,18 +72,14 @@ namespace BehaviorTree
 		\param _val the 'right side' of the mathematical expression the node performs
 		\param _ulps the number of "units in the last place" two floating point numbers can differ by and still be considered 'close' The default value of 2^25 will consider 5.000000000 and 5.000001 to be 'close'. However, the number of digits the numbers can differ by will vary depending on their size, due to how they are stored on the computer. 
 		*/
-		FloatCondition(float(*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^25) : func2(_func), func(NULL)
+		FloatCondition(float(*_func)(), FLOAT_TEST _test, float _val,int _ulps = 2^22) : func2(_func), func(NULL)
 		{
 			test = _test;
 			val = _val;
 			ulps = _ulps;
 		}
 
-		FloatCondition(float(T::* const _func)() const, FLOAT_TEST _test, float _val,int _ulps = 2^25) : func(reinterpret_cast<int(T::* const)()>(_func)), func2(NULL)
-		{
-			test = _test;
-			val = _val;
-		}
+		
 	private:
 		float (T::* const func)();
 		float (* const func2)();

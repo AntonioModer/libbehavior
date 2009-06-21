@@ -168,13 +168,14 @@ void GameObject::loadCollisionOutline(string source,CL_PixelBuffer image)
 	try 
 	{
 		collisionOutline = new CL_CollisionOutline(*s);
+		collisionOutline->set_rotation_hotspot(origin_center);
 	}
 	catch (...)
 	{
 		cout << "creating a new collision outline" << endl;
 		collisionOutline = new CL_CollisionOutline(image);
-		collisionOutline->set_rotation_hotspot(origin_center,0,0);
 		collisionOutline->set_angle(displayHeading);
+		collisionOutline->set_rotation_hotspot(origin_center);
 		collisionOutline->save(CL_String("Resources\\Collision\\" + source + ".out"));
 	}
 

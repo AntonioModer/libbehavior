@@ -7,10 +7,11 @@
 #include <ClanLib/gl.h>
 #include <ClanLib/application.h>
 #include "Ship.h"
-
+#include <iostream>
 using namespace SL;
 using namespace SL::Behaviors;
 using namespace BehaviorTree;
+using namespace std;
 
 void Fire::init(void* agent)
 {
@@ -21,6 +22,7 @@ Fire::Fire()
 }
 BEHAVIOR_STATUS Fire::execute(void* agent)
 {
+	cout << "Fire!" << endl;
 	Ship* ship = (Ship*) agent;
 	Projectile* p = new Projectile();
 	p->setSprite("Ammo\\test");
