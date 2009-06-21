@@ -22,7 +22,7 @@ BEHAVIOR_STATUS TurnTowardsTarget::execute(void* agent)
 	
 	CL_Angle angleBetween = ws->angleBetween(object,target);
 
-	cout << "angleBetween" << angleBetween.to_degrees() << endl;
+	//cout << "angleBetween" << angleBetween.to_degrees() << endl;
 
 	if ( angleBetween.to_degrees() < -(speed+1))
 	{

@@ -2,6 +2,7 @@
 #include "point.h"
 #include "GameObject.h"
 #include "worldstate.h"
+#include <iostream>
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -20,6 +21,7 @@ GotoPoint::GotoPoint(point _target, int _speed)
 }
 BEHAVIOR_STATUS GotoPoint::execute(void* agent)
 {
+	cout << "going to point " << target.toString() << endl;
 	GameObject* ship = (GameObject*) agent;
 	int timeElapsed = ws->timeElapsed;
 
