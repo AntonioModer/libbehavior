@@ -10,13 +10,13 @@
 #include "BehaviorFactory.h"
 #include "GotoPoint.h"
 
-#ifndef SCENARIO3_H_
-#define SCENARIO3_H_
+#ifndef SCENARIO4_H_
+#define SCENARIO4_H_
 using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
-	WorldState* loadScenario3()
+	WorldState* loadScenario4()
 	{
 		WorldState* state = new WorldState();
 
@@ -39,23 +39,22 @@ namespace SL
 
 		opponent->getProjectileBrain = &makeBoringBrain;
 		opponent->brain->addChild(new TurnTowardsTarget(1));
-		ProbabilityNode* pNode = new ProbabilityNode();
-		pNode->addChild((new SequentialNode())
+		opponent->brain->addChild(( new RepeatNode(-1))->addChild(
+			(new SequentialNode())
 				->addChild(new BoolCondition<GameObject>(&GameObject::alignedWithPlayer,true))
 				->addChild(new Fire())
-				->addChild(new Cooldown(500)),5.0);
-		pNode->addChild((
+				->addChild(new Cooldown(500))));
+		ProbabilityNode* probNode = new ProbabilityNode(); //get out of the way in a random direction when not near an edge
+		probNode->addChild((
 			new SequentialNode())
-				->addChild(new FloatCondition<GameObject>(&Ship::getXPosition,LESS_THAN_FP,200,1))
-				->addChild(new GotoPoint(point(300,50),500))
-				->addChild(new Cooldown(200)))
+				->addChild(new AbsoluteMovement(LEFT,10,200)))
 			->addChild((new SequentialNode())
-				->addChild(new FloatCondition<GameObject>(&Ship::getXPosition,GREATER_OR_CLOSE,200,1))
-				->addChild(new GotoPoint(point(100,50),500))
-				->addChild(new Cooldown(200)));
+				->addChild(new AbsoluteMovement(RIGHT,10,200)));
+
 		opponent->brain
-			->addChild((new RepeatNode(-1))
-				->addChild(pNode));
+			->addChild((new RepeatNode(-1)) ->addChild((new SequentialNode())
+			->addChild(new BoolCondition<GameObject>(&GameObject::playerIsAligned,true))
+				->addChild(probNode)));
 			
 		state->insertObject(opponent,point(100,50));
 		return state;
