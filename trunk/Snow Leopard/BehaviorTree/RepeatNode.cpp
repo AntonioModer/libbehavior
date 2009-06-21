@@ -1,5 +1,5 @@
 #include "BehaviorTree.h"
-
+#include <assert.h>
 using namespace BehaviorTree;
 using namespace std;
 BEHAVIOR_STATUS RepeatNode::execute(void* agent)
@@ -33,11 +33,8 @@ void BehaviorTree::RepeatNode::init( void* agent )
 
 BehaviorTreeInternalNode* BehaviorTree::RepeatNode::addChild( BehaviorTreeNode* newChild )
 {
-	if (children.size() == 0)
-		BehaviorTreeInternalNode::addChild(newChild);
-	else
-		throw new std::exception("Cannot add more than one child to a repeat node");
-
+	assert(children.size() == 0);
+	BehaviorTreeInternalNode::addChild(newChild);
 	return this;
 }
 
