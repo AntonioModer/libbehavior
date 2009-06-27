@@ -4,7 +4,7 @@
 #include "Common.h"
 namespace BehaviorTree
 {
-	/** These are the numerical tests that are available for integers*/
+	/// These are the numerical tests that are available for integers
 	enum INT_TEST {LESS_THAN,GREATER_THAN,LESS_OR_EQ,GREATER_OR_EQ,EQUAL,NOT_EQUAL};
 	template <class T = NoClass>
 	/// Wraps a function or member pointer that returns an integer value into a conditional node
@@ -65,6 +65,10 @@ namespace BehaviorTree
 			test = _test;
 			val = _val;
 		}
+		/** \param _func the address of the const class member
+			\param _test the mathematical operation to perform on the return value of _func
+			\param _val the 'right side' of the mathematical expression the node performs
+		*/
 		IntCondition(int(T::* const _func)() const, INT_TEST _test, int _val) : func(reinterpret_cast<int(T::* const)()>(_func)), func2(NULL)
 		{
 			test = _test;

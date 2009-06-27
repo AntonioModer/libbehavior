@@ -10,7 +10,9 @@ class ParallelNode:public BehaviorTreeInternalNode
 public:
 	BEHAVIOR_STATUS execute(void* agent);
 	void init(void* agent);
-	ParallelNode::ParallelNode( FAILURE_POLICY failurePolicy = FAIL_ON_ALL, SUCCESS_POLICY SuccessPolicy = SUCCEED_ON_ALL);
+	/* \param failurePolicy Determines how many of the node's children must fail before the node fails
+	   \param successPolicy Determines how many of the node's children must succeed before the node succeeds */
+	ParallelNode::ParallelNode( FAILURE_POLICY failurePolicy = FAIL_ON_ALL, SUCCESS_POLICY successPolicy = SUCCEED_ON_ALL);
 
 private:
 	typedef std::map<BehaviorTreeNode*,BEHAVIOR_STATUS> ChildrenStatusMap;

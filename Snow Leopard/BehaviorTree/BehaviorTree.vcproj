@@ -219,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\mainpage.h"
+				>
+			</File>
+			<File
 				RelativePath=".\mtrand.h"
 				>
 			</File>

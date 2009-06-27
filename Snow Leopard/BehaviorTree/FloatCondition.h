@@ -5,7 +5,8 @@
 #include "FPCompare.h"
 namespace BehaviorTree
 {
-	/** These are the numerical tests that are available for floating point numbers. Because of Floating Point precision and rounding issues, testing for exact equalities is unwise. Therefore, the FloatCondition constructor accepts an optional value to determine how strict equality checks are. */
+	/// These are the numerical tests that are available for floating point numbers.
+	/**Because of Floating Point precision and rounding issues, testing for exact equalities is unwise. Therefore, the FloatCondition constructor accepts an optional value to determine how strict equality checks are. */
 	enum FLOAT_TEST {LESS_THAN_FP,GREATER_THAN_FP,LESS_OR_CLOSE,GREATER_OR_CLOSE,CLOSE,NOT_CLOSE};
 	template <class T = NoClass>
 	/// Wraps a function or member pointer that returns a float value into a conditional node
@@ -48,6 +49,11 @@ namespace BehaviorTree
 		{
 		};
 
+		/** \param _func the address of the const class member
+			\param _test the mathematical operation to perform on the return value of _func
+			\param _val the 'right side' of the mathematical expression the node performs
+			\param _ulps the number of "units in the last place" two floating point numbers can differ by and still be considered 'close' The default value of 2^25 will consider 5.000000000 and 5.000001 to be 'close'. However, the number of digits the numbers can differ by will vary depending on their size, due to how they are stored on the computer. 
+		*/
 		FloatCondition(float(T::* const _func)() const, FLOAT_TEST _test, float _val,int _ulps = 2^22) : func(reinterpret_cast<float(T::* const)()>(_func)), func2(NULL)
 		{
 			test = _test;
