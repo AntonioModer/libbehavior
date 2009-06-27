@@ -32,7 +32,7 @@ namespace BehaviorTree
 		void init(void* agent)
 		{
 		};
-		/** \param _func the address of the class member
+		/** \param _func the address of the (non-static) class member
 			\param _check the value that is being tested for
 		*/
 		BoolCondition(bool(T::*_func)(), bool _check) : func(_func), func2(NULL)
@@ -46,6 +46,9 @@ namespace BehaviorTree
 		{
 			check = _check;
 		}
+		/** \param _func the address of the const non-static class member
+			\param _check the value that is being tested for
+		*/
 		BoolCondition(bool(T::* const _func)() const,bool _check) : func(reinterpret_cast<bool(T::* const)()>(_func)), func2(NULL)
 		{
 			check = _check;

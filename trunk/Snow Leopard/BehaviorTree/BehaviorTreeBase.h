@@ -70,6 +70,7 @@ namespace BehaviorTree
 
 	};
 
+	///Always returns the BT_RUNNING status
 	class AlwaysRunning: public BehaviorTreeNode
 	{
 		BEHAVIOR_STATUS execute(void* agent)
@@ -79,6 +80,7 @@ namespace BehaviorTree
 		void init(void* agent){};
 	};
 
+	///Always returns the BT_SUCCESS status
 	class AlwaysSuccess: public BehaviorTreeNode
 	{
 		BEHAVIOR_STATUS execute(void* agent)
@@ -88,6 +90,7 @@ namespace BehaviorTree
 		void init(void* agent){};
 	};
 
+	///Always returns the BT_FAILURE status
 	class AlwaysFailure: public BehaviorTreeNode
 	{
 		BEHAVIOR_STATUS execute(void* agent)
@@ -97,6 +100,7 @@ namespace BehaviorTree
 		void init(void* agent){};
 	};
 
+	///Returns BT_RUNNING for the specified number of iterations, then returns BT_SUCCESS after that
 	class SuccessAfter: public BehaviorTreeNode
 	{
 	public:
@@ -125,6 +129,7 @@ namespace BehaviorTree
 		}
 	};
 
+	///Returns BT_RUNNING for the specified number of iterations, then returns BT_FAILURE after that
 	class FailureAfter: public BehaviorTreeNode
 	{
 	public:
