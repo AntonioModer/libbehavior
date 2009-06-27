@@ -15,9 +15,25 @@ A Behavior Tree, as one would guess, is a branching data structure that is used 
 
 Of course, a fixed linear sequence of actions is not a very interesting behavior. It lacks awareness of the situation and adaptivity. These qualities are given to the agent via the internal nodes. These nodes decide which of their children nodes to execute, using a number of different schemes. One internal node, the Parallel Node, executes all of its children simultaneously. By combining the Parallel Node with other nodes like the Priority or Probability Nodes, interesting behaviors can be developed that show awareness and adaptivity.
 
-@What Internal Nodes are Available?
+@section What Internal Nodes are Available?
 
 This is a brief behavioral description of each of the supplied internal nodes. For specifics, please consult each node's documentation page.
 
+- Count Limit Node
+This node restricts a particular path of behavior from executing more than the specified number of times. It can either put a strict limitation in repetition, or reset the limitation after some time. This is useful for, e.g. preventing your agents from repeating the same line of dialog to the point where the player will become annoyed.
+- ParallelNode
+This is a powerful node that executes all of its children at the same time. This not just useful for simultanous behaviors, it can also be used for pursuing a main path of behavior while simultanously monitoring the world for problems that would make the behavior invalid. Examples of this type of usage are given in the test bench.
+- Priority Node
+The Priority Node maintains an ordered sequence of behaviors, where earlier ones are more desireable (but may fail to complete), and later ones are less desireable, but presumably more likely to work. For example, if a character is trying to get through a door and they have the key in pocket, they can simply take out the key and open the door. If they don't have a key in pocket, that behavior will fail. The next behavior in priority order may be to go to the backyard and get the spare key. If that fails, the next behavior may be to call someone who has a key. This will continue until either one of the approaches succeeds, in which case the priority node will return success, or all of the nodes fail. In the latter case, the priority node will also return failure.
+-Probability Node
+The probability node introduces randomness into the agent's behavior. It works by associating a weight with each of its children. When it needs to select a behavior, it makes a random choice among its children, based on their weights. The weighting approach facilitates "tweaking" behaviors by allowing changes to be made without requiring that all the probabilities be re-balanced.
+- Repeat Node
+The Repeat Node is unusual because it only has one child. It runs that child either a fixed number of times or indefinitely.
+- Sequential Node
+The Sequential Node is the workhorse internal node. It simply runs all of its children in sequential order. If one of them fails, it also fails. Once all of them succeeds, it also succeeds.
 
+By composing these internal nodes together or possibly making your own, a large range of behavior can be expressed in a compact and reusable way.
 
+@section What Leaf Nodes are Available?
+
+Since leaf nodes are application-specific, you will have to implement most of them yourself. However, there are a handful of useful nodes provided. Some of them can wrap function and member calls in order to save you time and reduce code duplication. Others are handy "stand ins" for when some behavior is not yet implemented, or when you are debugging behaviors.
