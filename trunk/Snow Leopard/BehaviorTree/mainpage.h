@@ -25,28 +25,45 @@ This is a brief behavioral description of each of the supplied internal nodes. F
 
 \subsection countlimit Count Limit Node
 This node restricts a particular path of behavior from executing more than the specified number of times. It can either put a strict limitation in repetition, or reset the limitation after some time. This is useful for, e.g. preventing your agents from repeating the same line of dialog to the point where the player will become annoyed.
+\sa BehaviorTree::CountLimitNode
 \subsection parallel ParallelNode
 This is a powerful node that executes all of its children at the same time. This not just useful for simultanous behaviors, it can also be used for pursuing a main path of behavior while simultanously monitoring the world for problems that would make the behavior invalid. Examples of this type of usage are given in the test bench.
+\sa BehaviorTree::ParallelNode
 \subsection priority Priority Node
 The Priority Node maintains an ordered sequence of behaviors, where earlier ones are more desireable (but may fail to complete), and later ones are less desireable, but presumably more likely to work. For example, if a character is trying to get through a door and they have the key in pocket, they can simply take out the key and open the door. If they don't have a key in pocket, that behavior will fail. The next behavior in priority order may be to go to the backyard and get the spare key. If that fails, the next behavior may be to call someone who has a key. This will continue until either one of the approaches succeeds, in which case the priority node will return success, or all of the nodes fail. In the latter case, the priority node will also return failure.
+\sa BehaviorTree::PriorityNode
 \subsection probability Probability Node
 The probability node introduces randomness into the agent's behavior. It works by associating a weight with each of its children. When it needs to select a behavior, it makes a random choice among its children, based on their weights. The weighting approach facilitates "tweaking" behaviors by allowing changes to be made without requiring that all the probabilities be re-balanced.
+\sa BehaviorTree::ProbabilityNode
 \subsection repeat Repeat Node
 The Repeat Node is unusual because it only has one child. It runs that child either a fixed number of times or indefinitely.
+\sa BehaviorTree::RepeatNode
 \subsection sequential Sequential Node
 The Sequential Node is the workhorse internal node. It simply runs all of its children in sequential order. If one of them fails, it also fails. Once all of them succeeds, it also succeeds.
+\sa BehaviorTree::SequentialNode
 
 By composing these internal nodes together or possibly making your own, a large range of behavior can be expressed in a compact and reusable way.
 
 \section leaf What Leaf Nodes are Available?
 
 Since leaf nodes are application-specific, you will have to implement most of them yourself. However, there are a handful of useful nodes provided. Some of them can wrap function and member calls in order to save you time and reduce code duplication. Others are handy "stand ins" for when some behavior is not yet implemented, or when you are debugging behaviors.
+
 \subsection always AlwaysRunning, AlwaysSuccess, AlwaysFailure
 These are the simplest leaf nodes. They simply return the indicated status value.
+\sa BehaviorTree::AlwaysRunning\n
+	BehaviorTree::AlwaysSuccess\n
+	BehaviorTree::AlwaysFailure\n
+
 \subsection after SuccessAfter, FailureAfter
 These have the 'running' status for a given number of iterations, then they return the indicated status.
+\sa BehaviorTree::SuccessAfter\n
+    BehaviorTree::FailureAfter\n
+
 \subsection condition BoolCondition, FloatCondition, IntCondition
 These wrap function calls (with no arguments) that return the specified type. The BoolCondition can check whether the return value is a given one. The FloatCondition and IntCondition have a full set of comparisons (==,<,<=,>,>=).
+\sa BehaviorTree::BoolCondition\n
+	BehaviorTree::FloatCondition\n
+	BehaviorTree::IntCondition\n
 
 \section Behavior Tree Examples
 
