@@ -23,6 +23,7 @@ public:
 	bool registerCollision(GameObject* collidedObject);
 	bool registerWallCollision();
 	Projectile::Projectile();
+	
 
 };
 
