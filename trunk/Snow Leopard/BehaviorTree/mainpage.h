@@ -15,6 +15,10 @@ A Behavior Tree, as one would guess, is a branching data structure that is used 
 
 Of course, a fixed linear sequence of actions is not a very interesting behavior. It lacks awareness of the situation and adaptivity. These qualities are given to the agent via the internal nodes. These nodes decide which of their children nodes to execute, using a number of different schemes. One internal node, the Parallel Node, executes all of its children simultaneously. By combining the Parallel Node with other nodes like the Priority or Probability Nodes, interesting behaviors can be developed that show awareness and adaptivity.
 
+Each node in a behavior tree can keep its own state. For example, this could be the current position of executing for a sequential node. In addition, when a behavior tree is executed, external state can be passed in to the structure through the void* "agent" argument. Each node is obligated to return a status after it has finished executing. The available statuses are "Success", "Failure", and "Running". Every timeslice (where a timeslice can be a particular number of milliseconds, a turn in a strategy game, etc.) the root node of the behavior tree is executed. The root node, in turn, selects some number of its children and executes them. This continues down the tree until execution reaches the leaf nodes. The leaf nodes update their state and select a status. The status information is interpreted at each level of the tree. At the top level, the root node selects a status and returns it. (TODO: insert diagram)
+
+Generally, it is considered desireable to limit a node to either keeping internal state or using external state, but not both. This reduces interdependence, which simplifies debugging and promotes reuse. Often, nodes that keep internal state are also internal nodes, and nodes that use external state are leaf nodes.
+
 \section internal What Internal Nodes are Available?
 
 This is a brief behavioral description of each of the supplied internal nodes. For specifics, please consult each node's documentation page.
