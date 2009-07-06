@@ -7,7 +7,7 @@ namespace SL
 {
 	namespace Behaviors
 	{
-	/// Fire your weapon
+	/// Destroy all projectiles within a 200 unit radius of the agent
 	class DestroyAllNearbyProjectiles:public BehaviorTree::BehaviorTreeNode
 	{
 	public:
