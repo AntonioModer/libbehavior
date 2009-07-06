@@ -96,5 +96,9 @@ The "occasional" aspect of the position switch is controlled by a probability no
 
 \section scenario4 Scenario 4
 
-Scenario 4 is another variant of an evasive enemy. This time, instead of switching positions randomly, the enemy bases its movement on the positions of the player and of incoming projectiles. If there are incoming projectiles nearby, the enemy will try to dodge them by moving away in a random direction. Otherwise, if the player has a shot lined up, the enemy will move out of the player's lane of fire. 
+Scenario 4 is another variant of an evasive enemy. This time, instead of switching positions randomly, the enemy bases its movement on the position of the player. If the player has a shot lined up, the enemy will move away in a random direction.
+
+\section scenario5 Scenario 5
+
+This scenario gives the enemy an ability that can destroy all projectiles within a certain proximity to it. However, this ability can only be activated 5 times, and it takes 2 seconds to recharge between uses. The 5 uses limitation is implemented with a count limit node.
 */

@@ -96,6 +96,7 @@ public:
 	/// Is the player facing me
 	bool playerIsAligned() const;
 	int getHealth() const;
+	bool projectileNearby() const;
 
  protected:
 	

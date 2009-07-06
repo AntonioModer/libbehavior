@@ -232,6 +232,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\DestroyAllNearbyProjectiles.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\DestroyAllNearbyProjectiles.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Fire.cpp"
 						>
 					</File>
@@ -309,6 +317,10 @@
 					</File>
 					<File
 						RelativePath=".\Scenario4.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Scenario5.h"
 						>
 					</File>
 				</Filter>
