@@ -5,6 +5,7 @@
 #include "BehaviorTree.h"
 #include "globals.h"
 #include "util.h"
+#include "Projectile.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -195,4 +196,24 @@ int SL::GameObject::getHealth() const
 bool SL::GameObject::playerIsAligned() const
 {
 	return abs(ws->angleBetween(ws->getPlayer(),this).to_degrees()) < 10;
+}
+
+bool SL::GameObject::projectileNearby() const
+{
+	const GameObjectList* objects = ws->getAllGameObjects();
+	ConstGameObjectIter iter;
+	for (iter = objects->begin(); iter!=objects->end(); iter++)
+	{
+		if ((*iter)->faction != PROJECTILE_FACTION)
+			continue;
+		cout << "projectile found" << endl;
+
+		float distance = ws->distanceBetween(this,*iter);
+
+		cout << "distance to projectile is: " << distance << endl;
+
+		if (distance < 200)
+			return true;
+	}
+	return false;
 }
