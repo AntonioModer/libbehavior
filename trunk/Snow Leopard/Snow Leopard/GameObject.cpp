@@ -54,6 +54,7 @@ GameObject::GameObject()
 
 	brain = new ParallelNode();
 	age = 0;
+	owner = NULL;
 };
 
 
@@ -206,11 +207,8 @@ bool SL::GameObject::projectileNearby() const
 	{
 		if ((*iter)->faction != PROJECTILE_FACTION)
 			continue;
-		cout << "projectile found" << endl;
 
 		float distance = ws->distanceBetween(this,*iter);
-
-		cout << "distance to projectile is: " << distance << endl;
 
 		if (distance < 200)
 			return true;

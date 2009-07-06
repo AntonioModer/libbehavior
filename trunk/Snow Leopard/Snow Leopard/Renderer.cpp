@@ -40,8 +40,9 @@ bool Renderer::Render()
 		CL_Sprite* sprite = obj->sprite;
 		sprite->set_angle(obj->displayHeading);
 		sprite->draw(*gc,obj->location.x,obj->location.y);
+		/*
 		if (obj->usesPhysics)
-			obj->collisionOutline->draw(0,0,CL_Colorf::azure,*gc);
+			obj->collisionOutline->draw(0,0,CL_Colorf::azure,*gc);*/
 			
 	}
 	

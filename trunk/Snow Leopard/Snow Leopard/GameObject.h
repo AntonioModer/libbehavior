@@ -95,6 +95,7 @@ public:
 	bool alignedWithPlayer() const;
 	/// Is the player facing me
 	bool playerIsAligned() const;
+	GameObject* owner; //Generally the object that created this object, if any
 	int getHealth() const;
 	bool projectileNearby() const;
 

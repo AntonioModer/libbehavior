@@ -92,6 +92,10 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 				continue;
 			if ((*itr)->faction == PROJECTILE_FACTION && (gameObject->faction == PROJECTILE_FACTION))
 				continue;
+			
+			if (((*itr)->owner == gameObject)|| (gameObject->owner == *itr))
+				continue;
+
 			if ((*itr)->usesPhysics)
 			{
 				if ((*itr)->collisionOutline->collide(*(gameObject->collisionOutline)))
@@ -136,6 +140,8 @@ bool WorldState::rotateObject(GameObject* gameObject, float angle)
 			if ((*itr) == gameObject)
 				continue;
 			if ((*itr)->faction == PROJECTILE_FACTION && (gameObject->faction == PROJECTILE_FACTION))
+				continue;
+			if (((*itr)->owner == gameObject)|| (gameObject->owner == *itr))
 				continue;
 			if ((*itr)->usesPhysics)
 			{

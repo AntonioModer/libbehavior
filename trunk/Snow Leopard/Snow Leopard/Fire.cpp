@@ -27,6 +27,7 @@ BEHAVIOR_STATUS Fire::execute(void* agent)
 	Projectile* p = new Projectile();
 	p->setSprite("Ammo\\test");
 	p->brain = ship->getProjectileBrain();
+	p->owner = ship;
 	ship->fire(p);
 	
 	return BT_SUCCESS;

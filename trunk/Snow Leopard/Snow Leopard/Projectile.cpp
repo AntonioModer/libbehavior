@@ -27,7 +27,6 @@ Projectile::Projectile() : GameObject()
 {
 	displayName = "projectile";
 	faction = PROJECTILE_FACTION;
-
 }
 	
 bool Projectile::registerWallCollision()
