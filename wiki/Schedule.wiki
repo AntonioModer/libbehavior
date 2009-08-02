@@ -58,19 +58,22 @@
         * ~~Fire homing missiles until you are at 50% health. Then, attempt to kamikaze the player (using the same homing behavior)~~ (scenario 2)
         * ~~Extend scenario 1 to add randomized movement behavior (scenario 3)~~
         * ~~Extend scenario 1 to stay out of the player's lane of fire (scenario 4)~~
-        * Have ability to nullify nearby projectiles, but with a limited number of activations
+        * ~~Have ability to nullify nearby projectiles, but with a limited number of activations~~
 
     Deliverable: 5 playable scenarios that each showcase a composite behavior
 
-6. (July 27 - August 7)
+6. (July 27 - August 14)
         Leverage the behaviors created earlier to create more interesting, full behaviors. Exact details are to be determined in the Design Document and through an iterative process. At least one of these will include running hundreds of agents simultaneously, in order to test CPU usage of the library.
 
      * A "director" implemented with a behavior tree selects the composition of each enemy wave that is sent against the player
      * Space invaders (hundreds of agents)
+     * An enemy that switches between weapon types depending on the distance to the player
+     * An enemy that keeps fighting as long as there are friends around, but then runs away when it's the only one left
+     * 
 
     Milestone: A full set of of behavior examples. 5 of them are simple and show how to accomplish one goal. 5 of them are complex and involve either many agents or adaptation to the situation and prioritization of multiple goals.
 
-7. (August 10 - 14)
+7. (August 15 - 16)
         Create a website and forum for the project. Polish up the testbench.
 
     * Deliverable: Project Website
