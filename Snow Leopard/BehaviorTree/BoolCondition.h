@@ -1,7 +1,4 @@
 #include "Common.h"
-#include <vector>
-#include <map>
-#include "boost\\bind.hpp"
 namespace BehaviorTree
 {
 	template <class T = NoClass>
