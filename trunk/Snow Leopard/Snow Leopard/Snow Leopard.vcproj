@@ -323,6 +323,10 @@
 						RelativePath=".\Scenario5.h"
 						>
 					</File>
+					<File
+						RelativePath=".\Scenario6.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>

@@ -16,7 +16,7 @@ void AbsoluteMovement::init(void* agent)
 	timeLeft = totalTime;
 };
 
-AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION _direction,int _speed, int time = INT_MAX)
+AbsoluteMovement::AbsoluteMovement(ABSOLUTE_DIRECTION _direction,float _speed, int time = INT_MAX)
 {
 	direction = _direction;
 	speed = _speed;
