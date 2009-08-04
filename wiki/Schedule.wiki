@@ -66,7 +66,7 @@
         Leverage the behaviors created earlier to create more interesting, full behaviors. Exact details are to be determined in the Design Document and through an iterative process. At least one of these will include running hundreds of agents simultaneously, in order to test CPU usage of the library.
 
      * A "director" implemented with a behavior tree selects the composition of each enemy wave that is sent against the player
-     * Space invaders (hundreds of agents)
+     * ~~Space invaders (hundreds of agents)~~
      * An enemy that switches between weapon types depending on the distance to the player
      * An enemy that keeps fighting as long as there are friends around, but then runs away when it's the only one left
      * 
