@@ -1,6 +1,3 @@
-#include <vector>
-#include <map>
-#include "boost\\bind.hpp"
 #include "Common.h"
 #include "FPCompare.h"
 namespace BehaviorTree
