@@ -13,6 +13,7 @@
 #include "Scenario4.h"
 #include "Scenario5.h"
 #include "Scenario6.h"
+#include "Scenario7.h"
 
 using namespace SL;
 using namespace SL::Behaviors;
@@ -73,7 +74,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 	if (args.size() > 1)
 		scenario = atoi(args[1].c_str());
 	else
-		scenario = 6;
+		scenario = 7;
 
 
 	 switch (scenario)
@@ -84,6 +85,7 @@ int DisplayProgram::main(const std::vector<CL_String> &args)
 		case 4: SL::ws = loadScenario4(); break;
 		case 5: SL::ws = loadScenario5(); break;
 		case 6: SL::ws = loadScenario6(); break;
+		case 7: SL::ws = loadScenario7(); break;
 	 }
 
 	Renderer* renderer = new Renderer();
