@@ -255,6 +255,14 @@
 						RelativePath=".\SelfDestruct.h"
 						>
 					</File>
+					<File
+						RelativePath=".\SpawnShip.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\SpawnShip.h"
+						>
+					</File>
 					<Filter
 						Name="Movement"
 						>
@@ -329,6 +337,10 @@
 					</File>
 					<File
 						RelativePath=".\Scenario7.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Scenario8.h"
 						>
 					</File>
 				</Filter>
