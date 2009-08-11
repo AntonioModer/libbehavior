@@ -90,11 +90,13 @@ bool WorldState::moveObject(GameObject* gameObject, point p)
 		{
 			if ((*itr) == gameObject)
 				continue;
-			if ((*itr)->faction == PROJECTILE_FACTION && (gameObject->faction == PROJECTILE_FACTION))
+			if ((*itr)->faction == PROJECTILE_FACTION && (*itr)->owner != ws->getPlayer() &&  (gameObject->isPlayer == false))
+				continue;
+			if (gameObject->faction == PROJECTILE_FACTION && gameObject->owner != ws->getPlayer() && ((*itr)->isPlayer == false))
 				continue;
 			
-			if (((*itr)->owner == gameObject)|| (gameObject->owner == *itr))
-				continue;
+			//if (((*itr)->owner == gameObject)|| (gameObject->owner == *itr))
+			//	continue;
 
 			if ((*itr)->usesPhysics)
 			{

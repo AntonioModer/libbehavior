@@ -1,3 +1,5 @@
+#ifndef BEHAVIORFACTORY_H_
+#define BEHAVIORFACTORY_H_
 #include "Ship.h"
 #include "GoStraight.h"
 #include "AbsoluteMovement.h"
@@ -8,13 +10,11 @@
 #include "turnTowardsTarget.h"
 #include "BehaviorTree.h"
 
-#ifndef BEHAVIORFACTORY_H_
-#define BEHAVIORFACTORY_H_
 using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
-	ParallelNode* makeHomingBrain()
+	static ParallelNode* makeHomingBrain()
 	{
 		ParallelNode* b = new ParallelNode();
 		b->addChild(new TurnTowardsTarget(2));
@@ -22,10 +22,17 @@ namespace SL
 		return b;
 	}
 
-	ParallelNode* makeBoringBrain()
+	static ParallelNode* makeBoringBrain()
 	{
 		ParallelNode* b = new ParallelNode();
 		b->addChild(new GoStraight(10));
+		return b;
+	}
+
+	static ParallelNode* makeSlowBoringBrain()
+	{
+		ParallelNode* b = new ParallelNode();
+		b->addChild(new GoStraight(3));
 		return b;
 	}
 }
