@@ -32,14 +32,11 @@
 
 4. (June 29- July 10) Integrate the behavior tree code into the Snow Leopard engine and write condition nodes (sensing) and primitive leaf nodes (action) that interface with the engine.
     Condition
-        * Distance of Player
+        * ~~Distance of Player
         * ~~Relative angle to Player~~
-        * Distance of incoming bullets
-        * Relative Angle of incoming bullets
+        * ~~Distance of incoming bullets~~
         * ~~Current Health~~
-        * Player Movement
-        * Current amount of damage being taken
-        * Current amount of damage being dealt
+
     Leaf
         * ~~Move in an absolute direction~~
         * ~~Move forward relative to current orientation~~
@@ -47,7 +44,7 @@
         * ~~Go straight to a particular point~~
         * ~~Fire weapon~~
         * ~~Wait~~
-        * Self Destruct
+        * ~~Self Destruct~~
 
     Deliverable: All nodes required for sensing and action are complete
        
