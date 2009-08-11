@@ -263,6 +263,14 @@
 						RelativePath=".\SpawnShip.h"
 						>
 					</File>
+					<File
+						RelativePath=".\WaitForNextWave.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\WaitForNextWave.h"
+						>
+					</File>
 					<Filter
 						Name="Movement"
 						>

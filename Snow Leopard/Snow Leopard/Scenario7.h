@@ -10,6 +10,7 @@
 #include "BehaviorTree.h"
 #include "BehaviorFactory.h"
 #include "GotoPoint.h"
+#include "SelfDestruct.h"
 
 #ifndef SCENARIO7_H_
 #define SCENARIO7_H_
@@ -17,6 +18,18 @@ using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
+	bool friendsAreAround()
+	{
+		int count = 0;
+		ConstGameObjectIter itr;
+		const GameObjectList* objects = ws->getAllGameObjects();
+		for (itr = objects->begin();itr != objects->end(); itr++)
+		{
+			if ((*itr)->isPlayer == false && (*itr)->faction == PROJECTILE_FACTION == false)
+				count++;
+		}
+		return count >= 2;
+	}
 	WorldState* loadScenario7()
 	{
 		WorldState* state = new WorldState();
@@ -41,6 +54,7 @@ namespace SL
 			opponent->getProjectileBrain = &makeBoringBrain;
 			opponent->brain
 			->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
+					->addChild(new BoolCondition<>(&friendsAreAround,true))
 					->addChild(new Fire())
 					->addChild(new AbsoluteMovement(RIGHT,10,500))
 					->addChild(new AbsoluteMovement(LEFT,10,500))));
@@ -56,6 +70,7 @@ namespace SL
 			opponent->getProjectileBrain = &makeBoringBrain;
 			opponent->brain
 			->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
+					->addChild(new BoolCondition<>(&friendsAreAround,true))
 					->addChild(new Fire())
 					->addChild(new AbsoluteMovement(LEFT,10,500))
 					->addChild(new AbsoluteMovement(RIGHT,10,500))));
@@ -71,6 +86,7 @@ namespace SL
 			opponent->getProjectileBrain = &makeBoringBrain;
 			opponent->brain
 			->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
+				->addChild(new BoolCondition<>(&friendsAreAround,true))
 				->addChild(new AbsoluteMovement(RIGHT,10,500))
 				->addChild(new Fire())
 				->addChild(new AbsoluteMovement(LEFT,10,500))));
@@ -86,6 +102,7 @@ namespace SL
 			opponent->getProjectileBrain = &makeBoringBrain;
 			opponent->brain
 			->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
+					->addChild(new BoolCondition<>(&friendsAreAround,true))
 					->addChild(new AbsoluteMovement(LEFT,10,500))
 					->addChild(new AbsoluteMovement(RIGHT,10,500))
 					->addChild(new Fire())));

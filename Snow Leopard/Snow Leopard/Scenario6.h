@@ -33,7 +33,7 @@ namespace SL
 		state->insertObject(player,point(100,300));
 
 
-		for (int i = 0 ; i< 4 ; i++)
+		for (int i = 0 ; i< 55 ; i++)
 		{
 			Ship* opponent = new Ship();
 			opponent->displayHeading.set_degrees(180);
@@ -41,13 +41,13 @@ namespace SL
 			opponent->HP = 50;
 			
 
-			opponent->getProjectileBrain = &makeBoringBrain;
+			opponent->getProjectileBrain = &makeSlowBoringBrain;
 			opponent->brain
 				->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
-					->addChild(new AbsoluteMovement(RIGHT,5,500))
-					->addChild(new AbsoluteMovement(DOWN,5,500))
-					->addChild(new AbsoluteMovement(LEFT,5,500))
-					->addChild(new AbsoluteMovement(DOWN,5,500))));
+					->addChild(new AbsoluteMovement(RIGHT,.5,2000))
+					->addChild(new AbsoluteMovement(DOWN,.5,1000))
+					->addChild(new AbsoluteMovement(LEFT,.5,2000))
+					->addChild(new AbsoluteMovement(DOWN,.5,1000))));
 			
 			ProbabilityNode* firing = new ProbabilityNode();
 			firing->addChild(new Fire(),1);
