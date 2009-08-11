@@ -65,7 +65,7 @@
      * ~~A "director" implemented with a behavior tree selects the composition of the enemy waves sent against the player (shows a non-obvious use of behavior trees)~~
      * ~~Space invaders (hundreds of agents)~~
      * An enemy that switches between weapon types depending on the distance to the player (Shows how to use a FunctionCall node)
-     * An enemy that keeps fighting as long as there are friends around, but then surrenders when it's the only one left (Shows how multiple agents can interact to create a story)
+     * ~~An enemy that keeps fighting as long as there are friends around, but then surrenders when it's the only one left (Shows how multiple agents can interact to create a story)~~
      * 
 
     Milestone: A full set of of behavior examples. 5 of them are simple and show how to accomplish one goal. 5 of them are more complex or show interesting ways to use behavior trees.
