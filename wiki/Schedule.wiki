@@ -65,7 +65,7 @@
      * ~~A "director" implemented with a behavior tree selects the composition of the enemy waves sent against the player (shows a non-obvious use of behavior trees)~~
      * ~~Space invaders (hundreds of agents)~~
      * An enemy that switches between weapon types depending on the distance to the player (Shows how to use a FunctionCall node)
-     * Enemies that wait for a common signal before they all do an action in unison (Shows how to handle synchronization and communication within the behavior tree framework)
+     * ~~Enemies that wait for a common signal before they all do an action in unison (Shows how to handle synchronization and communication within the behavior tree framework)~~
      * ~~An enemy that keeps fighting as long as there are friends around, but then surrenders when it's the only one left (Shows how multiple agents can interact to create a story)~~
      * 
 
