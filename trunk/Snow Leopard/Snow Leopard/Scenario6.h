@@ -42,8 +42,7 @@ namespace SL
 			
 
 			opponent->projectileBrain = &makeSlowBoringBrain;
-			opponent->brain
-				->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
+			opponent->brain->addChild((new RepeatNode(-1))->addChild((new SequentialNode())
 					->addChild(new AbsoluteMovement(RIGHT,.5,2000))
 					->addChild(new AbsoluteMovement(DOWN,.5,1000))
 					->addChild(new AbsoluteMovement(LEFT,.5,2000))
