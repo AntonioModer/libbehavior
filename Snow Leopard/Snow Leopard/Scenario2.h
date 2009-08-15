@@ -22,13 +22,13 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		player->getProjectileBrain = &makeBoringBrain;
+		player->projectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
 		Ship* opponent = new Ship();
 		opponent->displayHeading.set_degrees(180);
 		opponent->setSprite("Hulls\\Fighter1");
-		opponent->getProjectileBrain = &makeHomingBrain;
+		opponent->projectileBrain = &makeHomingBrain;
 		opponent->brain
 			->addChild((new PriorityNode())
 				->addChild((new SequentialNode())

@@ -21,7 +21,7 @@ WorldState* loadScenario1()
 	Ship* player = new Ship();
 	player->setSprite("Hulls\\Sample Hull");
 	player->isPlayer = true;
-	player->getProjectileBrain = &makeBoringBrain;
+	player->projectileBrain = &makeBoringBrain;
 	state->insertObject(player,point(100,300));
 	
 	const int offset = 50;
@@ -31,7 +31,7 @@ WorldState* loadScenario1()
 		opponent->displayHeading.set_degrees(180);
 		opponent->setSprite("Hulls\\drone");
 		//opponent->brain->addChild(new AbsoluteMovement(DOWN,5));
-		opponent->getProjectileBrain = makeBoringBrain;
+		opponent->projectileBrain = makeBoringBrain;
 		opponent->brain
 			->addChild((new RepeatNode(-1))
 				->addChild((new SequentialNode())

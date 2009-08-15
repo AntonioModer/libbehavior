@@ -12,6 +12,7 @@
 #include "GotoPoint.h"
 #include "SpawnShip.h"
 #include "WaitForNextWave.h"
+#include "WaitForSignal.h"
 
 
 
@@ -22,10 +23,22 @@ using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
-
-	void spawnProjectile()
+	bool projectileSignal = false;
+	
+	BehaviorTreeInternalNode* makeSynchronizedProjectile()
 	{
+		BehaviorTreeInternalNode* brain = new ParallelNode();
+		brain->addChild(new WaitForSignal(projectileSignal));
+		brain->addChild((new ParallelNode())
+			->addChild(new TurnTowardsTarget(2))
+			->addChild(new GoStraight(5)));
+		
+		return brain;
+	}
 
+	void flipProjectileSignal(void* ignore)
+	{
+		projectileSignal = true;
 	}
 
 	WorldState* loadScenario9()
@@ -40,19 +53,26 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		player->getProjectileBrain = &makeBoringBrain;
+		player->projectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
-		GameObject* director = new GameObject();
+		Ship* director = new Ship();
+		director->setSprite("Hulls\\Sample Hull");
+		director->HP = INT_MAX;
+
+		director->projectileBrain = &makeSynchronizedProjectile;
+		
+
 
 		director->brain->addChild(
 			(new SequentialNode())
-			->addChild(new SpawnShip(1))
+			->addChild(new Fire())
 			->addChild(new Cooldown(100))
-			->addChild(new SpawnShip(2))
+			->addChild(new Fire())
 			->addChild(new Cooldown(100))
-			->addChild(new SpawnShip(3))
-			->addChild(new Cooldown(100)));
+			->addChild(new Fire())
+			->addChild(new Cooldown(100))
+			->addChild(new FunctionCall<>(&flipProjectileSignal)));
 
 
 		return state;

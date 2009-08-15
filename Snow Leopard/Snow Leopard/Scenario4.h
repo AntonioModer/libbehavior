@@ -28,7 +28,7 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		player->getProjectileBrain = &makeBoringBrain;
+		player->projectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
 		Ship* opponent = new Ship();
@@ -37,7 +37,7 @@ namespace SL
 		
 		
 
-		opponent->getProjectileBrain = &makeBoringBrain;
+		opponent->projectileBrain = &makeBoringBrain;
 		opponent->brain->addChild(new TurnTowardsTarget(1));
 		opponent->brain->addChild(( new RepeatNode(-1))->addChild(
 			(new SequentialNode())

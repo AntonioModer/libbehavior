@@ -1,4 +1,4 @@
-#include "Fire.h"
+#include "WaitForSignal.h"
 #include "point.h"
 #include "GameObject.h"
 #include "worldstate.h"
@@ -13,22 +13,20 @@ using namespace SL::Behaviors;
 using namespace BehaviorTree;
 using namespace std;
 
-void Fire::init(void* agent)
+void WaitForSignal::init(void* agent)
 {
 };
 
-Fire::Fire()
+WaitForSignal::WaitForSignal(bool& _signal):signal(_signal)
 {
 }
-BEHAVIOR_STATUS Fire::execute(void* agent)
+BEHAVIOR_STATUS WaitForSignal::execute(void* agent)
 {
-	cout << "Fire!" << endl;
-	Ship* ship = (Ship*) agent;
-	Projectile* p = new Projectile();
-	p->setSprite("Ammo\\test");
-	p->brain = ship->projectileBrain();
-	p->owner = ship;
-	ship->fire(p);
-	
-	return BT_SUCCESS;
+	if (signal)
+		return BT_SUCCESS;
+	else
+	{
+		cout<< "waiting for signal" << endl;
+		return BT_RUNNING;
+	}
 }

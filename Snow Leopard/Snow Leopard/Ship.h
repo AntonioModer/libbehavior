@@ -26,7 +26,7 @@ public:
 	bool registerWallCollision();
 	Ship::Ship();
 	void Ship::fire(Projectile* p);
-	ParallelNode* (*getProjectileBrain)();
+	BehaviorTreeInternalNode* (*projectileBrain)();
 };
 
 }
