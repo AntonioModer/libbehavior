@@ -72,6 +72,6 @@
     Milestone: A full set of of behavior examples. 5 of them are simple and show how to accomplish one goal. 5 of them are more complex or show interesting ways to use behavior trees.
 
 7. (August 15 - 16)
-        Create a website and forum for the project. Polish up the testbench.
+        Create a website for the project.
 
-    * Deliverable: Project Website
+    * Deliverable: Improve google code website
