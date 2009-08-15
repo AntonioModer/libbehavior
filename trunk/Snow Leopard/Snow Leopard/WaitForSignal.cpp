@@ -23,10 +23,12 @@ WaitForSignal::WaitForSignal(bool& _signal):signal(_signal)
 BEHAVIOR_STATUS WaitForSignal::execute(void* agent)
 {
 	if (signal)
+	{
+		cout << "got signal!" << endl;
 		return BT_SUCCESS;
+	}
 	else
 	{
-		cout<< "waiting for signal" << endl;
 		return BT_RUNNING;
 	}
 }
