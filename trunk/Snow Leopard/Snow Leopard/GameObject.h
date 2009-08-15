@@ -52,7 +52,7 @@ public:
 		return location.y;
 	}
 	/// The "AI" for the object.
-	BehaviorTree::ParallelNode* brain;
+	BehaviorTree::BehaviorTreeInternalNode* brain;
 	/// Unique for each object instance
 	int ID;
 	/// Generate a unique ID for an object

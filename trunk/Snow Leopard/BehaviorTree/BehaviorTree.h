@@ -12,5 +12,6 @@
 #include "RepeatNode.h"
 #include "SequentialNode.h"
 #include "CountLimitNode.h"
+#include "FunctionCall.h"
 
 #endif

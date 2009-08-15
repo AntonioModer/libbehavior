@@ -52,7 +52,7 @@ void GameLogic::handleInput()
 			 Projectile* p = new Projectile();
 			 p->setSprite("Ammo\\test");
 			p->displayHeading = *(new CL_Angle(playerShip->displayHeading));
-			p->brain = playerShip->getProjectileBrain();
+			p->brain = playerShip->projectileBrain();
 			p->owner = playerShip;
 			ws->insertObject(p,playerShip->location.offsetPolar(playerShip->displayHeading,0));
 		 }

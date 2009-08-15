@@ -14,24 +14,24 @@ using namespace SL;
 using namespace SL::Behaviors;
 namespace SL
 {
-	static ParallelNode* makeHomingBrain()
+	static BehaviorTreeInternalNode* makeHomingBrain()
 	{
-		ParallelNode* b = new ParallelNode();
+		BehaviorTreeInternalNode* b = new ParallelNode();
 		b->addChild(new TurnTowardsTarget(2));
 		b->addChild(new GoStraight(5));
 		return b;
 	}
 
-	static ParallelNode* makeBoringBrain()
+	static BehaviorTreeInternalNode* makeBoringBrain()
 	{
-		ParallelNode* b = new ParallelNode();
+		BehaviorTreeInternalNode* b = new ParallelNode();
 		b->addChild(new GoStraight(10));
 		return b;
 	}
 
-	static ParallelNode* makeSlowBoringBrain()
+	static BehaviorTreeInternalNode* makeSlowBoringBrain()
 	{
-		ParallelNode* b = new ParallelNode();
+		BehaviorTreeInternalNode* b = new ParallelNode();
 		b->addChild(new GoStraight(3));
 		return b;
 	}

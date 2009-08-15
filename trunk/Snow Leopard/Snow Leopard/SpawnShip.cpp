@@ -45,7 +45,7 @@ BEHAVIOR_STATUS SpawnShip::execute(void* agent)
 	else if (shipType == 3)
 		opponent->setSprite("Hulls\\Fighter1");
 	
-	opponent->getProjectileBrain = &makeBoringBrain;
+	opponent->projectileBrain = &makeBoringBrain;
 		opponent->brain->addChild(new TurnTowardsTarget(1));
 		opponent->brain->addChild(( new RepeatNode(-1))->addChild(
 			(new SequentialNode())

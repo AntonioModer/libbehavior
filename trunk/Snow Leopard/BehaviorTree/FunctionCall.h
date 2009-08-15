@@ -27,19 +27,19 @@ namespace BehaviorTree
 
 		/** \param _func the address of the (non-static) class member
 		*/
-		FunctionCall(void(T::*_func)(void* _arg),void* _arg) : func(_func), func2(NULL),arg(_arg){}
+		FunctionCall(void(T::*_func)(void* _arg),void* _arg = (void*)NULL) : func(_func), func2(NULL),arg(_arg){}
 
 		/** \param _func the address of the function or the static class member
 		*/
-		FunctionCall(void(*_func)(void* _arg),void* _arg) : func2(_func), func(NULL),arg(_arg){}
+		FunctionCall(void(*_func)(void* _arg),void* _arg = (void*)NULL) : func2(_func), func(NULL),arg(_arg){}
 
 		/** \param _func the address of the const non-static class member
 		*/
-		FunctionCall(void(T::* const _func)(void* _arg) const,void* _arg) : func(reinterpret_cast<void(T::* const)()>(_func)), func2(NULL),arg(_arg){}
+		FunctionCall(void(T::* const _func)(void* _arg) const,void* _arg = (void*)NULL) : func(reinterpret_cast<void(T::* const)()>(_func)), func2(NULL),arg(_arg){}
 
 	private:
-		void (T::* const func)();
-		void (* const func2)();
+		void (T::* const func)(void* _arg);
+		void (* const func2)(void* _arg);
 		void* arg;
 	};
 
@@ -47,5 +47,6 @@ namespace BehaviorTree
 	BEHAVIOR_STATUS FunctionCall<NoClass>::execute(void* agent)
 	{
 		(*func2)(arg);
+		return BT_SUCCESS;
 	}
 }

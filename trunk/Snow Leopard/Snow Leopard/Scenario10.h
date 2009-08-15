@@ -35,7 +35,7 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		player->getProjectileBrain = &makeBoringBrain;
+		player->projectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
 		return state;

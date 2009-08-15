@@ -29,7 +29,7 @@ namespace SL
 		Ship* player = new Ship();
 		player->setSprite("Hulls\\Sample Hull");
 		player->isPlayer = true;
-		player->getProjectileBrain = &makeBoringBrain;
+		player->projectileBrain = &makeBoringBrain;
 		state->insertObject(player,point(100,300));
 
 		Ship* opponent = new Ship();
@@ -38,7 +38,7 @@ namespace SL
 		
 		
 
-		opponent->getProjectileBrain = &makeHomingBrain;
+		opponent->projectileBrain = &makeHomingBrain;
 		opponent->brain
 			->addChild((new SequentialNode())
 				->addChild(new BoolCondition<GameObject>(&GameObject::projectileNearby,true))

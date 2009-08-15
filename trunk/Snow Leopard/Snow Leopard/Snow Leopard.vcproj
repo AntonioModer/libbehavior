@@ -270,6 +270,14 @@
 						RelativePath=".\WaitForNextWave.h"
 						>
 					</File>
+					<File
+						RelativePath=".\WaitForSignal.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\WaitForSignal.h"
+						>
+					</File>
 					<Filter
 						Name="Movement"
 						>
