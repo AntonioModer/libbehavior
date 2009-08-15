@@ -3,16 +3,16 @@ namespace BehaviorTree
 {
 	template <class T = NoClass>
 	/// Wraps a function or member pointer into a Behavior Tree Node.
-	/** To wrap a void function pointer or static class member that takes no arguments , instantiate FunctionCall without a type argument.
-		For example, to wrap the function "func", with the signature "void func()", one would do this:
-		FunctionCall<> functionNode(&func);
+	/** To wrap a void function pointer or static class member that takes a generic void* argument , instantiate FunctionCall without a type argument.
+		For example, to wrap the function "func", with the signature "void func(void*)" and the argument "arg", one would do this:
+		FunctionCall<> functionNode(&func,arg);
 
 		To wrap the static method "sMethod" of the class "Class", one would do this:
-		FunctionCall<> staticMethodNode(&Class::sMethod);
+		FunctionCall<> staticMethodNode(&Class::sMethod,arg);
 
 		To wrap a non-static class member, FunctionCall must be parameterized with the class's type.
 		For example, to wrap the method "method" of class "Class", one would do this:
-		FunctionCall<Class> classMethodNode(&Class:method);
+		FunctionCall<Class> classMethodNode(&Class:method,arg);
 	**/
 	class FunctionCall: public BehaviorTreeNode
 	{
