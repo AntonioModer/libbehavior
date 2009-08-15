@@ -122,4 +122,21 @@ Scenario 4 is another variant of an evasive enemy. This time, instead of switchi
 \section scenario5 Scenario 5
 
 This scenario gives the enemy an ability that can destroy all projectiles within a certain proximity to it. However, this ability can only be activated 5 times, and it takes 2 seconds to recharge between uses. The 5 uses limitation is implemented with a count limit node.
-*/
+
+\section scenario5 Scenario 6
+
+Scenario 6 is a version of the classic game "Space Invaders". It demonstrates hundreds of agents running at the same time. The entire AI code takes about 10 lines.
+
+\section scenario5 Scenario 7
+
+Scenario 7 shows how a story can be told through the use of behavior. In this case, the player is confonted with 4 enemies that work in unison. When 3 of the enemies are destroyed, the remaining one "surrenders" to the player.
+
+\section scenario5 Scenario 8
+
+Scenario 8 shows a non-obvious way to use behavior trees. In addition to controlling the behavior of the agents in the world, they can also be used to control the behavior of the game itself. In this case, the game only spawns a "secret" enemy if the player defeated the previous two enemies without getting hit.
+
+\section scenario5 Scenario 9
+
+Scenario 9 shows how to manage synchronization and communication between agents in the behavior tree framework. Three projectiles are spawned which all wait for a common signal before beginning to move in unison.
+
+\section scenario5 Scenario 10
