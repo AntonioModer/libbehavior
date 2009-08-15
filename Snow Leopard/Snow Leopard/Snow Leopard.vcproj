@@ -137,7 +137,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xerces-c_static_2.lib"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="libcmt"
 				GenerateDebugInformation="true"
@@ -324,6 +323,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Scenario10.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Scenario2.h"
 						>
 					</File>
@@ -349,6 +352,10 @@
 					</File>
 					<File
 						RelativePath=".\Scenario8.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Scenario9.h"
 						>
 					</File>
 				</Filter>
