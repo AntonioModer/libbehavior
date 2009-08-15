@@ -27,11 +27,11 @@ namespace SL
 	
 	BehaviorTreeInternalNode* makeSynchronizedProjectile()
 	{
-		BehaviorTreeInternalNode* brain = new ParallelNode();
+		BehaviorTreeInternalNode* brain = new SequentialNode();
 		brain->addChild(new WaitForSignal(projectileSignal));
 		brain->addChild((new ParallelNode())
-			->addChild(new TurnTowardsTarget(2))
-			->addChild(new GoStraight(5)));
+			->addChild(new TurnTowardsTarget(5))
+			->addChild(new GoStraight(7)));
 		
 		return brain;
 	}
@@ -65,14 +65,18 @@ namespace SL
 
 
 		director->brain->addChild(
-			(new SequentialNode())
+			(new CountLimitNode(1,false))->addChild((new SequentialNode())
 			->addChild(new Fire())
-			->addChild(new Cooldown(100))
+			->addChild(new Cooldown(500))
 			->addChild(new Fire())
-			->addChild(new Cooldown(100))
+			->addChild(new Cooldown(500))
 			->addChild(new Fire())
-			->addChild(new Cooldown(100))
-			->addChild(new FunctionCall<>(&flipProjectileSignal)));
+			->addChild(new Cooldown(500))
+			->addChild(new FunctionCall<>(&flipProjectileSignal))));
+		director->brain->addChild(new GotoPoint(point(500,100),500));
+
+		state->insertObject(director,point(50,100));
+		state->rotateObject(director,90);
 
 
 		return state;
