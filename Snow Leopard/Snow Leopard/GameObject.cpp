@@ -199,6 +199,11 @@ bool SL::GameObject::playerIsAligned() const
 	return abs(ws->angleBetween(ws->getPlayer(),this).to_degrees()) < 10;
 }
 
+float SL::GameObject::distanceToPlayer() const
+{
+	return ws->distanceBetween(ws->getPlayer(),this);
+}
+
 bool SL::GameObject::projectileNearby() const
 {
 	const GameObjectList* objects = ws->getAllGameObjects();
