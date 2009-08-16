@@ -26,14 +26,17 @@ namespace BehaviorTree
 		void init(void* agent){};
 
 		/** \param _func the address of the (non-static) class member
+			\param _arg the genericized argument to the function
 		*/
 		FunctionCall(void(T::*_func)(void* _arg),void* _arg = (void*)NULL) : func(_func), func2(NULL),arg(_arg){}
 
 		/** \param _func the address of the function or the static class member
+			\param _arg the genericized argument to the function
 		*/
 		FunctionCall(void(*_func)(void* _arg),void* _arg = (void*)NULL) : func2(_func), func(NULL),arg(_arg){}
 
 		/** \param _func the address of the const non-static class member
+			\param _arg the genericized argument to the function
 		*/
 		FunctionCall(void(T::* const _func)(void* _arg) const,void* _arg = (void*)NULL) : func(reinterpret_cast<void(T::* const)()>(_func)), func2(NULL),arg(_arg){}
 

@@ -65,6 +65,10 @@ These wrap function calls (with no arguments) that return the specified type. Th
 	BehaviorTree::FloatCondition\n
 	BehaviorTree::IntCondition\n
 
+\subsection functionCall FunctionCall
+This wraps a function call with a void* argument that has no return value.
+\sa BehaviorTree::FunctionCall\n
+
 \section Behavior Tree Examples
 
 Included with the library are several examples of behavior trees in action. They are implemented in the context a "shoot-em-up" game, but of course the principles they use are applicable to anything. This is a short description of each of the behavior examples. For more information, consult the relevant "ScenarioX.h" header file. Before doing that, try actually playing the scenario to understand the behavior it implements.
@@ -142,3 +146,5 @@ Scenario 9 shows how to manage synchronization and communication between agents 
 \section scenario10 Scenario 10
 
 Scenario 10 is a further demonstration of the FloatCondition and FunctionCall nodes. An enemy ship is cloaked, causing it to appear nearly transparent. However, if the player gets close enough, they can disrupt the cloaking field, making the ship permanently visible.
+
+*/
