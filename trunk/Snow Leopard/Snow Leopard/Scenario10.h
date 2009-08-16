@@ -58,6 +58,7 @@ namespace SL
 			->addChild((new CountLimitNode(1,false))
 				->addChild(new FunctionCall<>(&decloak,(void*)enemy))));
 		state->insertObject(enemy,point(50,100));
+		state->rotateObject(enemy,180);
 
 
 
