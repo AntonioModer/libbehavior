@@ -74,4 +74,4 @@
 7. (August 15 - 16)
         Create a website for the project.
 
-    * Deliverable: Improve google code website
+    * ~~Deliverable: Improve google code website~~
