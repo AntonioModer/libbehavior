@@ -1,0 +1,2 @@
+  * [Visual Studio 2008 Runtime](http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en)
+  * Up to date graphics card drivers (must support OpenGL 2.0)
